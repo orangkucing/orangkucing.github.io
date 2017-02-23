@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Title of the document</title>
+<style>
+body {
+    font-family: Arial;
+}
+
+ul.tree li {
+    list-style-type: none;
+    position: relative;
+}
+
+ul.tree li ul {
+    display: none;
+}
+
+ul.tree li.open > ul {
+    display: block;
+}
+
+ul.tree li a {
+    color: black;
+    text-decoration: none;
+}
+
+ul.tree li a:before {
+    height: 1em;
+    padding:0 .1em;
+    font-size: .8em;
+    display: block;
+    position: absolute;
+    left: -1.3em;
+    top: .2em;
+}
+
+ul.tree li > a:not(:last-child):before {
+    content: '+';
+}
+
+ul.tree li.open > a:not(:last-child):before {
+    content: '-';
+}
+</style>
+</head>
+
+<body>
+<ul class="tree">
+  <li><a href="#">YY command</a>
+    <ul>
+      <li><a href="#">* (don't care): extended YY commands</a>
+        <ul>
+          <li><a href="#">0x01: mode change</a>
+            <ul>
+              <li><a href="#">0x00: get main mode; argc = 0x0000</a></li>
+              <li><a href="#">0x01: set main mode; argc = 0x0001; argv[] = { mode }</a>
+                <ul>
+                  <li>mode</li>
+                  <li>0x00: video</li>
+                  <li>0x01: photo</li>
+                  <li>0x02: multi-shot</li>
+                  <li>0x04: playback</li>
+                  <li>0x05: setup</li>
+                  <li>0x06: audio</li>
+                </ul>
+              </li>
+              <li><a href="#">0x04: get sub mode; argc = 0x0000</a></li>
+              <li><a href="#">0x05: set sub mode; argc = 0x0002; argv[] = { mode, submode }</a>
+                <ul>
+                  <li>mode, submode<li>
+                  <li>0x00, 0x00: video</li>
+                  <li>0x00, 0x01: timelapse video</li>
+                  <li>0x00, 0x02: photo in video</li>
+                  <li>0x00, 0x03: looping video</li>
+                  <li>0x01, 0x00: single photo</li>
+                  <li>0x01, 0x01: continuous photo</li>
+                  <li>0x01, 0x02: night photo</li>
+                  <li>0x02, 0x00: burst photo</li>
+                  <li>0x02, 0x01: timelapse photo</li>
+                  <li>0x02, 0x02: nightlapse photo</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><a href="#">0x02: video</a>
+            <ul>
+              <li><a href="#">0x00: get default sub mode; argc = 0x0000</a></li>
+              <li><a href="#">0x01: set default sub mode; argc = 0x0001; argv[] = { submode }</a>
+                <ul>
+                  <li>submode<li>
+                  <li>0x00: video</li>
+                  <li>0x01: timelapse video</li>
+                  <li>0x02: photo in video</li>
+                  <li>0x03: looping video</li>
+                </ul>
+              </li>
+              <li><a href="#">0x02: get video mode; argc = 0x0000</a></li>
+              <li><a href="#">0x03: set video mode; argc = 0x0003; argv[] = { resolution, fps, fov }</a>
+                <ul>
+                  <li>resolution</li>
+                  <li>0x01: 4k</li>
+                  <li>0x02: 4k SuperView</li>
+                  <li>0x04: 2.7k</li>
+                  <li>0x05: 2.7k SuperView</li>
+                  <li>0x06: 2.7k 4:3</li>
+                  <li>0x07: 1440</li>
+                  <li>0x08: 1080 SuperView</li>
+                  <li>0x09: 1080</li>
+                  <li>0x0A: 960</li>
+                  <li>0x0B: 720 SuperView</li>
+                  <li>0x0C: 720</li>
+                  <li>0x0D: WVGA</li>
+                  <li>fps</li>
+                  <li>0x00: 240</li>
+                  <li>0x01: 120</li>
+                  <li>0x02: 100</li>
+                  <li>0x03: 90</li>
+                  <li>0x04: 80</li>
+                  <li>0x05: 60</li>
+                  <li>0x06: 50</li>
+                  <li>0x07: 48</li>
+                  <li>0x08: 30</li>
+                  <li>0x09: 25</li>
+                  <li>0x0A: 24</li>
+                  <li>0x0B: 15</li>
+                  <li>0x0C: 12.5</li>
+                  <li>fov</li>
+                  <li>0x00: wide</li>
+                  <li>0x01: medium</li>
+                  <li>0x02: narrow</li>
+                  <li>0x04: linear (v5 or later firmware only)</li>
+                </ul>
+              </li>
+              <li><a href="#">0x04: get video + photo; argc = 0x0000</a></li>
+              <li><a href="#">0x05: set video + photo; argc = 0x0001; argv[] = { interval }</a>
+                <ul>
+                  <li>interval</li>
+                  <li>0x01: 1 photo per 5 seconds</li> 
+                  <li>0x02: 1 photo per 10 seconds</li> 
+                  <li>0x03: 1 photo per 30 seconds</li> 
+                  <li>0x04: 1 photo per 60 seconds</li> 
+                </ul>
+              </li>
+              <li><a href="#">0x06: get looping; argc = 0x0000</a></li>
+              <li><a href="#">0x07: set looping; argc = 0x0001; argv[] = { interval }</a>
+                <ul>
+                  <li>interval</li>
+                  <li>0x00: maximum</li>
+                  <li>0x01: 5 minutes</li>
+                  <li>0x02: 20 minutes</li>
+                  <li>0x03: 60 minutes</li>
+                  <li>0x04: 120 minutes</li>
+                </ul>
+              </li>
+              <li><a href="#">0x08: get low light; argc = 0x0000</a></li>
+              <li><a href="#">0x09: set low light; argc = 0x0001; argv[] = { state }</a>
+                <ul>
+                  <li>state</li>
+                  <li>0x00: off</li>
+                  <li>0x01: on</li>
+                </ul>
+              </li>
+              <li><a href="#">0x0A: get spot meter; argc = 0x0000</a></li>
+              <li><a href="#">0x0B: set spot meter; argc = 0x0001; argv[] = { state }</a>
+                <ul>
+                  <li>state</li>
+                  <li>0x00: off</li>
+                  <li>0x01: on</li>
+                </ul>
+              </li>
+              <li><a href="#">0x0C: get timelapse rate; argc = 0x0000</a></li>
+              <li><a href="#">0x0D: set timelapse rate; argc = 0x0001; argv[] = { interval }</a>
+                <ul>
+                  <li>interval</li>
+                  <li>0x00: 0.5 seconds</li>
+                  <li>0x01: 1 second</li>
+                  <li>0x02: 2 seconds</li>
+                  <li>0x03: 5 seconds</li>
+                  <li>0x04: 10 seconds</li>
+                  <li>0x05: 30 seconds</li>
+                  <li>0x06: 60 seconds</li>
+                </ul>
+              </li>
+              <li><a href="#">0x0E: get protune; argc = 0x0000</a></li>
+              <li><a href="#">0x0F: set protune; argc = 0x0001; argv[] = { state }</a>
+                <ul>
+                  <li>state</li>
+                  <li>0x00: off</li>
+                  <li>0x01: on</li>
+                </ul>
+              </li>
+              <li><a href="#">0x10: get protune white balance; argc = 0x0000</a></li>
+              <li><a href="#">0x11: set protune white balance; argc = 0x0001; argv[] = { wb }</a>
+                <ul>
+                  <li>wb</li>
+                  <li>0x00: auto</li>
+                  <li>0x01: 3000K</li>
+                  <li>0x02: 5500K</li>
+                  <li>0x03: 6500K</li>
+                  <li>0x04: native</li>
+                </ul>
+              </li>
+              <li><a href="#">0x12: get protune color; argc = 0x0000</a></li>
+              <li><a href="#">0x13: set protune color; argc = 0x0001; argv[] = { color }</a>
+                <ul>
+                  <li>color</li>
+                  <li>0x00: GoPro color</li>
+                  <li>0x01: flat</li>
+                </ul>
+              </li>
+              <li><a href="#">0x14: get protune sharpness; argc = 0x0000</a></li>
+              <li><a href="#">0x15: set protune sharpness; argc = 0x0001; argv[] = { sharpness }</a>
+                <ul>
+                  <li>sharpness</li>
+                  <li>0x00: high</li>
+                  <li>0x01: medium</li>
+                  <li>0x02: low</li>
+                </ul>
+              </li>
+              <li><a href="#">0x16: get protune ISO; argc = 0x0000</a></li>
+              <li><a href="#">0x17: set protune ISO; argc = 0x0001; argv[] = { limit }</a>
+                <ul>
+                  <li>limit</li>
+                  <li>0x00: 6400</li>
+                  <li>0x01: 1600</li>
+                  <li>0x02: 400</li>
+                  <li>0x03: 3200</li>
+                  <li>0x04: 800</li>
+                </ul>
+              </li>
+              <li><a href="#">0x18: get protune exposure value; argc = 0x0000</a></li>
+              <li><a href="#">0x19: set protune exposure value; argc = 0x0001; argv[] = { ev }</a>
+                <ul>
+                  <li>ev</li>
+                  <li>0x00: +2.0</li>
+                  <li>0x01: +1.5</li>
+                  <li>0x02: +1.0</li>
+                  <li>0x03: +0.5</li>
+                  <li>0x04: 0</li>
+                  <li>0x05: -0.5</li>
+                  <li>0x06: -1.0</li>
+                  <li>0x07: -1.5</li>
+                  <li>0x08: -2.0</li>
+                </ul>
+              </li>
+              <li><a href="#">0x1A: reset protune; argc = 0x0000</a></li>
+              <li><a href="#">0x1B: shutter button depressed. start recording; argc = 0x0000</a></li>
+              <li><a href="#">0x1C: stop recording; argc = 0x0000</a></li>
+              <li><a href="#">0x26: bulk set video settings; argc = 0x0060; argv[]</a>
+                <ul>
+                  <li>video</li>
+                  <li>argv[0]: current submode (defunct)</li>
+                  <li>argv[1]: power on submode</li>
+                  <li>argv[2]: resolution</li>
+                  <li>argv[3]: fps</li>
+                  <li>argv[4]: fov</li>
+                  <li>argv[5]: video + photo interval</li>
+                  <li>argv[6]: looping</li>
+                  <li>argv[7]: spot meter</li>
+                  <li>argv[8]: low light</li>
+                  <li>argv[9]: timelapse interval</li>
+                  <li>argv[10]: protune</li>
+                  <li>argv[11]: color</li>
+                  <li>argv[12]: sharpness</li>
+                  <li>argv[13]: ISO limit</li>
+                  <li>argv[14]: exposure compensation</li>
+                  <li>argv[15]: white balance</li>
+                  <li>argv[16]: shutter</li>
+                  <li>argv[17]: ISO mode</li>
+                  <li>argv[18:23]: (no use)
+                  <li>timelapse video</li>
+                  <li>argv[24]: current submode (defunct)</li>
+                  <li>argv[25]: power on submode</li>
+                  <li>argv[26]: resolution</li>
+                  <li>argv[27]: fps</li>
+                  <li>argv[28]: fov</li>
+                  <li>argv[29]: video + photo interval</li>
+                  <li>argv[30]: looping</li>
+                  <li>argv[31]: spot meter</li>
+                  <li>argv[32]: low light</li>
+                  <li>argv[33]: timelapse interval</li>
+                  <li>argv[34]: protune</li>
+                  <li>argv[35]: color</li>
+                  <li>argv[36]: sharpness</li>
+                  <li>argv[37]: ISO limit</li>
+                  <li>argv[38]: exposure compensation</li>
+                  <li>argv[39]: white balance</li>
+                  <li>argv[40]: shutter</li>
+                  <li>argv[41]: ISO mode</li>
+                  <li>argv[42:47]: (no use)
+                  <li>video + photo</li>
+                  <li>argv[48]: current submode (defunct)</li>
+                  <li>argv[49]: power on submode</li>
+                  <li>argv[50]: resolution</li>
+                  <li>argv[51]: fps</li>
+                  <li>argv[52]: fov</li>
+                  <li>argv[53]: video + photo interval</li>
+                  <li>argv[54]: looping</li>
+                  <li>argv[55]: spot meter</li>
+                  <li>argv[56]: low light</li>
+                  <li>argv[57]: timelapse interval</li>
+                  <li>argv[58]: protune</li>
+                  <li>argv[59]: color</li>
+                  <li>argv[60]: sharpness</li>
+                  <li>argv[61]: ISO limit</li>
+                  <li>argv[62]: exposure compensation</li>
+                  <li>argv[63]: white balance</li>
+                  <li>argv[64]: shutter</li>
+                  <li>argv[65]: ISO mode</li>
+                  <li>argv[66:71]: (no use)
+                  <li>looping</li>
+                  <li>argv[72]: current submode (defunct)</li>
+                  <li>argv[73]: power on submode</li>
+                  <li>argv[74]: resolution</li>
+                  <li>argv[75]: fps</li>
+                  <li>argv[76]: fov</li>
+                  <li>argv[77]: video + photo interval</li>
+                  <li>argv[78]: looping</li>
+                  <li>argv[79]: spot meter</li>
+                  <li>argv[80]: low light</li>
+                  <li>argv[81]: timelapse interval</li>
+                  <li>argv[82]: protune</li>
+                  <li>argv[83]: color</li>
+                  <li>argv[84]: sharpness</li>
+                  <li>argv[85]: ISO limit</li>
+                  <li>argv[86]: exposure compensation</li>
+                  <li>argv[87]: white balance</li>
+                  <li>argv[88]: shutter</li>
+                  <li>argv[89]: ISO mode</li>
+                  <li>argv[90:95]: (no use)
+                </ul>
+              </li>
+              <li><a href="#">0x27: get exposure time (v4 or later firmware only); argc = 0x0000</a></li>
+              <li><a href="#">0x28: set exposure time (v4 or later firmware only); argc = 0x0001; argv[] = { shutter }</a>
+                <ul>
+                  <li>shutter</li>
+                  <li>0x00: auto</li>
+                  <li>0x01: 1/12.5</li>
+                  <li>0x02: 1/15</li>
+                  <li>0x03: 1/24</li>
+                  <li>0x04: 1/25</li>
+                  <li>0x05: 1/30</li>
+                  <li>0x06: 1/48</li>
+                  <li>0x07: 1/50</li>
+                  <li>0x08: 1/60</li>
+                  <li>0x09: 1/80</li>
+                  <li>0x0A: 1/90</li>
+                  <li>0x0B: 1/96</li>
+                  <li>0x0C: 1/100</li>
+                  <li>0x0D: 1/120</li>
+                  <li>0x0E: 1/160</li>
+                  <li>0x0F: 1/180</li>
+                  <li>0x10: 1/192</li>
+                  <li>0x11: 1/200</li>
+                  <li>0x12: 1/240</li>
+                  <li>0x13: 1/320</li>
+                  <li>0x14: 1/360</li>
+                  <li>0x15: 1/400</li>
+                  <li>0x16: 1/480</li>
+                  <li>0x17: 1/960</li>
+                </ul>
+              </li>
+              <li><a href="#">0x29: get protune ISO mode (v4 or later firmware only); argc = 0x0000</a></li>
+              <li><a href="#">0x2A: set protune ISO mode (v4 or later firmware only); argc = 0x0001; argv[] = { mode }</a>
+                <ul>
+                  <li>mode</li>
+                  <li>0x00: maximum</li>
+                  <li>0x01: lock</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><a href="#">0x03: photo</a>
+            <ul>
+              <li><a href="#">0x00: get default sub mode; argc = 0x0000</a></li>
+              <li><a href="#">0x01: set default sub mode; argc = 0x0001; argv[] = { submode }</a>
+                <ul>
+                  <li>submode</li>
+                  <li>0x00: single</li>
+                  <li>0x01: continuous</li>
+                  <li>0x02: night</li>
+                </ul>
+              </li>
+              <li><a href="#">0x02: get resolution; argc = 0x0000</a></li>
+              <li><a href="#">0x03: set resolution; argc = 0x0001; argv[] = { resolution }</a>
+                <ul>
+                  <li>resolution</li>
+                  <li>0x00: 12MP wide</li>
+                  <li>0x01: 7MP wide</li>
+                  <li>0x02: 7MP medium</li>
+                  <li>0x03: 5MP medium</li>
+                </ul>
+              </li>
+              <li><a href="#">0x04: get continuous rate; argc = 0x0000</a></li>
+              <li><a href="#">0x05: set continuous rate; argc = 0x0001; argv[] = { interval }</a>
+                <ul>
+                  <li>interval</li>
+                  <li>0x00: 3 frames per second</li>
+                  <li>0x01: 5 frames per second</li>
+                  <li>0x02: 10 frames per second</li>
+                </ul>
+              </li>
+              <li><a href="#">0x06: get spot meter; argc = 0x0000</a></li>
+              <li><a href="#">0x07: set spot meter; argc = 0x0001; argv[] = { state }</a>
+                <ul>
+                  <li>state</li>
+                  <li>0x00: off</li>
+                  <li>0x01: on</li>
+                </ul>
+              </li>
+              <li><a href="#">0x08: get exposure time; argc = 0x0000</a></li>
+              <li><a href="#">0x09: set exposure time; argc = 0x0001; argv[] = { shutter }</a>
+                <ul>
+                  <li>shutter</li>
+                  <li>0x00: auto</li>
+                  <li>0x01: 2 seconds</li>
+                  <li>0x02: 5 seconds</li>
+                  <li>0x03: 10 seconds</li>
+                  <li>0x04: 15 seconds</li>
+                  <li>0x05: 20 seconds</li>
+                  <li>0x06: 30 seconds</li>
+                </ul>
+              </li>
+              <li><a href="#">0x0A: get protune; argc = 0x0000</a></li>
+              <li><a href="#">0x0B: set protune; argc = 0x0001; argv[] = { state }</a>
+                <ul>
+                  <li>state</li>
+                  <li>0x00: off</li>
+                  <li>0x01: on</li>
+                </ul>
+              </li>
+              <li><a href="#">0x0C: get protune white balance; argc = 0x0000</a></li>
+              <li><a href="#">0x0D: set protune white balance; argc = 0x0001; argv[] = { wb }</a>
+                <ul>
+                  <li>wb</li>
+                  <li>0x00: auto</li>
+                  <li>0x01: 3000K</li>
+                  <li>0x02: 5500K</li>
+                  <li>0x03: 6500K</li>
+                  <li>0x04: native</li>
+                  <li>0x05: 4000K</li>
+                  <li>0x06: 4800K</li>
+                  <li>0x07: 6000K</li>
+                </ul>
+              </li>
+              <li><a href="#">0x0E: get protune color; argc = 0x0000</a></li>
+              <li><a href="#">0x0F: set protune color; argc = 0x0001; argv[] = { color }</a>
+                <ul>
+                  <li>color</li>
+                  <li>0x00: GoPro color</li>
+                  <li>0x01: flat</li>
+                </ul>
+              </li>
+              <li><a href="#">0x10: get protune sharpness; argc = 0x0000</a></li>
+              <li><a href="#">0x11: set protune sharpness; argc = 0x0001; argv[] = { sharpness }</a>
+                <ul>
+                  <li>sharpness</li>
+                  <li>0x00: high</li>
+                  <li>0x01: medium</li>
+                  <li>0x02: low</li>
+                </ul>
+              </li>
+              <li><a href="#">0x12: get protune ISO maximum; argc = 0x0000</a></li>
+              <li><a href="#">0x13: set protune ISO maximum; argc = 0x0001; argv[] = { ISO }</a>
+                <ul>
+                  <li>ISO</li>
+                  <li>0x00: 800</li>
+                  <li>0x01: 400</li>
+                  <li>0x02: 200</li>
+                  <li>0x03: 100</li>
+                </ul>
+              </li>
+              <li><a href="#">0x14: get protune exposure value; argc = 0x0000</a></li>
+              <li><a href="#">0x15: set protune exposure value; argc = 0x0001; argv[] = { ev }</a>
+                <ul>
+                  <li>ev</li>
+                  <li>0x00: +2.0</li>
+                  <li>0x01: +1.5</li>
+                  <li>0x02: +1.0</li>
+                  <li>0x03: +0.5</li>
+                  <li>0x04: 0</li>
+                  <li>0x05: -0.5</li>
+                  <li>0x06: -1.0</li>
+                  <li>0x07: -1.5</li>
+                  <li>0x08: -2.0</li>
+                </ul>
+              </li>
+              <li><a href="#">0x16: reset protune; argc = 0x0000</a></li>
+              <li><a href="#">0x17: shutter button depressed. start recording; argc = 0x0000</a></li>
+              <li><a href="#">0x18: stop recording (continuous submode only); argc = 0x0000</a></li>
+              <li><a href="#">0x1B: bulk set photo settings; argc = 0x003C; argv[]</a>
+                <ul>
+                  <li>single</li>
+                  <li>argv[0]: current submode (defunct)</li>
+                  <li>argv[1]: power on submode</li>
+                  <li>argv[2]: resolution</li>
+                  <li>argv[3]: interval</li>
+                  <li>argv[4]: spot meter</li>
+                  <li>argv[5]: shutter</li>
+                  <li>argv[6]: protune</li>
+                  <li>argv[7]: color</li>
+                  <li>argv[8]: sharpness</li>
+                  <li>argv[9]: ISO maximum</li>
+                  <li>argv[10]: exposure compensation</li>
+                  <li>argv[11]: white balance</li>
+                  <li>argv[12]: ISO minimum</li>
+                  <li>argv[13:19]: (no use)</li>
+                  <li>continuous</li>
+                  <li>argv[20]: current submode (defunct)</li>
+                  <li>argv[21]: power on submode</li>
+                  <li>argv[22]: resolution</li>
+                  <li>argv[23]: interval</li>
+                  <li>argv[24]: spot meter</li>
+                  <li>argv[25]: shutter</li>
+                  <li>argv[26]: protune</li>
+                  <li>argv[27]: color</li>
+                  <li>argv[28]: sharpness</li>
+                  <li>argv[29]: ISO maximum</li>
+                  <li>argv[30]: exposure compensation</li>
+                  <li>argv[31]: white balance</li>
+                  <li>argv[32]: ISO minimum</li>
+                  <li>argv[33:39]: (no use)</li>
+                  <li>night</li>
+                  <li>argv[40]: current submode (defunct)</li>
+                  <li>argv[41]: power on submode</li>
+                  <li>argv[42]: resolution</li>
+                  <li>argv[43]: interval</li>
+                  <li>argv[44]: spot meter</li>
+                  <li>argv[45]: shutter</li>
+                  <li>argv[46]: protune</li>
+                  <li>argv[47]: color</li>
+                  <li>argv[48]: sharpness</li>
+                  <li>argv[49]: ISO maximum</li>
+                  <li>argv[50]: exposure compensation</li>
+                  <li>argv[51]: white balance</li>
+                  <li>argv[52]: ISO minimum</li>
+                  <li>argv[53:59]: (no use)</li>
+                </ul>
+              </li>
+              <li><a href="#">0x1C: get protune ISO minimum (v4 or later firmware only); argc = 0x0000</a></li>
+              <li><a href="#">0x1D: set protune ISO minimum (v4 or later firmware only); argc = 0x0001; argv[] = { ISO }</a>
+                <ul>
+                  <li>ISO</li>
+                  <li>0x00: 800</li>
+                  <li>0x01: 400</li>
+                  <li>0x02: 200</li>
+                  <li>0x03: 100</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><a href="#">0x04: multi-shot</a>
+            <ul>
+              <li><a href="#">0x00: get default sub mode; argc = 0x0000</a></li>
+              <li><a href="#">0x01: set default sub mode; argv[] = { submode }</a>
+                <ul>
+                  <li>submode</li>
+                  <li>0x00: burst</li>
+                  <li>0x01: timelapse</li>
+                  <li>0x02: nightlapse</li>
+                </ul>
+              </li>
+              <li><a href="#">0x02: get resolution; argc = 0x0000</a></li>
+              <li><a href="#">0x03: set resolution; argc = 0x0001; argv[] = { resolution }</a>
+                <ul>
+                  <li>resolution</li>
+                  <li>0x00: 12MP wide</li>
+                  <li>0x01: 7MP wide</li>
+                  <li>0x02: 7MP medium</li>
+                  <li>0x03: 5MP medium</li>
+                </ul>
+              </li>
+              <li><a href="#">0x04: get burst rate; argc = 0x0000</a></li>
+              <li><a href="#">0x05: set burst rate; argc = 0x0001; argv[] = { interval }</a>
+                <ul>
+                  <li>interval</li>
+                  <li>0x00: 3 photos / 1 second</li>
+                  <li>0x01: 5 photos / 1 second</li>
+                  <li>0x02: 10 photos / 1 second</li>
+                  <li>0x03: 10 photos / 2 seconds</li>
+                  <li>0x04: 10 photos / 3 seconds</li>
+                  <li>0x05: 30 photos / 1 second</li>
+                  <li>0x06: 30 photos / 2 seconds</li>
+                  <li>0x07: 30 photos / 3 seconds</li>
+                  <li>0x08: 30 photos / 6 seconds</li>
+                </ul>
+              </li>
+              <li><a href="#">0x06: get timelapse rate; argc = 0x0000</a></li>
+              <li><a href="#">0x07: set timelapse rate; argc = 0x0001; argv[] = { interval }</a>
+                <ul>
+                  <li>interval</li>
+                  <li>0x00: 1 photo / 0.5 seconds</li>
+                  <li>0x01: 1 photo / 1 second</li>
+                  <li>0x02: 1 photo / 2 seconds</li>
+                  <li>0x03: 1 photo / 5 seconds</li>
+                  <li>0x04: 1 photo / 10 seconds</li>
+                  <li>0x05: 1 photo / 30 seconds</li>
+                  <li>0x06: 1 photo / 60 seconds</li>
+                </ul>
+              </li>
+              <li><a href="#">0x08: get nightlapse rate; argc = 0x0000</a></li>
+              <li><a href="#">0x09: set nightlapse rate; argc = 0x0001; argv[] = { interval }</a>
+                <ul>
+                  <li>interval</li>
+                  <li>0x00: 10 seconds</li>
+                  <li>0x01: 15 seconds</li>
+                  <li>0x02: 20 seconds</li>
+                  <li>0x03: 30 seconds</li>
+                  <li>0x04: 1 minute</li>
+                  <li>0x05: 2 minutes</li>
+                  <li>0x06: 5 minutes</li>
+                  <li>0x07: 30 minutes</li>
+                  <li>0x08: 60 minutes</li>
+                </ul>
+              </li>
+              <li><a href="#">0x0A: get spot meter; argc = 0x0000</a></li>
+              <li><a href="#">0x0B: set spot meter; argc = 0x0001; argv[] = { status }</a>
+                <ul>
+                  <li>state</li>
+                  <li>0x00: off</li>
+                  <li>0x01: on</li>
+                </ul>
+              </li>
+              <li><a href="#">0x0C: get exposure time; argc = 0x0000</a></li>
+              <li><a href="#">0x0D: set exposure time; argc = 0x0001; argv[] = { shutter }</a>
+                <ul>
+                  <li>shutter</li>
+                  <li>0x00: auto</li>
+                  <li>0x01: 2 seconds</li>
+                  <li>0x02: 5 seconds</li>
+                  <li>0x03: 10 seconds</li>
+                  <li>0x04: 15 seconds</li>
+                  <li>0x05: 20 seconds</li>
+                  <li>0x06: 30 seconds</li>
+                </ul>
+              </li>
+              <li><a href="#">0x0E: get protune; argc = 0x0000</a></li>
+              <li><a href="#">0x0F: set protune; argc = 0x0001; argv[] = { status }</a>
+                <ul>
+                  <li>state</li>
+                  <li>0x00: off</li>
+                  <li>0x01: on</li>
+                </ul>
+              </li>
+              <li><a href="#">0x10: get protune white balance; argc = 0x0000</a></li>
+              <li><a href="#">0x11: set protune white balance; argc = 0x0001; argv[] = { wb }</a>
+                <ul>
+                  <li>wb</li>
+                  <li>0x00: auto</li>
+                  <li>0x01: 3000K</li>
+                  <li>0x02: 5500K</li>
+                  <li>0x03: 6500K</li>
+                  <li>0x04: native</li>
+                </ul>
+              </li>
+              <li><a href="#">0x12: get protune color; argc = 0x0000</a></li>
+              <li><a href="#">0x13: set protune color; argc = 0x0001; argv[] = { color }</a>
+                <ul>
+                  <li>color</li>
+                  <li>0x00: GoPro color</li>
+                  <li>0x01: flat</li>
+                </ul>
+              </li>
+              <li><a href="#">0x14: get protune sharpness; argc = 0x0000</a></li>
+              <li><a href="#">0x15: set protune sharpness; argc = 0x0001; argv[] = { sharpness }</a>
+                <ul>
+                  <li>sharpness</li>
+                  <li>0x00: high</li>
+                  <li>0x01: medium</li>
+                  <li>0x02: low</li>
+                </ul>
+              </li>
+              <li><a href="#">0x16: get protune ISO; argc = 0x0000</a></li>
+              <li><a href="#">0x17: set protune ISO; argc = 0x0001; argv[] = { ISO }</a>
+                <ul>
+                  <li>ISO</li>
+                  <li>0x00: 800</li>
+                  <li>0x01: 400</li>
+                  <li>0x02: 200</li>
+                  <li>0x03: 100</li>
+                </ul>
+              </li>
+              <li><a href="#">0x18: get protune exposure value; argc = 0x0000</a></li>
+              <li><a href="#">0x19: set protune exposure value; argc = 0x0001; argv[] = { ev }</a>
+                <ul>
+                  <li>ev</li>
+                  <li>0x00: +2.0</li>
+                  <li>0x01: +1.5</li>
+                  <li>0x02: +1.0</li>
+                  <li>0x03: +0.5</li>
+                  <li>0x04: 0</li>
+                  <li>0x05: -0.5</li>
+                  <li>0x06: -1.0</li>
+                  <li>0x07: -1.5</li>
+                  <li>0x08: -2.0</li>
+                </ul>
+              </li>
+              <li><a href="#">0x1A: reset protune; argc = 0x0000</a></li>
+              <li><a href="#">0x1B: shutter button depressed. start recording; argc = 0x0000</a></li>
+              <li><a href="#">0x1C: stop recording; argc = 0x0000</a></li>
+              <li><a href="#">0x20: bulk set photo settings; argc = 0x0042; argv[]</a>
+                <ul>
+                  <li>burst</li>
+                  <li>argv[0]: current submode (defunct)</li>
+                  <li>argv[1]: power on submode</li>
+                  <li>argv[2]: resolution</li>
+                  <li>argv[3]: rate</li>
+                  <li>argv[4]: timelapse interval</li>
+                  <li>argv[5]: nightlapse interval</li>
+                  <li>argv[6]: spot meter</li>
+                  <li>argv[7]: shutter</li>
+                  <li>argv[8]: protune</li>
+                  <li>argv[9]: color</li>
+                  <li>argv[10]: sharpness</li>
+                  <li>argv[11]: ISO maximum</li>
+                  <li>argv[12]: exposure compensation</li>
+                  <li>argv[13]: white balance</li>
+                  <li>argv[14]: ISO minimum</li>
+                  <li>argv[15:21]: (no use)</li>
+                  <li>timelapse</li>
+                  <li>argv[22]: current submode (defunct)</li>
+                  <li>argv[23]: power on submode</li>
+                  <li>argv[24]: resolution</li>
+                  <li>argv[25]: rate</li>
+                  <li>argv[26]: timelapse interval</li>
+                  <li>argv[27]: nightlapse interval</li>
+                  <li>argv[28]: spot meter</li>
+                  <li>argv[29]: shutter</li>
+                  <li>argv[30]: protune</li>
+                  <li>argv[31]: color</li>
+                  <li>argv[32]: sharpness</li>
+                  <li>argv[33]: ISO maximum</li>
+                  <li>argv[34]: exposure compensation</li>
+                  <li>argv[35]: white balance</li>
+                  <li>argv[36]: ISO minimum</li>
+                  <li>argv[37:43]: (no use)</li>
+                  <li>nightlapse</li>
+                  <li>argv[44]: current submode (defunct)</li>
+                  <li>argv[45]: power on submode</li>
+                  <li>argv[46]: resolution</li>
+                  <li>argv[47]: rate</li>
+                  <li>argv[48]: timelapse interval</li>
+                  <li>argv[49]: nightlapse interval</li>
+                  <li>argv[50]: spot meter</li>
+                  <li>argv[51]: shutter</li>
+                  <li>argv[52]: protune</li>
+                  <li>argv[53]: color</li>
+                  <li>argv[54]: sharpness</li>
+                  <li>argv[55]: ISO maximum</li>
+                  <li>argv[56]: exposure compensation</li>
+                  <li>argv[57]: white balance</li>
+                  <li>argv[58]: ISO minimum</li>
+                  <li>argv[59:65]: (no use)</li>
+                </ul>
+              </li>
+              <li><a href="#">0x21: get protune ISO minimum (v4 or later firmware only); argc = 0x0000</a></li>
+              <li><a href="#">0x22: set protune ISO minimum (v4 or later firmware only); argc = 0x0001; argv[] = { ISO }</a>
+                <ul>
+                  <li>ISO</li>
+                  <li>0x00: 800</li>
+                  <li>0x01: 400</li>
+                  <li>0x02: 200</li>
+                  <li>0x03: 100</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><a href="#">0x07: global settings</a>
+            <ul>
+              <li><a href="#">0x00: get LCD brightness; argc = 0x0000</a></li>
+              <li><a href="#">0x01: set LCD brightness; argc = 0x0001; argv[] = { brightness }</a>
+                <ul>
+                  <li>brightness</li>
+                  <li>0x00: high</li>
+                  <li>0x01: medium</li>
+                  <li>0x02: low</li>
+                </ul>
+              </li>
+              <li><a href="#">0x02: get LCD sleep; argc = 0x0000</a></li>
+              <li><a href="#">0x03: set LCD sleep; argc = 0x0001; argv[] = { sleep }</a>
+                <ul>
+                  <li>sleep</li>
+                  <li>0x00: never</li>
+                  <li>0x01: 1 minute</li>
+                  <li>0x02: 2 minutes</li>
+                  <li>0x03: 3 minutes</li>
+                </ul>
+              </li>
+              <li><a href="#">0x04: get LCD lock; argc = 0x0000</a></li>
+              <li><a href="#">0x05: set LCD lock; argc = 0x0001; argv[] = { state}</a>
+                <ul>
+                  <li>state</li>
+                  <li>0x00: off</li>
+                  <li>0x01: on</li>
+                </ul>
+              </li>
+              <li><a href="#">0x06: get LCD power; argc = 0x0000</a></li>
+              <li><a href="#">0x07: set LCD power; argc = 0x0001; argv[] = { state }</a>
+                <ul>
+                  <li>state</li>
+                  <li>0x00: off</li>
+                  <li>0x01: on</li>
+                </ul>
+              </li>
+              <li><a href="#">0x08: get orientation; argc = 0x0000</a></li>
+              <li><a href="#">0x09: set orientation; argc = 0x0001; argv[] = { orientation }</a>
+                <ul>
+                  <li>orientation</li>
+                  <li>0x00: auto</li>
+                  <li>0x01: up</li>
+                  <li>0x02: down</li>
+                </ul>
+              </li>
+              <li><a href="#">0x0A: get default mode; argc = 0x0000</a></li>
+              <li><a href="#">0x0B: set default mode; argc = 0x0001; argv[] = { mode }</a>
+                <ul>
+                  <li>mode</li>
+                  <li>0x00: video</li>
+                  <li>0x01: photo</li>
+                  <li>0x02: multi-shot</li>
+                </ul>
+              </li>
+              <li><a href="#">0x0C: get quick capture; argc = 0x0000</a></li>
+              <li><a href="#">0x0D: set quick capture; argc = 0x0001; argv[] = { state }</a>
+                <ul>
+                  <li>state</li>
+                  <li>0x00: off</li>
+                  <li>0x01: on</li>
+                </ul>
+              </li>
+              <li><a href="#">0x0E: get LEDs; argc = 0x0000</a></li>
+              <li><a href="#">0x0F: set LEDs; argc = 0x0001; argv[] = { LEDs }</a>
+                <ul>
+                  <li>LEDs</li>
+                  <li>0x00: off</li>
+                  <li>0x01: 2</li>
+                  <li>0x02: 4</li>
+                </ul>
+              </li>
+              <li><a href="#">0x10: get beeps; argc = 0x0000</a></li>
+              <li><a href="#">0x11: set beeps; argc = 0x0001; argv[] = { beeps }</a>
+                <ul>
+                  <li>beeps</li>
+                  <li>0x00: 100%</li>
+                  <li>0x01: 70%</li>
+                  <li>0x02: off</li>
+                </ul>
+              </li>
+              <li><a href="#">0x12: get video format; argc = 0x0000</a></li>
+              <li><a href="#">0x13: set video format; argc = 0x0001; argv[] = { format }</a>
+                <ul>
+                  <li>format</li>
+                  <li>0x00: NTSC</li>
+                  <li>0x01: PAL</li>
+                </ul>
+              </li>
+              <li><a href="#">0x14: get OSD; argc = 0x0000</a></li>
+              <li><a href="#">0x15: set OSD; argc = 0x0001; argv[] = { state }</a>
+                <ul>
+                  <li>state</li>
+                  <li>0x00: off</li>
+                  <li>0x01: on</li>
+                </ul>
+              </li>
+              <li><a href="#">0x16: get auto power down; argc = 0x0000</a></li>
+              <li><a href="#">0x17: set auto power down; argc = 0x0001; argv[] = { minute }</a>
+                <ul>
+                  <li>minute</li>
+                  <li>0x00: never</li>
+                  <li>0x01: 1 minute</li>
+                  <li>0x02: 2 minutes</li>
+                  <li>0x03: 3 minutes</li>
+                  <li>0x04: 5 minutes</li>
+                </ul>
+              </li>
+              <li><a href="#">0x1A: get datetime; argc = 0x0000</a></li>
+              <li><a href="#">0x1B: set datetime; argc = 0x0001; argv[] = { year_h, year_l,  month, day, hour, minute, second }</a>
+                <ul>
+                  <li>year_h: high byte of year</li>
+                  <li>year_l: low byte of year</li>
+                  <li>month: month (1 - 12)</li> 
+                  <li>day: day (1 - 31)</li>
+                  <li>hour: hour (0 - 23)</li>
+                  <li>minute: minute (0 - 60)</li>
+                  <li>second: second (0 - 60)</li>
+                </ul>
+              </li>
+              <li><a href="#">0x1F: get language; argc = 0x0000</a></li>
+              <li><a href="#">0x20: set language; argc = 0x0001; argv[] = { language }</a>
+                <ul>
+                  <li>language</li>
+                  <li>0x00: English</li>
+                  <li>0x01: Simplified Chinese</li>
+                </ul>
+              </li>
+              <li><a href="#">0x21: bulk set global settings; argc = 0x0023; argv[]</a>
+                <ul>
+                  <li>argv[0]: 0x20 (unknown constant)</li>
+                  <li>argv[1]: 0x16 (unknown constant)</li>
+                  <li>argv[2]: 0x01 (unknown constant)</li>
+                  <li>argv[3]: 0x11 (unknown constant)</li>
+                  <li>argv[4]: 0x00 (unknown constant)</li>
+                  <li>argv[5]: 0x00 (unknown constant)</li>
+                  <li>argv[6]: OSD</li>
+                  <li>argv[7]: beeps</li>
+                  <li>argv[8]: auto power off</li>
+                  <li>argv[9]: LEDs</li>
+                  <li>argv[10]: quick capture</li>
+                  <li>argv[11]: orientation</li>
+                  <li>argv[12]: LCD brightness</li>
+                  <li>argv[13]: LCD sleep</li>
+                  <li>argv[14]: LCD lock</li>
+                  <li>argv[15]: LCD power</li>
+                  <li>argv[16]: video format</li>
+                  <li>argv[17]: language</li>
+                  <li>argv[18:24]: (no use)</li>
+                  <li>argv[25]: 0x01 (unknown constant)</li>
+                  <li>argv[26]: default mode</li>
+                  <li>argv[27]: default submode</li>
+                  <li>argv[28]: high byte of year</li>
+                  <li>argv[29]: low byte of year</li>
+                  <li>argv[30]: month</li>
+                  <li>argv[31]: day</li>
+                  <li>argv[32]: hour</li>
+                  <li>argv[33]: minute</li>
+                  <li>argv[34]: second</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><a href="#">0x09: delete</a>
+            <ul>
+              <li><a href="#">0x09: delete last; argc = 0x0000</a></li>
+              <li><a href="#">0x0A: delete all/format; argc = 0x0000</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+
+  <li><a href="#">ZZ command</a>
+    <ul>
+      <li><a href="#">0x01</a>
+        <ul>
+          <li><a href="#">0x00: (unknown)</a></li>
+        </ul>
+      </li>
+      <li><a href="#">0x02</a>
+        <ul>
+          <li><a href="#">0x01: camera power on</a></li>
+        </ul>
+      </li>
+      <li><a href="#">0x03</a>
+        <ul>
+          <li><a href="#">0x00: get camera version</a></li>
+        </ul>
+      </li>
+      <li><a href="#">0x00: extended ZZ command </a>
+        <ul>
+          <li><a href="#">0x00</a>
+            <ul>
+              <li><a href="#">0x01</a>
+                <ul>
+                  <li>0x0000: external sync</li>
+                  <li>0x0100: standalone</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><a href="#">0x01</a>
+            <ul>
+              <li><a href="#">0x01</a>
+                <ul>
+                  <li>0x0000: is recording</li>
+                  <li>0x0100: is finished</li>
+                </ul>
+              </li>
+              <li><a href="#">0x02</a>
+                <ul>
+                  <li>0x0000: block until writing to microSD complete</li>
+                </ul>
+              </li>
+              <li><a href="#">0x07</a>
+                <ul>
+                  <li><a href="#">0x06: external sync signal; argv[] = { fps_h, fps_l, hsync_h, hsync_l, dummy_h, dummy_l }</a>
+                    <ul>
+                      <li>fps_h: high byte of fps * 100</li>
+                      <li>fps_l: low byte of fps * 100</li>
+                      <li>hsync_h: high byte of number of HSYNC pulses in a frame (buggy)</li>
+                      <li>hsync_l: low byte of number of HSYNC pulses in a frame (buggy)</li>
+                      <li>dummy_h: (unknown. always equal to hsync_h)</li>
+                      <li>dummy_l: (unknown. always equal to hsync_l)</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><a href="#">0x02: heartbeat; argc = 0x00</a></li>
+          <li><a href="#">0x03: power off; argc = 0x01; argv[] = { 0x01 }</a></li>
+          <li><a href="#">0x05: bacpac firmware version; argc = 0x03; argv[] = { version[3], 0x00 }</a></li>
+          <li><a href="#">0x06: bacpac serial number; argc = 0x08; argv[] = { serial_number[7], check_sum, 0x00 }</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<script>
+var tree = document.querySelectorAll('ul.tree a:not(:last-child)');
+for(var i = 0; i < tree.length; i++){
+    tree[i].addEventListener('click', function(e) {
+        var parent = e.target.parentElement;
+        var classList = parent.classList;
+        if(classList.contains("open")) {
+            classList.remove('open');
+            var opensubs = parent.querySelectorAll(':scope .open');
+            for(var i = 0; i < opensubs.length; i++){
+                opensubs[i].classList.remove('open');
+            }
+        } else {
+            classList.add('open');
+        }
+    });
+}
+</script>
+</body>
+
+</html>
