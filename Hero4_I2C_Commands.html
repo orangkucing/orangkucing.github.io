@@ -50,7 +50,7 @@ ul.tree li.open > a:not(:last-child):before {
 <body>
 <h1>List of GoPro Hero 4 I2C Commands</h1>
 <p>
-The following tree represents all the I2C commands of GoPro Hero 4 camera. Actual I2C packets that the camera understands are in binary form and further wrapped by packet size, useless constant header bytes, session numbers, etc.  So we don't go into gory detail of the binary array but we explain a human-readable form that both MewPro Iliad and MewPro4 softwares also understand. 
+The following tree represents all the I2C commands of GoPro Hero 4 camera. Actual I2C packets that the camera understands are in a binary form and further wrapped by packet size, useless constant header bytes, session numbers, etc.  So we don't want to go into gory detail of the binary array but we explain human-readable strings that both MewPro Iliad and MewPro4 softwares also understand. 
 </p>
 
 <h2> Command Tree </h2>
@@ -1022,7 +1022,7 @@ Click '+' to expand and '-' to shrink.
 
 <h2>Usage</h2>
 <p>
-The commands listed above are translated into I2C binary array for Hero 4 camera by MewPro Iliad or MewPro4 softwares. Iliad and/or MewPro receive commands through their default UART port (aka <code>Serial</code> in Arduino's terminology) at 57600 baud. A command consists of hexadecimal characters preceded by either <code>YY</code> or <code>ZZ</code> followed by a newline character <code>\n</code>. These commands can be sent from your PC's terminal or Arduino Monitor easily.
+The commands listed above are translated into I2C binary arrays for Hero 4 camera by MewPro Iliad or MewPro4 softwares. Both Iliad and MewPro can receive these strings through their default UART port (aka <code>Serial</code> in Arduino's terminology) at 57600 baud. A command consists of hexadecimal characters preceded by either <code>YY</code> or <code>ZZ</code> and followed by a newline character <code>\n</code>. These commands can be sent from your PC's terminal or Arduino Monitor easily.
 </p>
 
 <p>
@@ -1030,7 +1030,7 @@ Each node of the tree corresponds a command byte that is denoted by using two he
 </p>
 <p>
 <strong>Example 1</strong>: Changing camera mode to multi-shot = "YY000101000102\n". <br/> 
-This command is obtained by clicking 
+This command string is obtained by clicking 
 <ul>
 <li> "YY command" &rarr;</li>
 <li> "* (don't care): extended YY command" &rarr;</li>
@@ -1047,7 +1047,7 @@ These branch expansions respectively correspond to the following nodes
 </p>
 <p>
 <strong>Example 2</strong>: Start recording in video mode = "YY00021B0000\n". <br/> 
-This command is obtained by clicking 
+This command string is obtained by clicking 
 <ul>
 <li> "YY command" &rarr;</li>
 <li> "* (don't care): extended YY command" &rarr;</li>
@@ -1063,7 +1063,7 @@ These branch expansions respectively correspond to the following nodes
 </ul>
 </p>
 <strong>Example 3</strong>: Change video mode to 4K 30fps Wide = "YY0002030003010800\n". <br/> 
-This command is obtained by clicking 
+This command string is obtained by clicking 
 <ul>
 <li> "YY command" &rarr;</li>
 <li> "* (don't care): extended YY command" &rarr;</li>
@@ -1081,7 +1081,7 @@ These branch expansions respectively correspond to the following nodes
 </p>
 <p>
 <strong>Example 4</strong>: Power off camera = "ZZ00030101\n". <br/> 
-This command is obtained by clicking
+This command string is obtained by clicking
 <ul>
 <li> "ZZ command" &rarr;</li>
 <li> "0x00: extended ZZ command" &rarr;</li>
@@ -1097,7 +1097,7 @@ These branch expansions respectively correspond to the following nodes
 
 <h2>Note</h2>
 <p>
-To improve readability the following strings, for example, share the same meaning for MewPro Iliad and/or MewPro4.
+In order to improve readability the following strings, for example, share the same meaning for MewPro Iliad and/or MewPro4 softwares.
 </p>
 <ul>
 <li>ZZ00030101\n</li>
@@ -1111,6 +1111,11 @@ To improve readability the following strings, for example, share the same meanin
 <li>MewPro 2: Shop, Usage, GitHub repo</li>
 </ul>
 
+<hr>
+<p style="font-size:70%;">
+Orangkucing Lab © 2017. All Rights Reserved.<br/> 
+MewPro is a trademark registered in the Japan Patent Office.
+</p>
 <script>
 var tree = document.querySelectorAll('ul.tree a:not(:last-child)');
 for(var i = 0; i < tree.length; i++){
