@@ -994,18 +994,14 @@ Click '+' to expand and '-' to shrink.
                   <li>0x0000: block until writing to microSD complete</li>
                 </ul>
               </li>
-              <li><a href="#">0x07</a>
+              <li><a href="#">0x07: request external sync signal; argc = 0x06; argv[] = { fps_h, fps_l, hsync_h, hsync_l, dummy_h, dummy_l }</a>
                 <ul>
-                  <li><a href="#">0x06: external sync signal; argv[] = { fps_h, fps_l, hsync_h, hsync_l, dummy_h, dummy_l }</a>
-                    <ul>
-                      <li>fps_h: high byte of fps * 100</li>
-                      <li>fps_l: low byte of fps * 100</li>
-                      <li>hsync_h: high byte of number of HSYNC pulses in a frame (buggy)</li>
-                      <li>hsync_l: low byte of number of HSYNC pulses in a frame (buggy)</li>
-                      <li>dummy_h: (unknown. always equal to hsync_h)</li>
-                      <li>dummy_l: (unknown. always equal to hsync_l)</li>
-                    </ul>
-                  </li>
+                  <li>fps_h: high byte of fps * 100</li>
+                  <li>fps_l: low byte of fps * 100</li>
+                  <li>hsync_h: high byte of number of HSYNC pulses in a frame (buggy)</li>
+                  <li>hsync_l: low byte of number of HSYNC pulses in a frame (buggy)</li>
+                  <li>dummy_h: (unknown. always equal to hsync_h)</li>
+                  <li>dummy_l: (unknown. always equal to hsync_l)</li>
                 </ul>
               </li>
             </ul>
