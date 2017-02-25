@@ -1018,7 +1018,7 @@ The commands listed above are translated into I2C binary arrays for Hero 4 camer
 <p>
 Each node of the tree corresponds a command byte that is denoted by using two hexadecimal digits (<code>0-9</code> and/or <code>A-F</code>). 
 </p>
-<p>
+<section>
 <strong>Example 1</strong>: Changing camera mode to multi-shot = "YY000101000102\n". <br/> 
 This command string is obtained by clicking 
 <ul>
@@ -1038,8 +1038,8 @@ These branch expansions respectively correspond to the following nodes (see also
 <img src="Example1.png">
 </div>
 <div style="text-align:center;">Fig 1.</div>
-</p>
-<p>
+</section>
+<section>
 <strong>Example 2</strong>: Start recording in video mode = "YY00021B0000\n". <br/> 
 This command string is obtained by clicking 
 <ul>
@@ -1055,7 +1055,7 @@ These branch expansions respectively correspond to the following nodes
 <li>"02" &rarr;</li>
 <li>"1B" "0000". (There are zero arguments to the command but argument length.)</li>
 </ul>
-</p>
+</section>
 <strong>Example 3</strong>: Change video mode to 4K 30fps Wide = "YY0002030003010800\n". <br/> 
 This command string is obtained by clicking 
 <ul>
@@ -1072,8 +1072,8 @@ These branch expansions respectively correspond to the following nodes
 <li>"02" &rarr;</li>
 <li>"03" "0003" "01" "08" "00". (There are three arguments to the command.)</li>
 </ul>
-</p>
-<p>
+</section>
+<section>
 <strong>Example 4</strong>: Power off camera = "ZZ00030101\n". <br/> 
 This command string is obtained by clicking
 <ul>
@@ -1087,7 +1087,7 @@ These branch expansions respectively correspond to the following nodes
 <li>"00" &rarr;</li>
 <li>"03" "01" "01". (There is one argument to the command.)</li>
 </ul>
-</p>
+</section>
 
 <h2>Note</h2>
 <p>
