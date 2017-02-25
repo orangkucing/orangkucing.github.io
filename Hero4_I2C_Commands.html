@@ -50,7 +50,7 @@ ul.tree li.open > a:not(:last-child):before {
 <body>
 <h1>List of GoPro Hero 4 I2C Commands</h1>
 <p>
-The following tree represents all the I2C commands of GoPro Hero 4 camera. Actual I2C packets that the camera understands are in a binary form and further wrapped by packet size, useless constant header bytes, session numbers, etc.  So we don't want to go into gory detail of the binary array but we explain human-readable strings that both MewPro Iliad and MewPro4 softwares also understand. 
+The following tree (Fig. 1) represents all the I2C commands of GoPro Hero 4 camera. Actual I2C packets that the camera understands are in a binary form and further wrapped by packet size, useless constant header bytes, session numbers, etc.  So we don't want to go into gory detail of the binary array but we explain human-readable strings that both MewPro Iliad and MewPro4 softwares also understand. 
 </p>
 
 <h2> Command Tree </h2>
@@ -1009,6 +1009,7 @@ Click '+' to expand a branch and '-' to shrink.
     </ul>
   </li>
 </ul>
+<div style="text-align:center;">Fig 1.</div>
 
 <h2>Usage</h2>
 <p>
@@ -1027,7 +1028,7 @@ This command string is obtained by clicking
 <li> "0x01: mode change" &rarr; </li>
 <li> "0x01: SET_CAMERA main mode; argc = 0x0001; argv[] = { mode }" where mode=0x02 (multi-shot).</li>
 </ul>
-These branch expansions respectively correspond to the following nodes (see also Fig 1).
+These branch expansions respectively correspond to the following nodes (cf. Fig 2).
 <ul>
 <li>"YY" &rarr;</li>
 <li>"00" (This is a don't-care byte. Let it be 00 for simplicity.) &rarr;</li>
@@ -1037,7 +1038,7 @@ These branch expansions respectively correspond to the following nodes (see also
 <div style="border:solid;">
 <img src="Example1.png">
 </div>
-<div style="text-align:center;">Fig 1.</div>
+<div style="text-align:center;">Fig 2.</div>
 </section>
 <section>
 <strong>Example 2</strong>: Start recording in video mode = "YY00021B0000\n". <br/> 
