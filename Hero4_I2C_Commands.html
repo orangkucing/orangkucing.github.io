@@ -59,14 +59,14 @@ The following tree (Fig. 1) represents all the I2C commands of GoPro Hero 4 came
 Click '+' to expand a branch and '-' to shrink.
 </p>
 <ul class="tree" style="border-style:groove;">
-  <li><a href="#">YY command</a>
+  <li><a href="javascript:;">YY command</a>
     <ul>
-      <li><a href="#">* (don't care): extended YY command</a>
+      <li><a href="javascript:;">* (don't care): extended YY command</a>
         <ul>
-          <li><a href="#">0x01: mode change</a>
+          <li><a href="javascript:;">0x01: mode change</a>
             <ul>
-              <li><a href="#">0x00: GET_CAMERA main mode; argc = 0x0000</a></li>
-              <li><a href="#">0x01: SET_CAMERA main mode; argc = 0x0001; argv[] = { mode }</a>
+              <li><a href="javascript:;">0x00: GET_CAMERA main mode; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x01: SET_CAMERA main mode; argc = 0x0001; argv[] = { mode }</a>
                 <ul>
                   <li>mode</li>
                   <li>0x00: video</li>
@@ -77,8 +77,8 @@ Click '+' to expand a branch and '-' to shrink.
                   <li>0x06: audio</li>
                 </ul>
               </li>
-              <li><a href="#">0x04: GET_CAMERA sub mode; argc = 0x0000</a></li>
-              <li><a href="#">0x05: SET_CAMERA sub mode; argc = 0x0002; argv[] = { mode, submode }</a>
+              <li><a href="javascript:;">0x04: GET_CAMERA sub mode; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x05: SET_CAMERA sub mode; argc = 0x0002; argv[] = { mode, submode }</a>
                 <ul>
                   <li>mode, submode<li>
                   <li>0x00, 0x00: video</li>
@@ -95,10 +95,10 @@ Click '+' to expand a branch and '-' to shrink.
               </li>
             </ul>
           </li>
-          <li><a href="#">0x02: video</a>
+          <li><a href="javascript:;">0x02: video</a>
             <ul>
-              <li><a href="#">0x00: GET_CAMERA default sub mode; argc = 0x0000</a></li>
-              <li><a href="#">0x01: SET_CAMERA default sub mode; argc = 0x0001; argv[] = { submode }</a>
+              <li><a href="javascript:;">0x00: GET_CAMERA default sub mode; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x01: SET_CAMERA default sub mode; argc = 0x0001; argv[] = { submode }</a>
                 <ul>
                   <li>submode<li>
                   <li>0x00: video</li>
@@ -107,8 +107,8 @@ Click '+' to expand a branch and '-' to shrink.
                   <li>0x03: looping video</li>
                 </ul>
               </li>
-              <li><a href="#">0x02: GET_CAMERA video mode; argc = 0x0000</a></li>
-              <li><a href="#">0x03: SET_CAMERA video mode; argc = 0x0003; argv[] = { resolution, fps, fov }</a>
+              <li><a href="javascript:;">0x02: GET_CAMERA video mode; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x03: SET_CAMERA video mode; argc = 0x0003; argv[] = { resolution, fps, fov }</a>
                 <ul>
                   <li>resolution</li>
                   <li>0x01: 4k</li>
@@ -144,8 +144,8 @@ Click '+' to expand a branch and '-' to shrink.
                   <li>0x04: linear (v5 or later firmware only)</li>
                 </ul>
               </li>
-              <li><a href="#">0x04: GET_CAMERA video + photo; argc = 0x0000</a></li>
-              <li><a href="#">0x05: SET_CAMERA video + photo; argc = 0x0001; argv[] = { interval }</a>
+              <li><a href="javascript:;">0x04: GET_CAMERA video + photo; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x05: SET_CAMERA video + photo; argc = 0x0001; argv[] = { interval }</a>
                 <ul>
                   <li>interval</li>
                   <li>0x01: 1 photo per 5 seconds</li> 
@@ -154,8 +154,8 @@ Click '+' to expand a branch and '-' to shrink.
                   <li>0x04: 1 photo per 60 seconds</li> 
                 </ul>
               </li>
-              <li><a href="#">0x06: GET_CAMERA looping; argc = 0x0000</a></li>
-              <li><a href="#">0x07: SET_CAMERA looping; argc = 0x0001; argv[] = { interval }</a>
+              <li><a href="javascript:;">0x06: GET_CAMERA looping; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x07: SET_CAMERA looping; argc = 0x0001; argv[] = { interval }</a>
                 <ul>
                   <li>interval</li>
                   <li>0x00: maximum</li>
@@ -165,24 +165,24 @@ Click '+' to expand a branch and '-' to shrink.
                   <li>0x04: 120 minutes</li>
                 </ul>
               </li>
-              <li><a href="#">0x08: GET_CAMERA low light; argc = 0x0000</a></li>
-              <li><a href="#">0x09: SET_CAMERA low light; argc = 0x0001; argv[] = { state }</a>
+              <li><a href="javascript:;">0x08: GET_CAMERA low light; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x09: SET_CAMERA low light; argc = 0x0001; argv[] = { state }</a>
                 <ul>
                   <li>state</li>
                   <li>0x00: off</li>
                   <li>0x01: on</li>
                 </ul>
               </li>
-              <li><a href="#">0x0A: GET_CAMERA spot meter; argc = 0x0000</a></li>
-              <li><a href="#">0x0B: SET_CAMERA spot meter; argc = 0x0001; argv[] = { state }</a>
+              <li><a href="javascript:;">0x0A: GET_CAMERA spot meter; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x0B: SET_CAMERA spot meter; argc = 0x0001; argv[] = { state }</a>
                 <ul>
                   <li>state</li>
                   <li>0x00: off</li>
                   <li>0x01: on</li>
                 </ul>
               </li>
-              <li><a href="#">0x0C: GET_CAMERA timelapse rate; argc = 0x0000</a></li>
-              <li><a href="#">0x0D: SET_CAMERA timelapse rate; argc = 0x0001; argv[] = { interval }</a>
+              <li><a href="javascript:;">0x0C: GET_CAMERA timelapse rate; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x0D: SET_CAMERA timelapse rate; argc = 0x0001; argv[] = { interval }</a>
                 <ul>
                   <li>interval</li>
                   <li>0x00: 0.5 seconds</li>
@@ -194,16 +194,16 @@ Click '+' to expand a branch and '-' to shrink.
                   <li>0x06: 60 seconds</li>
                 </ul>
               </li>
-              <li><a href="#">0x0E: GET_CAMERA protune; argc = 0x0000</a></li>
-              <li><a href="#">0x0F: SET_CAMERA protune; argc = 0x0001; argv[] = { state }</a>
+              <li><a href="javascript:;">0x0E: GET_CAMERA protune; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x0F: SET_CAMERA protune; argc = 0x0001; argv[] = { state }</a>
                 <ul>
                   <li>state</li>
                   <li>0x00: off</li>
                   <li>0x01: on</li>
                 </ul>
               </li>
-              <li><a href="#">0x10: GET_CAMERA protune white balance; argc = 0x0000</a></li>
-              <li><a href="#">0x11: SET_CAMERA protune white balance; argc = 0x0001; argv[] = { wb }</a>
+              <li><a href="javascript:;">0x10: GET_CAMERA protune white balance; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x11: SET_CAMERA protune white balance; argc = 0x0001; argv[] = { wb }</a>
                 <ul>
                   <li>wb</li>
                   <li>0x00: auto</li>
@@ -213,16 +213,16 @@ Click '+' to expand a branch and '-' to shrink.
                   <li>0x04: native</li>
                 </ul>
               </li>
-              <li><a href="#">0x12: GET_CAMERA protune color; argc = 0x0000</a></li>
-              <li><a href="#">0x13: SET_CAMERA protune color; argc = 0x0001; argv[] = { color }</a>
+              <li><a href="javascript:;">0x12: GET_CAMERA protune color; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x13: SET_CAMERA protune color; argc = 0x0001; argv[] = { color }</a>
                 <ul>
                   <li>color</li>
                   <li>0x00: GoPro color</li>
                   <li>0x01: flat</li>
                 </ul>
               </li>
-              <li><a href="#">0x14: GET_CAMERA protune sharpness; argc = 0x0000</a></li>
-              <li><a href="#">0x15: SET_CAMERA protune sharpness; argc = 0x0001; argv[] = { sharpness }</a>
+              <li><a href="javascript:;">0x14: GET_CAMERA protune sharpness; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x15: SET_CAMERA protune sharpness; argc = 0x0001; argv[] = { sharpness }</a>
                 <ul>
                   <li>sharpness</li>
                   <li>0x00: high</li>
@@ -230,8 +230,8 @@ Click '+' to expand a branch and '-' to shrink.
                   <li>0x02: low</li>
                 </ul>
               </li>
-              <li><a href="#">0x16: GET_CAMERA protune ISO; argc = 0x0000</a></li>
-              <li><a href="#">0x17: SET_CAMERA protune ISO; argc = 0x0001; argv[] = { limit }</a>
+              <li><a href="javascript:;">0x16: GET_CAMERA protune ISO; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x17: SET_CAMERA protune ISO; argc = 0x0001; argv[] = { limit }</a>
                 <ul>
                   <li>limit</li>
                   <li>0x00: 6400</li>
@@ -241,8 +241,8 @@ Click '+' to expand a branch and '-' to shrink.
                   <li>0x04: 800</li>
                 </ul>
               </li>
-              <li><a href="#">0x18: GET_CAMERA protune exposure value; argc = 0x0000</a></li>
-              <li><a href="#">0x19: SET_CAMERA protune exposure value; argc = 0x0001; argv[] = { ev }</a>
+              <li><a href="javascript:;">0x18: GET_CAMERA protune exposure value; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x19: SET_CAMERA protune exposure value; argc = 0x0001; argv[] = { ev }</a>
                 <ul>
                   <li>ev</li>
                   <li>0x00: +2.0</li>
@@ -256,10 +256,10 @@ Click '+' to expand a branch and '-' to shrink.
                   <li>0x08: -2.0</li>
                 </ul>
               </li>
-              <li><a href="#">0x1A: SET_CAMERA reset protune; argc = 0x0000</a></li>
-              <li><a href="#">0x1B: SET_CAMERA shutter button depressed. start recording; argc = 0x0000</a></li>
-              <li><a href="#">0x1C: SET_CAMERA stop recording; argc = 0x0000</a></li>
-              <li><a href="#">0x26: SET_CAMERA bulk set video settings; argc = 0x0060; argv[]</a>
+              <li><a href="javascript:;">0x1A: SET_CAMERA reset protune; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x1B: SET_CAMERA shutter button depressed. start recording; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x1C: SET_CAMERA stop recording; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x26: SET_CAMERA bulk set video settings; argc = 0x0060; argv[]</a>
                 <ul>
                   <li>video</li>
                   <li>argv[0]: current submode (defunct)</li>
@@ -343,8 +343,8 @@ Click '+' to expand a branch and '-' to shrink.
                   <li>argv[90:95]: (no use)
                 </ul>
               </li>
-              <li><a href="#">0x27: GET_CAMERA exposure time (v4 or later firmware only); argc = 0x0000</a></li>
-              <li><a href="#">0x28: SET_CAMERA exposure time (v4 or later firmware only); argc = 0x0001; argv[] = { shutter }</a>
+              <li><a href="javascript:;">0x27: GET_CAMERA exposure time (v4 or later firmware only); argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x28: SET_CAMERA exposure time (v4 or later firmware only); argc = 0x0001; argv[] = { shutter }</a>
                 <ul>
                   <li>shutter</li>
                   <li>0x00: auto</li>
@@ -373,8 +373,8 @@ Click '+' to expand a branch and '-' to shrink.
                   <li>0x17: 1/960</li>
                 </ul>
               </li>
-              <li><a href="#">0x29: GET_CAMERA protune ISO mode (v4 or later firmware only); argc = 0x0000</a></li>
-              <li><a href="#">0x2A: SET_CAMERA protune ISO mode (v4 or later firmware only); argc = 0x0001; argv[] = { mode }</a>
+              <li><a href="javascript:;">0x29: GET_CAMERA protune ISO mode (v4 or later firmware only); argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x2A: SET_CAMERA protune ISO mode (v4 or later firmware only); argc = 0x0001; argv[] = { mode }</a>
                 <ul>
                   <li>mode</li>
                   <li>0x00: maximum</li>
@@ -383,10 +383,10 @@ Click '+' to expand a branch and '-' to shrink.
               </li>
             </ul>
           </li>
-          <li><a href="#">0x03: photo</a>
+          <li><a href="javascript:;">0x03: photo</a>
             <ul>
-              <li><a href="#">0x00: GET_CAMERA default sub mode; argc = 0x0000</a></li>
-              <li><a href="#">0x01: SET_CAMERA default sub mode; argc = 0x0001; argv[] = { submode }</a>
+              <li><a href="javascript:;">0x00: GET_CAMERA default sub mode; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x01: SET_CAMERA default sub mode; argc = 0x0001; argv[] = { submode }</a>
                 <ul>
                   <li>submode</li>
                   <li>0x00: single</li>
@@ -394,8 +394,8 @@ Click '+' to expand a branch and '-' to shrink.
                   <li>0x02: night</li>
                 </ul>
               </li>
-              <li><a href="#">0x02: GET_CAMERA resolution; argc = 0x0000</a></li>
-              <li><a href="#">0x03: SET_CAMERA resolution; argc = 0x0001; argv[] = { resolution }</a>
+              <li><a href="javascript:;">0x02: GET_CAMERA resolution; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x03: SET_CAMERA resolution; argc = 0x0001; argv[] = { resolution }</a>
                 <ul>
                   <li>resolution</li>
                   <li>0x00: 12MP wide</li>
@@ -404,8 +404,8 @@ Click '+' to expand a branch and '-' to shrink.
                   <li>0x03: 5MP medium</li>
                 </ul>
               </li>
-              <li><a href="#">0x04: GET_CAMERA continuous rate; argc = 0x0000</a></li>
-              <li><a href="#">0x05: SET_CAMERA continuous rate; argc = 0x0001; argv[] = { interval }</a>
+              <li><a href="javascript:;">0x04: GET_CAMERA continuous rate; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x05: SET_CAMERA continuous rate; argc = 0x0001; argv[] = { interval }</a>
                 <ul>
                   <li>interval</li>
                   <li>0x00: 3 frames per second</li>
@@ -413,16 +413,16 @@ Click '+' to expand a branch and '-' to shrink.
                   <li>0x02: 10 frames per second</li>
                 </ul>
               </li>
-              <li><a href="#">0x06: GET_CAMERA spot meter; argc = 0x0000</a></li>
-              <li><a href="#">0x07: SET_CAMERA spot meter; argc = 0x0001; argv[] = { state }</a>
+              <li><a href="javascript:;">0x06: GET_CAMERA spot meter; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x07: SET_CAMERA spot meter; argc = 0x0001; argv[] = { state }</a>
                 <ul>
                   <li>state</li>
                   <li>0x00: off</li>
                   <li>0x01: on</li>
                 </ul>
               </li>
-              <li><a href="#">0x08: GET_CAMERA exposure time; argc = 0x0000</a></li>
-              <li><a href="#">0x09: SET_CAMERA exposure time; argc = 0x0001; argv[] = { shutter }</a>
+              <li><a href="javascript:;">0x08: GET_CAMERA exposure time; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x09: SET_CAMERA exposure time; argc = 0x0001; argv[] = { shutter }</a>
                 <ul>
                   <li>shutter</li>
                   <li>0x00: auto</li>
@@ -434,16 +434,16 @@ Click '+' to expand a branch and '-' to shrink.
                   <li>0x06: 30 seconds</li>
                 </ul>
               </li>
-              <li><a href="#">0x0A: GET_CAMERA protune; argc = 0x0000</a></li>
-              <li><a href="#">0x0B: SET_CAMERA protune; argc = 0x0001; argv[] = { state }</a>
+              <li><a href="javascript:;">0x0A: GET_CAMERA protune; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x0B: SET_CAMERA protune; argc = 0x0001; argv[] = { state }</a>
                 <ul>
                   <li>state</li>
                   <li>0x00: off</li>
                   <li>0x01: on</li>
                 </ul>
               </li>
-              <li><a href="#">0x0C: GET_CAMERA protune white balance; argc = 0x0000</a></li>
-              <li><a href="#">0x0D: SET_CAMERA protune white balance; argc = 0x0001; argv[] = { wb }</a>
+              <li><a href="javascript:;">0x0C: GET_CAMERA protune white balance; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x0D: SET_CAMERA protune white balance; argc = 0x0001; argv[] = { wb }</a>
                 <ul>
                   <li>wb</li>
                   <li>0x00: auto</li>
@@ -456,16 +456,16 @@ Click '+' to expand a branch and '-' to shrink.
                   <li>0x07: 6000K</li>
                 </ul>
               </li>
-              <li><a href="#">0x0E: GET_CAMERA protune color; argc = 0x0000</a></li>
-              <li><a href="#">0x0F: SET_CAMERA protune color; argc = 0x0001; argv[] = { color }</a>
+              <li><a href="javascript:;">0x0E: GET_CAMERA protune color; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x0F: SET_CAMERA protune color; argc = 0x0001; argv[] = { color }</a>
                 <ul>
                   <li>color</li>
                   <li>0x00: GoPro color</li>
                   <li>0x01: flat</li>
                 </ul>
               </li>
-              <li><a href="#">0x10: GET_CAMERA protune sharpness; argc = 0x0000</a></li>
-              <li><a href="#">0x11: SET_CAMERA protune sharpness; argc = 0x0001; argv[] = { sharpness }</a>
+              <li><a href="javascript:;">0x10: GET_CAMERA protune sharpness; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x11: SET_CAMERA protune sharpness; argc = 0x0001; argv[] = { sharpness }</a>
                 <ul>
                   <li>sharpness</li>
                   <li>0x00: high</li>
@@ -473,8 +473,8 @@ Click '+' to expand a branch and '-' to shrink.
                   <li>0x02: low</li>
                 </ul>
               </li>
-              <li><a href="#">0x12: GET_CAMERA protune ISO maximum; argc = 0x0000</a></li>
-              <li><a href="#">0x13: SET_CAMERA protune ISO maximum; argc = 0x0001; argv[] = { ISO }</a>
+              <li><a href="javascript:;">0x12: GET_CAMERA protune ISO maximum; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x13: SET_CAMERA protune ISO maximum; argc = 0x0001; argv[] = { ISO }</a>
                 <ul>
                   <li>ISO</li>
                   <li>0x00: 800</li>
@@ -483,8 +483,8 @@ Click '+' to expand a branch and '-' to shrink.
                   <li>0x03: 100</li>
                 </ul>
               </li>
-              <li><a href="#">0x14: GET_CAMERA protune exposure value; argc = 0x0000</a></li>
-              <li><a href="#">0x15: SET_CAMERA protune exposure value; argc = 0x0001; argv[] = { ev }</a>
+              <li><a href="javascript:;">0x14: GET_CAMERA protune exposure value; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x15: SET_CAMERA protune exposure value; argc = 0x0001; argv[] = { ev }</a>
                 <ul>
                   <li>ev</li>
                   <li>0x00: +2.0</li>
@@ -498,10 +498,10 @@ Click '+' to expand a branch and '-' to shrink.
                   <li>0x08: -2.0</li>
                 </ul>
               </li>
-              <li><a href="#">0x16: SET_CAMERA reset protune; argc = 0x0000</a></li>
-              <li><a href="#">0x17: SET_CAMERA shutter button depressed. start recording; argc = 0x0000</a></li>
-              <li><a href="#">0x18: SET_CAMERA stop recording (continuous submode only); argc = 0x0000</a></li>
-              <li><a href="#">0x1B: SET_CAMERA bulk set photo settings; argc = 0x003C; argv[]</a>
+              <li><a href="javascript:;">0x16: SET_CAMERA reset protune; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x17: SET_CAMERA shutter button depressed. start recording; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x18: SET_CAMERA stop recording (continuous submode only); argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x1B: SET_CAMERA bulk set photo settings; argc = 0x003C; argv[]</a>
                 <ul>
                   <li>single</li>
                   <li>argv[0]: current submode (defunct)</li>
@@ -550,8 +550,8 @@ Click '+' to expand a branch and '-' to shrink.
                   <li>argv[53:59]: (no use)</li>
                 </ul>
               </li>
-              <li><a href="#">0x1C: GET_CAMERA protune ISO minimum (v4 or later firmware only); argc = 0x0000</a></li>
-              <li><a href="#">0x1D: SET_CAMERA protune ISO minimum (v4 or later firmware only); argc = 0x0001; argv[] = { ISO }</a>
+              <li><a href="javascript:;">0x1C: GET_CAMERA protune ISO minimum (v4 or later firmware only); argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x1D: SET_CAMERA protune ISO minimum (v4 or later firmware only); argc = 0x0001; argv[] = { ISO }</a>
                 <ul>
                   <li>ISO</li>
                   <li>0x00: 800</li>
@@ -562,10 +562,10 @@ Click '+' to expand a branch and '-' to shrink.
               </li>
             </ul>
           </li>
-          <li><a href="#">0x04: multi-shot</a>
+          <li><a href="javascript:;">0x04: multi-shot</a>
             <ul>
-              <li><a href="#">0x00: GET_CAMERA default sub mode; argc = 0x0000</a></li>
-              <li><a href="#">0x01: SET_CAMERA default sub mode; argv[] = { submode }</a>
+              <li><a href="javascript:;">0x00: GET_CAMERA default sub mode; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x01: SET_CAMERA default sub mode; argv[] = { submode }</a>
                 <ul>
                   <li>submode</li>
                   <li>0x00: burst</li>
@@ -573,8 +573,8 @@ Click '+' to expand a branch and '-' to shrink.
                   <li>0x02: nightlapse</li>
                 </ul>
               </li>
-              <li><a href="#">0x02: GET_CAMERA resolution; argc = 0x0000</a></li>
-              <li><a href="#">0x03: SET_CAMERA resolution; argc = 0x0001; argv[] = { resolution }</a>
+              <li><a href="javascript:;">0x02: GET_CAMERA resolution; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x03: SET_CAMERA resolution; argc = 0x0001; argv[] = { resolution }</a>
                 <ul>
                   <li>resolution</li>
                   <li>0x00: 12MP wide</li>
@@ -583,8 +583,8 @@ Click '+' to expand a branch and '-' to shrink.
                   <li>0x03: 5MP medium</li>
                 </ul>
               </li>
-              <li><a href="#">0x04: GET_CAMERA burst rate; argc = 0x0000</a></li>
-              <li><a href="#">0x05: SET_CAMERA burst rate; argc = 0x0001; argv[] = { interval }</a>
+              <li><a href="javascript:;">0x04: GET_CAMERA burst rate; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x05: SET_CAMERA burst rate; argc = 0x0001; argv[] = { interval }</a>
                 <ul>
                   <li>interval</li>
                   <li>0x00: 3 photos / 1 second</li>
@@ -598,8 +598,8 @@ Click '+' to expand a branch and '-' to shrink.
                   <li>0x08: 30 photos / 6 seconds</li>
                 </ul>
               </li>
-              <li><a href="#">0x06: GET_CAMERA timelapse rate; argc = 0x0000</a></li>
-              <li><a href="#">0x07: SET_CAMERA timelapse rate; argc = 0x0001; argv[] = { interval }</a>
+              <li><a href="javascript:;">0x06: GET_CAMERA timelapse rate; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x07: SET_CAMERA timelapse rate; argc = 0x0001; argv[] = { interval }</a>
                 <ul>
                   <li>interval</li>
                   <li>0x00: 1 photo / 0.5 seconds</li>
@@ -611,8 +611,8 @@ Click '+' to expand a branch and '-' to shrink.
                   <li>0x06: 1 photo / 60 seconds</li>
                 </ul>
               </li>
-              <li><a href="#">0x08: GET_CAMERA nightlapse rate; argc = 0x0000</a></li>
-              <li><a href="#">0x09: SET_CAMERA nightlapse rate; argc = 0x0001; argv[] = { interval }</a>
+              <li><a href="javascript:;">0x08: GET_CAMERA nightlapse rate; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x09: SET_CAMERA nightlapse rate; argc = 0x0001; argv[] = { interval }</a>
                 <ul>
                   <li>interval</li>
                   <li>0x00: 10 seconds</li>
@@ -626,16 +626,16 @@ Click '+' to expand a branch and '-' to shrink.
                   <li>0x08: 60 minutes</li>
                 </ul>
               </li>
-              <li><a href="#">0x0A: GET_CAMERA spot meter; argc = 0x0000</a></li>
-              <li><a href="#">0x0B: SET_CAMERA spot meter; argc = 0x0001; argv[] = { status }</a>
+              <li><a href="javascript:;">0x0A: GET_CAMERA spot meter; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x0B: SET_CAMERA spot meter; argc = 0x0001; argv[] = { status }</a>
                 <ul>
                   <li>state</li>
                   <li>0x00: off</li>
                   <li>0x01: on</li>
                 </ul>
               </li>
-              <li><a href="#">0x0C: GET_CAMERA exposure time; argc = 0x0000</a></li>
-              <li><a href="#">0x0D: SET_CAMERA exposure time; argc = 0x0001; argv[] = { shutter }</a>
+              <li><a href="javascript:;">0x0C: GET_CAMERA exposure time; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x0D: SET_CAMERA exposure time; argc = 0x0001; argv[] = { shutter }</a>
                 <ul>
                   <li>shutter</li>
                   <li>0x00: auto</li>
@@ -647,16 +647,16 @@ Click '+' to expand a branch and '-' to shrink.
                   <li>0x06: 30 seconds</li>
                 </ul>
               </li>
-              <li><a href="#">0x0E: GET_CAMERA protune; argc = 0x0000</a></li>
-              <li><a href="#">0x0F: SET_CAMERA protune; argc = 0x0001; argv[] = { status }</a>
+              <li><a href="javascript:;">0x0E: GET_CAMERA protune; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x0F: SET_CAMERA protune; argc = 0x0001; argv[] = { status }</a>
                 <ul>
                   <li>state</li>
                   <li>0x00: off</li>
                   <li>0x01: on</li>
                 </ul>
               </li>
-              <li><a href="#">0x10: GET_CAMERA protune white balance; argc = 0x0000</a></li>
-              <li><a href="#">0x11: SET_CAMERA protune white balance; argc = 0x0001; argv[] = { wb }</a>
+              <li><a href="javascript:;">0x10: GET_CAMERA protune white balance; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x11: SET_CAMERA protune white balance; argc = 0x0001; argv[] = { wb }</a>
                 <ul>
                   <li>wb</li>
                   <li>0x00: auto</li>
@@ -666,16 +666,16 @@ Click '+' to expand a branch and '-' to shrink.
                   <li>0x04: native</li>
                 </ul>
               </li>
-              <li><a href="#">0x12: GET_CAMERA protune color; argc = 0x0000</a></li>
-              <li><a href="#">0x13: SET_CAMERA protune color; argc = 0x0001; argv[] = { color }</a>
+              <li><a href="javascript:;">0x12: GET_CAMERA protune color; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x13: SET_CAMERA protune color; argc = 0x0001; argv[] = { color }</a>
                 <ul>
                   <li>color</li>
                   <li>0x00: GoPro color</li>
                   <li>0x01: flat</li>
                 </ul>
               </li>
-              <li><a href="#">0x14: GET_CAMERA protune sharpness; argc = 0x0000</a></li>
-              <li><a href="#">0x15: SET_CAMERA protune sharpness; argc = 0x0001; argv[] = { sharpness }</a>
+              <li><a href="javascript:;">0x14: GET_CAMERA protune sharpness; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x15: SET_CAMERA protune sharpness; argc = 0x0001; argv[] = { sharpness }</a>
                 <ul>
                   <li>sharpness</li>
                   <li>0x00: high</li>
@@ -683,8 +683,8 @@ Click '+' to expand a branch and '-' to shrink.
                   <li>0x02: low</li>
                 </ul>
               </li>
-              <li><a href="#">0x16: GET_CAMERA protune ISO; argc = 0x0000</a></li>
-              <li><a href="#">0x17: SET_CAMERA protune ISO; argc = 0x0001; argv[] = { ISO }</a>
+              <li><a href="javascript:;">0x16: GET_CAMERA protune ISO; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x17: SET_CAMERA protune ISO; argc = 0x0001; argv[] = { ISO }</a>
                 <ul>
                   <li>ISO</li>
                   <li>0x00: 800</li>
@@ -693,8 +693,8 @@ Click '+' to expand a branch and '-' to shrink.
                   <li>0x03: 100</li>
                 </ul>
               </li>
-              <li><a href="#">0x18: GET_CAMERA protune exposure value; argc = 0x0000</a></li>
-              <li><a href="#">0x19: SET_CAMERA protune exposure value; argc = 0x0001; argv[] = { ev }</a>
+              <li><a href="javascript:;">0x18: GET_CAMERA protune exposure value; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x19: SET_CAMERA protune exposure value; argc = 0x0001; argv[] = { ev }</a>
                 <ul>
                   <li>ev</li>
                   <li>0x00: +2.0</li>
@@ -708,10 +708,10 @@ Click '+' to expand a branch and '-' to shrink.
                   <li>0x08: -2.0</li>
                 </ul>
               </li>
-              <li><a href="#">0x1A: SET_CAMERA reset protune; argc = 0x0000</a></li>
-              <li><a href="#">0x1B: SET_CAMERA shutter button depressed. start recording; argc = 0x0000</a></li>
-              <li><a href="#">0x1C: SET_CAMERA stop recording; argc = 0x0000</a></li>
-              <li><a href="#">0x20: SET_CAMERA bulk set photo settings; argc = 0x0042; argv[]</a>
+              <li><a href="javascript:;">0x1A: SET_CAMERA reset protune; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x1B: SET_CAMERA shutter button depressed. start recording; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x1C: SET_CAMERA stop recording; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x20: SET_CAMERA bulk set photo settings; argc = 0x0042; argv[]</a>
                 <ul>
                   <li>burst</li>
                   <li>argv[0]: current submode (defunct)</li>
@@ -766,8 +766,8 @@ Click '+' to expand a branch and '-' to shrink.
                   <li>argv[59:65]: (no use)</li>
                 </ul>
               </li>
-              <li><a href="#">0x21: GET_CAMERA protune ISO minimum (v4 or later firmware only); argc = 0x0000</a></li>
-              <li><a href="#">0x22: SET_CAMERA protune ISO minimum (v4 or later firmware only); argc = 0x0001; argv[] = { ISO }</a>
+              <li><a href="javascript:;">0x21: GET_CAMERA protune ISO minimum (v4 or later firmware only); argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x22: SET_CAMERA protune ISO minimum (v4 or later firmware only); argc = 0x0001; argv[] = { ISO }</a>
                 <ul>
                   <li>ISO</li>
                   <li>0x00: 800</li>
@@ -778,10 +778,10 @@ Click '+' to expand a branch and '-' to shrink.
               </li>
             </ul>
           </li>
-          <li><a href="#">0x07: global settings</a>
+          <li><a href="javascript:;">0x07: global settings</a>
             <ul>
-              <li><a href="#">0x00: GET_CAMERA LCD brightness; argc = 0x0000</a></li>
-              <li><a href="#">0x01: SET_CAMERA LCD brightness; argc = 0x0001; argv[] = { brightness }</a>
+              <li><a href="javascript:;">0x00: GET_CAMERA LCD brightness; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x01: SET_CAMERA LCD brightness; argc = 0x0001; argv[] = { brightness }</a>
                 <ul>
                   <li>brightness</li>
                   <li>0x00: high</li>
@@ -789,8 +789,8 @@ Click '+' to expand a branch and '-' to shrink.
                   <li>0x02: low</li>
                 </ul>
               </li>
-              <li><a href="#">0x02: GET_CAMERA LCD sleep; argc = 0x0000</a></li>
-              <li><a href="#">0x03: SET_CAMERA LCD sleep; argc = 0x0001; argv[] = { sleep }</a>
+              <li><a href="javascript:;">0x02: GET_CAMERA LCD sleep; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x03: SET_CAMERA LCD sleep; argc = 0x0001; argv[] = { sleep }</a>
                 <ul>
                   <li>sleep</li>
                   <li>0x00: never</li>
@@ -799,24 +799,24 @@ Click '+' to expand a branch and '-' to shrink.
                   <li>0x03: 3 minutes</li>
                 </ul>
               </li>
-              <li><a href="#">0x04: GET_CAMERA LCD lock; argc = 0x0000</a></li>
-              <li><a href="#">0x05: SET_CAMERA LCD lock; argc = 0x0001; argv[] = { state}</a>
+              <li><a href="javascript:;">0x04: GET_CAMERA LCD lock; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x05: SET_CAMERA LCD lock; argc = 0x0001; argv[] = { state}</a>
                 <ul>
                   <li>state</li>
                   <li>0x00: off</li>
                   <li>0x01: on</li>
                 </ul>
               </li>
-              <li><a href="#">0x06: GET_CAMERA LCD power; argc = 0x0000</a></li>
-              <li><a href="#">0x07: SET_CAMERA LCD power; argc = 0x0001; argv[] = { state }</a>
+              <li><a href="javascript:;">0x06: GET_CAMERA LCD power; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x07: SET_CAMERA LCD power; argc = 0x0001; argv[] = { state }</a>
                 <ul>
                   <li>state</li>
                   <li>0x00: off</li>
                   <li>0x01: on</li>
                 </ul>
               </li>
-              <li><a href="#">0x08: GET_CAMERA orientation; argc = 0x0000</a></li>
-              <li><a href="#">0x09: SET_CAMERA orientation; argc = 0x0001; argv[] = { orientation }</a>
+              <li><a href="javascript:;">0x08: GET_CAMERA orientation; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x09: SET_CAMERA orientation; argc = 0x0001; argv[] = { orientation }</a>
                 <ul>
                   <li>orientation</li>
                   <li>0x00: auto</li>
@@ -824,8 +824,8 @@ Click '+' to expand a branch and '-' to shrink.
                   <li>0x02: down</li>
                 </ul>
               </li>
-              <li><a href="#">0x0A: GET_CAMERA default mode; argc = 0x0000</a></li>
-              <li><a href="#">0x0B: SET_CAMERA default mode; argc = 0x0001; argv[] = { mode }</a>
+              <li><a href="javascript:;">0x0A: GET_CAMERA default mode; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x0B: SET_CAMERA default mode; argc = 0x0001; argv[] = { mode }</a>
                 <ul>
                   <li>mode</li>
                   <li>0x00: video</li>
@@ -833,16 +833,16 @@ Click '+' to expand a branch and '-' to shrink.
                   <li>0x02: multi-shot</li>
                 </ul>
               </li>
-              <li><a href="#">0x0C: GET_CAMERA quick capture; argc = 0x0000</a></li>
-              <li><a href="#">0x0D: SET_CAMERA quick capture; argc = 0x0001; argv[] = { state }</a>
+              <li><a href="javascript:;">0x0C: GET_CAMERA quick capture; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x0D: SET_CAMERA quick capture; argc = 0x0001; argv[] = { state }</a>
                 <ul>
                   <li>state</li>
                   <li>0x00: off</li>
                   <li>0x01: on</li>
                 </ul>
               </li>
-              <li><a href="#">0x0E: GET_CAMERA LEDs; argc = 0x0000</a></li>
-              <li><a href="#">0x0F: SET_CAMERA LEDs; argc = 0x0001; argv[] = { LEDs }</a>
+              <li><a href="javascript:;">0x0E: GET_CAMERA LEDs; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x0F: SET_CAMERA LEDs; argc = 0x0001; argv[] = { LEDs }</a>
                 <ul>
                   <li>LEDs</li>
                   <li>0x00: off</li>
@@ -850,8 +850,8 @@ Click '+' to expand a branch and '-' to shrink.
                   <li>0x02: 4</li>
                 </ul>
               </li>
-              <li><a href="#">0x10: GET_CAMERA beeps; argc = 0x0000</a></li>
-              <li><a href="#">0x11: SET_CAMERA beeps; argc = 0x0001; argv[] = { beeps }</a>
+              <li><a href="javascript:;">0x10: GET_CAMERA beeps; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x11: SET_CAMERA beeps; argc = 0x0001; argv[] = { beeps }</a>
                 <ul>
                   <li>beeps</li>
                   <li>0x00: 100%</li>
@@ -859,24 +859,24 @@ Click '+' to expand a branch and '-' to shrink.
                   <li>0x02: off</li>
                 </ul>
               </li>
-              <li><a href="#">0x12: GET_CAMERA video format; argc = 0x0000</a></li>
-              <li><a href="#">0x13: SET_CAMERA video format; argc = 0x0001; argv[] = { format }</a>
+              <li><a href="javascript:;">0x12: GET_CAMERA video format; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x13: SET_CAMERA video format; argc = 0x0001; argv[] = { format }</a>
                 <ul>
                   <li>format</li>
                   <li>0x00: NTSC</li>
                   <li>0x01: PAL</li>
                 </ul>
               </li>
-              <li><a href="#">0x14: GET_CAMERA OSD; argc = 0x0000</a></li>
-              <li><a href="#">0x15: SET_CAMERA OSD; argc = 0x0001; argv[] = { state }</a>
+              <li><a href="javascript:;">0x14: GET_CAMERA OSD; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x15: SET_CAMERA OSD; argc = 0x0001; argv[] = { state }</a>
                 <ul>
                   <li>state</li>
                   <li>0x00: off</li>
                   <li>0x01: on</li>
                 </ul>
               </li>
-              <li><a href="#">0x16: GET_CAMERA auto power down; argc = 0x0000</a></li>
-              <li><a href="#">0x17: SET_CAMERA auto power down; argc = 0x0001; argv[] = { minute }</a>
+              <li><a href="javascript:;">0x16: GET_CAMERA auto power down; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x17: SET_CAMERA auto power down; argc = 0x0001; argv[] = { minute }</a>
                 <ul>
                   <li>minute</li>
                   <li>0x00: never</li>
@@ -886,8 +886,8 @@ Click '+' to expand a branch and '-' to shrink.
                   <li>0x04: 5 minutes</li>
                 </ul>
               </li>
-              <li><a href="#">0x1A: GET_CAMERA datetime; argc = 0x0000</a></li>
-              <li><a href="#">0x1B: SET_CAMERA datetime; argc = 0x0001; argv[] = { year_h, year_l,  month, day, hour, minute, second }</a>
+              <li><a href="javascript:;">0x1A: GET_CAMERA datetime; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x1B: SET_CAMERA datetime; argc = 0x0001; argv[] = { year_h, year_l,  month, day, hour, minute, second }</a>
                 <ul>
                   <li>year_h: high byte of year</li>
                   <li>year_l: low byte of year</li>
@@ -898,15 +898,15 @@ Click '+' to expand a branch and '-' to shrink.
                   <li>second: second (0 - 60)</li>
                 </ul>
               </li>
-              <li><a href="#">0x1F: GET_CAMERA language; argc = 0x0000</a></li>
-              <li><a href="#">0x20: SET_CAMERA language; argc = 0x0001; argv[] = { language }</a>
+              <li><a href="javascript:;">0x1F: GET_CAMERA language; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x20: SET_CAMERA language; argc = 0x0001; argv[] = { language }</a>
                 <ul>
                   <li>language</li>
                   <li>0x00: English</li>
                   <li>0x01: Simplified Chinese</li>
                 </ul>
               </li>
-              <li><a href="#">0x21: SET_CAMERA bulk set global settings; argc = 0x0023; argv[]</a>
+              <li><a href="javascript:;">0x21: SET_CAMERA bulk set global settings; argc = 0x0023; argv[]</a>
                 <ul>
                   <li>argv[0]: 0x20 (unknown constant)</li>
                   <li>argv[1]: 0x16 (unknown constant)</li>
@@ -941,10 +941,10 @@ Click '+' to expand a branch and '-' to shrink.
               </li>
             </ul>
           </li>
-          <li><a href="#">0x09: delete</a>
+          <li><a href="javascript:;">0x09: delete</a>
             <ul>
-              <li><a href="#">0x09: SET_CAMERA delete last; argc = 0x0000</a></li>
-              <li><a href="#">0x0A: SET_CAMERA delete all/format; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x09: SET_CAMERA delete last; argc = 0x0000</a></li>
+              <li><a href="javascript:;">0x0A: SET_CAMERA delete all/format; argc = 0x0000</a></li>
             </ul>
           </li>
         </ul>
@@ -952,43 +952,43 @@ Click '+' to expand a branch and '-' to shrink.
     </ul>
   </li>
 
-  <li><a href="#">ZZ command</a>
+  <li><a href="javascript:;">ZZ command</a>
     <ul>
-      <li><a href="#">0x01:</a>
+      <li><a href="javascript:;">0x01:</a>
         <ul>
-          <li><a href="#">0x00: GET_BACPAC (unknown)</a></li>
+          <li><a href="javascript:;">0x00: GET_BACPAC (unknown)</a></li>
         </ul>
       </li>
-      <li><a href="#">0x02:</a>
+      <li><a href="javascript:;">0x02:</a>
         <ul>
-          <li><a href="#">0x01: SET_BACPAC power on</a></li>
+          <li><a href="javascript:;">0x01: SET_BACPAC power on</a></li>
         </ul>
       </li>
-      <li><a href="#">0x03:</a>
+      <li><a href="javascript:;">0x03:</a>
         <ul>
-          <li><a href="#">0x00: GET_CAMERA version string</a></li>
+          <li><a href="javascript:;">0x00: GET_CAMERA version string</a></li>
         </ul>
       </li>
-      <li><a href="#">0x00: extended ZZ command </a>
+      <li><a href="javascript:;">0x00: extended ZZ command </a>
         <ul>
-          <li><a href="#">0x00: SET_CAMERA sync source; argc = 0x01; argv[] = { source, 0x00 }</a>
+          <li><a href="javascript:;">0x00: SET_CAMERA sync source; argc = 0x01; argv[] = { source, 0x00 }</a>
             <ul>
               <li>source</li>
               <li>0x00: external (multi camera)</li>
               <li>0x01: internal (standalone)</li>
             </ul>
           </li>
-          <li><a href="#">0x01: SET_BACPAC camera sync status</a>
+          <li><a href="javascript:;">0x01: SET_BACPAC camera sync status</a>
             <ul>
-              <li><a href="#">0x01; argv[] = { status, 0x00 }</a>
+              <li><a href="javascript:;">0x01; argv[] = { status, 0x00 }</a>
                 <ul>
                   <li>status</li>
                   <li>0x00: camera is recording</li>
                   <li>0x01: camera is finished</li>
                 </ul>
               </li>
-              <li><a href="#">0x02; camera is blocking until microSD write complete; argv[] = { 0x00, 0x00 }</a></li>
-              <li><a href="#">0x07: camera is requesting external sync signal; argv[] = { 0x01, fps_h, fps_l, hsync_h, hsync_l, dummy_h, dummy_l }</a>
+              <li><a href="javascript:;">0x02; camera is blocking until microSD write complete; argv[] = { 0x00, 0x00 }</a></li>
+              <li><a href="javascript:;">0x07: camera is requesting external sync signal; argv[] = { 0x01, fps_h, fps_l, hsync_h, hsync_l, dummy_h, dummy_l }</a>
                 <ul>
                   <li>fps_h: high byte of fps * 100</li>
                   <li>fps_l: low byte of fps * 100</li>
@@ -1000,10 +1000,10 @@ Click '+' to expand a branch and '-' to shrink.
               </li>
             </ul>
           </li>
-          <li><a href="#">0x02: SET_BACPAC heartbeat; argc = 0x00</a></li>
-          <li><a href="#">0x03: SET_CAMERA power off; argc = 0x01; argv[] = { 0x01 }</a></li>
-          <li><a href="#">0x05: SET_CAMERA bacpac firmware version; argc = 0x03; argv[] = { version[3], 0x00 }</a></li>
-          <li><a href="#">0x06: SET_CAMERA bacpac serial number; argc = 0x08; argv[] = { serial_number[7], check_sum, 0x00 }</a></li>
+          <li><a href="javascript:;">0x02: SET_BACPAC heartbeat; argc = 0x00</a></li>
+          <li><a href="javascript:;">0x03: SET_CAMERA power off; argc = 0x01; argv[] = { 0x01 }</a></li>
+          <li><a href="javascript:;">0x05: SET_CAMERA bacpac firmware version; argc = 0x03; argv[] = { version[3], 0x00 }</a></li>
+          <li><a href="javascript:;">0x06: SET_CAMERA bacpac serial number; argc = 0x08; argv[] = { serial_number[7], check_sum, 0x00 }</a></li>
         </ul>
       </li>
     </ul>
@@ -1102,8 +1102,8 @@ In order to improve readability the following strings, for example, share the sa
 
 <h2>Useful Links</h2>
 <ul>
-<li>MewPro Iliad: Shop, Usage, GitHub repo</li>
-<li>MewPro 2: Shop, Usage, GitHub repo</li>
+<li>MewPro Iliad: <a href="https://mewpro.cc/product/mewpro-iliad/">Shop</a>, <a href="https://mewpro.cc/2016/11/04/how-to-use-mewpro-iliad/">Usage</a>, <a href="https://github.com/orangkucing/MewPro_Iliad">GitHub repo</a></li>
+<li>MewPro 2: <a href="https://mewpro.cc/product/mewpro-2/">Shop</a>, <a href="https://mewpro.cc/2017/02/25/list-of-gopro-hero-4-i2c-commands/">Usage</a>, <a href="https://github.com/orangkucing/MewPro4">GitHub repo</a></li>
 </ul>
 
 <hr>
