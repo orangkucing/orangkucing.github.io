@@ -76,11 +76,10 @@
             q += ')';
           }
           // rewrite due to a bug of Google Visualization API
-          for (let r of select) {
-            q = q.replace(new RegExp('\\[' + r + '\\]', "g"), selectA1[r]);
-          }
+          //for (let r of select) {
+          //  q = q.replace(new RegExp('\\[' + r + '\\]', "g"), selectA1[r]);
+          //}
 
-          alert(q);
           var query = 'https://docs.google.com/spreadsheets/d/1-XgySBso-vJoqMhmYgUZMtjcCY0qnjm-vIr3c6J7_M8/gviz/tq?sheet=%22' + sheetname + '%22&tqx=out:html&tq=' + encodeURIComponent(q);
           document.getElementById('results').src = query;
         }
