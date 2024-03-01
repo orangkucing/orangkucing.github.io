@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <style>
+      iframe {
+        width: 100vw;
+        height: 100vh;
+        height: 100dvh;
+        border: none;
+      }
+    </style>
+  </head>
+  <body>
+    <form>
+      <table>
+        <tr><td>タイトル</td><td><input type="search" name="keyword"></td><td><input type="checkbox" name="keywordOr">OR</td></tr>
+        <tr><td>著者</td><td><input type="search" name="author"></td><td><input type="checkbox" name="authorOr">OR</td></tr>
+        <tr><td>出版社</td><td><input type="search" name="publisher"></td><td><input type="checkbox" name="publisherOr">OR</td></tr>
+        <tr><td></td><td><button onclick="sendQuery(event)">検索</button></td><td></td></tr>
+      </table>
+    </form>
+    <iframe id='results'></iframe>
+    <script>
+      function sendQuery(event) {
+        // change here! if column or sheet names are modified in the sheet
+        const selectA1 = {'著者・編者':'B', 'シリーズ名':'D', '巻号':'E', 'タイトル':'F', '出版者':'G', '出版年':'H', '分類記号':'I', '配架場所':'L'};
+        const authorIndex = 0;
+        const keywordIndices = [1, 3];
+        const publisherIndex = 4;
+        const sheetname = 'Sheet1';
+        //
+        var select = Object.keys(selectA1);
+        var keywords = document.querySelector('input[name="keyword"]').value.replace(/["'\[\]]/g, ' ').split(/[\x20\u3000]/);
+        var keywordOperator = document.querySelector('input[name="keywordOr"]').checked ? ' or ' : ' and ';
+        var authors = document.querySelector('input[name="author"]').value.replace(/["'\[\]]/g, ' ').split(/[\x20\u3000]/);
+        var authorOperator = document.querySelector('input[name="authorOr"]').checked ? ' or ' : ' and ';
+        var publishers = document.querySelector('input[name="publisher"]').value.replace(/["'\[\]]/g, ' ').split(/[\x20\u3000]/);
+        var publisherOperator = document.querySelector('input[name="publisherOr"]').checked ? ' or ' : ' and ';
+        if (authors[0] || publishers[0] || keywords[0]) {
+          let q = 'select ';
+          let concat = false;
+          for (let i = 0; i < select.length - 1; i++) {
+            q += '[' + select[i] + '], ';
+          }
+          q += '[' + select[select.length - 1] + '] where ';
+          if (authors[0]) {
+            concat = true;
+            let op = '';
+            q += '(';
+            for (let author of authors) {
+              q += op + '[' + select[authorIndex] + '] contains "' + author + '"';
+              if (!op) {op = authorOperator;}
+            }
+            q += ')';
+          }
+          if (publishers[0]) {
+            if (concat) {q += ' and ';}
+            concat = true;
+            let op = '';
+            q += '(';
+            for (let publisher of publishers) {
+              q += op + '[' + select[publisherIndex] + '] contains "' + publisher + '"';
+              if (!op) {op = publisherOperator;}
+            }
+            q += ')';
+          }
+          if (keywords[0]) {
+            if (concat) {q += ' and ';}
+            let op = '';
+            q += '(';
+            for (let keyword of keywords) {
+              q += op + '([' + select[keywordIndices[0]] + '] contains "' + keyword + '" or [' + select[keywordIndices[1]] + '] contains "' + keyword + '")';
+              if (!op) {op = keywordOperator;}
+            }
+            q += ')';
+          }
+          // rewrite due to a bug of Google Visualization API
+          for (let r of select) {
+            q = q.replace(new RegExp('\\[' + r + '\\]', "g"), selectA1[r]);
+          }
+
+          alert(q);
+          var query = 'https://docs.google.com/spreadsheets/d/1-XgySBso-vJoqMhmYgUZMtjcCY0qnjm-vIr3c6J7_M8/gviz/tq?sheet=%22' + sheetname + '%22&tqx=out:html&tq=' + encodeURIComponent(q);
+          document.getElementById('results').src = query;
+        }
+        event.preventDefault();
+      }
+    </script>
+  </body>
+</html>
