@@ -3,6 +3,15 @@
   <head>
     <base target="_top">
     <style>
+      .longbox {
+        width: 10rem;
+      }
+      .shortbox {
+        width: 4rem;
+      }
+      .remark {
+        font-size: 40%;
+      }
       iframe {
         width: 100vw;
         height: 100vh;
@@ -12,12 +21,14 @@
     </style>
   </head>
   <body>
+    <h3>中野バプテスト教会　蔵書検索サービス</h3>
     <form>
       <table>
-        <tr><td>タイトル</td><td><input type="search" name="keyword"></td><td><input type="checkbox" name="keywordOr">OR</td></tr>
-        <tr><td>著者</td><td><input type="search" name="author"></td><td><input type="checkbox" name="authorOr">OR</td></tr>
-        <tr><td>出版社</td><td><input type="search" name="publisher"></td><td><input type="checkbox" name="publisherOr">OR</td></tr>
-        <tr><td></td><td><button onclick="sendQuery(event)">検索</button></td><td></td></tr>
+        <tr><td>タイトル</td><td><input class="longbox" type="search" name="keyword"></td><td><input type="checkbox" name="keywordOr">OR</td></tr>
+        <tr><td>著者</td><td><input class="longbox" type="search" name="author"></td><td><input type="checkbox" name="authorOr">OR</td></tr>
+        <tr><td>出版社</td><td><input class="longbox" type="search" name="publisher"></td><td><input type="checkbox" name="publisherOr">OR</td></tr>
+        <tr><td>出版年</td><td><input class="shortbox" type="search" name="yearfrom" placeholder="西暦">-<input class="shortbox" type="search" name="yearuntil" placeholder="西暦"></td><td></td></tr>
+        <tr><td></td><td><button onclick="sendQuery(event)">検索</button></td><td><span class="remark">Powered by <a href="https://docs.google.com/spreadsheets/d/1-XgySBso-vJoqMhmYgUZMtjcCY0qnjm-vIr3c6J7_M8/edit?usp=sharing">Google Sheets</a></span></td></tr>
       </table>
     </form>
     <iframe id='results'></iframe>
@@ -28,6 +39,7 @@
         const authorIndex = 0;
         const keywordIndices = [1, 3];
         const publisherIndex = 4;
+	const publishyearIndex = 5;
         const sheetname = 'Sheet1';
         //
         var select = Object.keys(selectA1);
@@ -37,7 +49,9 @@
         var authorOperator = document.querySelector('input[name="authorOr"]').checked ? ' or ' : ' and ';
         var publishers = document.querySelector('input[name="publisher"]').value.replace(/["'\[\]]/g, ' ').split(/[\x20\u3000]/);
         var publisherOperator = document.querySelector('input[name="publisherOr"]').checked ? ' or ' : ' and ';
-        if (authors[0] || publishers[0] || keywords[0]) {
+        var publishyears = [document.querySelector('input[name="yearfrom"]').value, document.querySelector('input[name="yearuntil"]').value];
+console.log(publishyears);
+        if (authors[0] || publishers[0] || keywords[0] || publishyears[0] || publishyears[1]) {
           let q = 'select ';
           let concat = false;
           for (let i = 0; i < select.length - 1; i++) {
@@ -67,6 +81,7 @@
           }
           if (keywords[0]) {
             if (concat) {q += ' and ';}
+            concat = true;
             let op = '';
             q += '(';
             for (let keyword of keywords) {
@@ -75,6 +90,22 @@
             }
             q += ')';
           }
+          if (publishyears[0] || publishyears[1]) {
+            if (concat) {q += ' and ';}
+            concat = true;
+            q += '([' + select[publishyearIndex] + '] is not null and ';
+            if (publishyears[0]) {
+              q += '[' + select[publishyearIndex] + '] >= ' + publishyears[0];
+              if (publishyears[1]) {
+                q += ' and ';
+              }
+            }
+            if (publishyears[1]) {
+              q += '[' + select[publishyearIndex] + '] <= ' + publishyears[1];
+            }
+            q += ')';
+          }
+alert(q);
           // rewrite due to a bug of Google Visualization API
           for (let r of select) {
             q = q.replace(new RegExp('\\[' + r + '\\]', "g"), selectA1[r]);
