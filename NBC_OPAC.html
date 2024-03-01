@@ -39,7 +39,7 @@
         const authorIndex = 0;
         const keywordIndices = [1, 3];
         const publisherIndex = 4;
-	const publishyearIndex = 5;
+        const publishyearIndex = 5;
         const sheetname = 'Sheet1';
         //
         var select = Object.keys(selectA1);
@@ -50,7 +50,6 @@
         var publishers = document.querySelector('input[name="publisher"]').value.replace(/["'\[\]]/g, ' ').split(/[\x20\u3000]/);
         var publisherOperator = document.querySelector('input[name="publisherOr"]').checked ? ' or ' : ' and ';
         var publishyears = [document.querySelector('input[name="yearfrom"]').value, document.querySelector('input[name="yearuntil"]').value];
-console.log(publishyears);
         if (authors[0] || publishers[0] || keywords[0] || publishyears[0] || publishyears[1]) {
           let q = 'select ';
           let concat = false;
