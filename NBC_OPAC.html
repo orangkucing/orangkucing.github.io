@@ -29,8 +29,8 @@
       <table>
         <tr><td></td><td style="text-align: right;">項目間</td><td><input type="checkbox" name="interItemOr">OR</td></tr>
         <tr><td>タイトル</td><td><input class="longbox" type="search" name="keyword"></td><td><input type="checkbox" name="keywordOr">OR</td></tr>
-        <tr><td>著者</td><td><input class="longbox" type="search" name="author"></td><td><input type="checkbox" name="authorOr">OR</td></tr>
-        <tr><td>出版社</td><td><input class="longbox" type="search" name="publisher"></td><td><input type="checkbox" name="publisherOr">OR</td></tr>
+        <tr><td>著者・編者</td><td><input class="longbox" type="search" name="author"></td><td><input type="checkbox" name="authorOr">OR</td></tr>
+        <tr><td>出版者</td><td><input class="longbox" type="search" name="publisher" placeholder="出版社名など"></td><td><input type="checkbox" name="publisherOr">OR</td></tr>
         <tr><td>出版年</td><td><input class="shortbox" type="search" name="yearfrom" placeholder="西暦">-<input class="shortbox" type="search" name="yearuntil" placeholder="西暦"></td><td></td></tr>
         <tr><td></td><td><button onclick="sendQuery(event)">検索</button></td><td><span class="remark">Powered by <a href="https://docs.google.com/spreadsheets/d/1-XgySBso-vJoqMhmYgUZMtjcCY0qnjm-vIr3c6J7_M8/edit?usp=sharing">Google Sheets</a></span></td></tr>
       </table>
@@ -39,35 +39,45 @@
     <script>
       function sendQuery(event) {
         // change here! if column or sheet names are modified in the sheet
-        const selectA1 = {'著者・編者':'B', 'シリーズ名':'D', '巻号':'E', 'タイトル':'F', '出版者':'G', '出版年':'H', '分類記号':'I', '配架場所':'L'};
-        const authorIndex = 0;
-        const keywordIndices = [1, 3];
-        const publisherIndex = 4;
-        const publishyearIndex = 5;
+        const selectA1 = {'著者・編者':'B', '読み':'C', 'シリーズ名':'D', '巻号':'E', 'タイトル':'F', '出版者':'G', '出版年':'H', '分類記号':'I', '配架場所':'L'};
+        const yomiIndex = 1;
+        const authorIndices = [0, yomiIndex];
+        const keywordIndices = [2, 4];
+        const publisherIndex = 5;
+        const publishyearIndex = 6;
         const sheetname = 'Sheet1';
         //
+        const regex = /["'=\[\]・　＝]/g;
         var select = Object.keys(selectA1);
         var interItemOperator = document.querySelector('input[name="interItemOr"]').checked ? ' or ' : ' and ';
-        var keywords = document.querySelector('input[name="keyword"]').value.replace(/["'\[\]]/g, ' ').split(/[\x20\u3000]/);
+        var keywords = document.querySelector('input[name="keyword"]').value.replace(regex, ' ').split(' ');
         var keywordOperator = document.querySelector('input[name="keywordOr"]').checked ? ' or ' : ' and ';
-        var authors = document.querySelector('input[name="author"]').value.replace(/["'\[\]]/g, ' ').split(/[\x20\u3000]/);
+        var authors = document.querySelector('input[name="author"]').value.replace(regex, ' ').split(' ');
         var authorOperator = document.querySelector('input[name="authorOr"]').checked ? ' or ' : ' and ';
-        var publishers = document.querySelector('input[name="publisher"]').value.replace(/["'\[\]]/g, ' ').split(/[\x20\u3000]/);
+        var publishers = document.querySelector('input[name="publisher"]').value.replace(regex, ' ').split(' ');
         var publisherOperator = document.querySelector('input[name="publisherOr"]').checked ? ' or ' : ' and ';
         var publishyears = [document.querySelector('input[name="yearfrom"]').value, document.querySelector('input[name="yearuntil"]').value];
         if (authors[0] || publishers[0] || keywords[0] || publishyears[0] || publishyears[1]) {
           let q = 'select ';
           let concat = false;
-          for (let i = 0; i < select.length - 1; i++) {
-            q += '[' + select[i] + '], ';
+          {
+            let op = '';
+            for (let i = 0; i < select.length; i++) {
+              if (i != yomiIndex) {
+                q += op + '[' + select[i] + ']';
+                if (!op) {
+                  op = ', ';
+                }
+              }
+            }
           }
-          q += '[' + select[select.length - 1] + '] where ';
+          q += ' where ';
           if (authors[0]) {
             concat = true;
             let op = '';
             q += '(';
             for (let author of authors) {
-              q += op + '[' + select[authorIndex] + '] contains "' + author + '"';
+              q += op + '([' + select[authorIndices[0]] + '] contains "' + author + '" or [' + select[authorIndices[1]] + '] contains "' + author.replace(/[ぁ-ゖ]/g, (s) => {return String.fromCharCode(s.charCodeAt(0) + 0x60);}) + '")';
               if (!op) {op = authorOperator;}
             }
             q += ')';
@@ -109,7 +119,6 @@
             }
             q += ')';
           }
-
           // rewrite due to a bug of Google Visualization API
           for (let r of select) {
             q = q.replace(new RegExp('\\[' + r + '\\]', "g"), selectA1[r]);
