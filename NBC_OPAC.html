@@ -3,9 +3,6 @@
   <head>
     <base target="_top">
     <style>
-      html {
-        -webkit-text-size-adjust: 100%;
-      }
       .longbox {
         width: 10rem;
       }
@@ -13,13 +10,62 @@
         width: 4rem;
       }
       .remark {
-        font-size: 40%;
+        font-size: 66%;
+      }
+      td span {
+        vertical-align: middle;
       }
       iframe {
-        width: 100vw;
+        width: 100%;
         height: 100vh;
         height: 100dvh;
         border: none;
+      }
+      .switch {
+        position: relative;
+        display: inline-block;
+        width: 28px;
+        height: 16px;
+      }
+      .switch input { 
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+        border-radius: 16px;
+      }
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 12px;
+        width: 12px;
+        left: 2px;
+        bottom: 2px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+        border-radius: 50%;
+      }
+      input:checked + .slider {
+        background-color: #2196F3;
+      }
+      input:focus + .slider {
+        box-shadow: 0 0 1px #2196F3;
+      }
+      input:checked + .slider:before {
+        -webkit-transform: translateX(12px);
+        -ms-transform: translateX(12px);
+        transform: translateX(12px);
       }
     </style>
   </head>
@@ -27,10 +73,10 @@
     <h3>中野バプテスト教会　蔵書検索サービス</h3>
     <form>
       <table>
-        <tr><td></td><td style="text-align: right;">項目間</td><td><input type="checkbox" name="interItemOr">OR</td></tr>
-        <tr><td>タイトル</td><td><input class="longbox" type="search" name="keyword"></td><td><input type="checkbox" name="keywordOr">OR</td></tr>
-        <tr><td>著者・編者</td><td><input class="longbox" type="search" name="author"></td><td><input type="checkbox" name="authorOr">OR</td></tr>
-        <tr><td>出版者</td><td><input class="longbox" type="search" name="publisher" placeholder="出版社名など"></td><td><input type="checkbox" name="publisherOr">OR</td></tr>
+        <tr><td></td><td style="text-align: right;">項目間</td><td><label class="switch"><input type="checkbox" name="interItemOr"><span class="slider"></span></label>OR</td></tr>
+        <tr><td>タイトル</td><td><input class="longbox" type="search" name="keyword"></td><td><label class="switch"><input type="checkbox" name="keywordOr"><span class="slider"></span></label>OR</td></tr>
+        <tr><td>著者・編者</td><td><input class="longbox" type="search" name="author"></td><td><label class="switch"><input type="checkbox" name="authorOr"><span class="slider"></span></label>OR</td></tr>
+        <tr><td>出版者</td><td><input class="longbox" type="search" name="publisher" placeholder="出版社名など"></td><td><label class="switch"><input type="checkbox" name="publisherOr"><span class="slider"></span></label>OR</td></tr>
         <tr><td>出版年</td><td><input class="shortbox" type="search" name="yearfrom" placeholder="西暦">-<input class="shortbox" type="search" name="yearuntil" placeholder="西暦"></td><td></td></tr>
         <tr><td></td><td><button onclick="sendQuery(event)">検索</button></td><td><span class="remark">Powered by <a href="https://docs.google.com/spreadsheets/d/1-XgySBso-vJoqMhmYgUZMtjcCY0qnjm-vIr3c6J7_M8/edit?usp=sharing">Google Sheets</a></span></td></tr>
       </table>
