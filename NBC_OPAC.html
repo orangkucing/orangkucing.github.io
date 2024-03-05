@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8">
     <base target="_self">
     <style>
       html {
@@ -27,7 +28,6 @@
       }
 
       /* begin: slide switch */
-
       td .switch {
         vertical-align: middle;
       }
@@ -84,9 +84,26 @@
         -ms-transform: translateX(12px);
         transform: translateX(12px);
       }
-
       /* end: slide switch */
 
+      /* begin: clear button */
+      input[type="search"]::-webkit-search-cancel-button {
+        -webkit-appearance: none;
+        height: 1em;
+        width: 1em;
+        margin-left: .5em;
+        border-radius: 50em;
+        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23777'><path d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'/></svg>");
+        background-size: contain;
+        display: none;
+        pointer-events: none;
+      }
+
+      input[type="search"]:focus::-webkit-search-cancel-button {
+        display: block;
+        pointer-events: all;
+      }
+      /* end: clear button */
     </style>
     <script>
       function toKatakana(s) {
