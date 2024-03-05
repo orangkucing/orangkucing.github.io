@@ -16,8 +16,43 @@
         width: 6rem;
       }
 
+      td {
+        padding-right: 4px;
+        padding-left: 4px;
+      }
+
       .remark {
         font-size: 70%;
+      }
+
+      .google-wrapper {
+        position: relative;
+      }
+
+      .google-wrapper .google {
+        font-size: 70%;
+        display: block;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+      } 
+
+      button {
+        float: left;
+        background-color: #2196f3;
+        border: none;
+        border-radius: 8px;
+        color: white;
+        margin: 10px auto 0;
+        padding: 2px 1rem;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        cursor: pointer;
+      }
+
+      button:active {
+        transform: translateY(2px);
       }
 
       iframe {
@@ -227,17 +262,18 @@
     <form action="." method="">
       <table>
         <tr>
-          <td>簡単検索</td>
+          <td>簡易検索</td>
           <td><input class="longbox" type="search" name="keyword" placeholder="キーワード" autofocus></td>
           <td><label class="switch"><input type="checkbox" name="keywordOr" checked><span class="slider"></span></label>OR</td>
         </tr>
         <tr>
           <td></td>
-          <td class="remark" colspan="2">キーワードはスペースで区切ってください。</td>
+          <td><span class="remark">キーワードはスペースで区切ってください。</span></td>
+          <td></td>
         </tr>
         <tr>
           <td>タイトル</td>
-          <td><input class="longbox" type="search" name="title"></td>
+          <td><input class="longbox" type="search" name="title" placeholder="タイトルやシリーズ名"></td>
           <td><label class="switch"><input type="checkbox" name="titleOr"><span class="slider"></span></label>OR</td>
         </tr>
         <tr>
@@ -257,8 +293,7 @@
         </tr>
         <tr>
           <td></td>
-          <td><button onclick="sendQuery(event)">検索</button></td>
-          <td><span class="remark">Powered by <a href="https://docs.google.com/spreadsheets/d/1-XgySBso-vJoqMhmYgUZMtjcCY0qnjm-vIr3c6J7_M8/edit?usp=sharing">Google Sheets</a></span></td>
+          <td colspan="2" class="google-wrapper"><button onclick="sendQuery(event)">検索</button><span class="google">Powered by <a href="https://docs.google.com/spreadsheets/d/1-XgySBso-vJoqMhmYgUZMtjcCY0qnjm-vIr3c6J7_M8/edit?usp=sharing">Google Sheets</a></span></td>
         </tr>
       </table>
     </form>
