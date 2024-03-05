@@ -16,7 +16,7 @@
         width: 6rem;
       }
 
-      table caption, .remark {
+      .remark {
         font-size: 70%;
       }
 
@@ -226,11 +226,14 @@
     <h3>中野バプテスト教会　蔵書検索サービス</h3>
     <form action="." method="">
       <table>
-        <caption>キーワードはスペースで区切ってください。</caption>
         <tr>
-          <td></td>
+          <td>簡単検索</td>
           <td><input class="longbox" type="search" name="keyword" placeholder="キーワード" autofocus></td>
           <td><label class="switch"><input type="checkbox" name="keywordOr" checked><span class="slider"></span></label>OR</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td class="remark" colspan="2">キーワードはスペースで区切ってください。</td>
         </tr>
         <tr>
           <td>タイトル</td>
