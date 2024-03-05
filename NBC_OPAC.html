@@ -7,13 +7,13 @@
         font-family: 'Hiragino Sans', 'Meiryo', sans-serif;
       }
       .longbox {
-        width: 14rem;
+        width: 18rem;
       }
       .shortbox {
         width: 4rem;
       }
       table caption, .remark {
-        font-size: 66%;
+        font-size: 70%;
       }
       td .switch {
         vertical-align: middle;
@@ -77,7 +77,7 @@
     <form>
       <table>
       <caption>キーワードはスペースで区切ってください。</caption>
-        <tr><td></td><td><input class="longbox" type="search" name="all" placeholder="キーワード"></td><td><label class="switch"><input type="checkbox" name="allOr" checked><span class="slider"></span></label>OR</td></tr>
+        <tr><td></td><td><input class="longbox" type="search" name="keyword" placeholder="キーワード"></td><td><label class="switch"><input type="checkbox" name="keywordOr" checked><span class="slider"></span></label>OR</td></tr>
         <tr><td>タイトル</td><td><input class="longbox" type="search" name="title"></td><td><label class="switch"><input type="checkbox" name="titleOr"><span class="slider"></span></label>OR</td></tr>
         <tr><td>著者・編者</td><td><input class="longbox" type="search" name="author"></td><td><label class="switch"><input type="checkbox" name="authorOr"><span class="slider"></span></label>OR</td></tr>
         <tr><td>出版者</td><td><input class="longbox" type="search" name="publisher" placeholder="出版社名など"></td><td><label class="switch"><input type="checkbox" name="publisherOr"><span class="slider"></span></label>OR</td></tr>
@@ -98,10 +98,10 @@
         const sheetname = 'Sheet1';
         //
         const regex = /["'=\[\]・　＝]/g;
-        var select = Object.keys(selectA1);
         const interItemOperator = ' and ';
-        var all = document.querySelector('input[name="all"]').value.replace(regex, ' ').split(' ');
-        var allOperator = document.querySelector('input[name="allOr"]').checked ? ' or ' : ' and ';
+        var select = Object.keys(selectA1);
+        var keywords = document.querySelector('input[name="keyword"]').value.replace(regex, ' ').split(' ');
+        var keywordOperator = document.querySelector('input[name="keywordOr"]').checked ? ' or ' : ' and ';
         var titles = document.querySelector('input[name="title"]').value.replace(regex, ' ').split(' ');
         var titleOperator = document.querySelector('input[name="titleOr"]').checked ? ' or ' : ' and ';
         var authors = document.querySelector('input[name="author"]').value.replace(regex, ' ').split(' ');
@@ -109,7 +109,7 @@
         var publishers = document.querySelector('input[name="publisher"]').value.replace(regex, ' ').split(' ');
         var publisherOperator = document.querySelector('input[name="publisherOr"]').checked ? ' or ' : ' and ';
         var publishyears = [document.querySelector('input[name="yearfrom"]').value, document.querySelector('input[name="yearuntil"]').value];
-        if (all[0] || authors[0] || publishers[0] || titles[0] || publishyears[0] || publishyears[1]) {
+        if (keywords[0] || authors[0] || publishers[0] || titles[0] || publishyears[0] || publishyears[1]) {
           let q = 'select ';
           let concat = false;
           {
@@ -117,52 +117,52 @@
             for (let i = 0; i < select.length; i++) {
               if (i != yomiIndex) {
                 q += op + '[' + select[i] + ']';
-                if (!op) {
-                  op = ', ';
-                }
+                if (!op) {op = ', ';}
               }
             }
           }
           q += ' where ';
-          if (all[0]) {
-            if (concat) {q += interItemOperator;}
+          if (keywords[0]) {
+            if (concat) {q += ' and ';}
             concat = true;
             let op = '';
             q += '(';
-            for (let a of all) {
-              q += op + '([' + select[titleIndices[0]] + '] contains "' + a + '" or ' +
-                         '[' + select[titleIndices[1]] + '] contains "' + a + '" or ' +
-                         '[' + select[authorIndices[0]] + '] contains "' + a + '" or ' + 
-                         '[' + select[authorIndices[1]] + '] contains "' + a.replace(/[ぁ-ゖ]/g, (s) => {return String.fromCharCode(s.charCodeAt(0) + 0x60);}) + '" or ' +
-                         '[' + select[publisherIndex] + '] contains "' + a + '")';
-              if (!op) {op = allOperator;}
+            for (let keyword of keywords) {
+              q += op + '([' + select[titleIndices[0]] + '] contains "' + keyword + '" or ' +
+                         '[' + select[titleIndices[1]] + '] contains "' + keyword + '" or ' +
+                         '[' + select[authorIndices[0]] + '] contains "' + keyword + '" or ' + 
+                         '[' + select[authorIndices[1]] + '] contains "' + keyword.replace(/[ぁ-ゖ]/g, (s) => {return String.fromCharCode(s.charCodeAt(0) + 0x60);}) + '" or ' +
+                         '[' + select[publisherIndex] + '] contains "' + keyword + '")';
+              if (!op) {op = keywordOperator;}
             }
             q += ')';
           }
           if (titles[0]) {
-            if (concat) {q += interItemOperator;}
+            if (concat) {q += ' and ';}
             concat = true;
             let op = '';
             q += '(';
             for (let title of titles) {
-              q += op + '([' + select[titleIndices[0]] + '] contains "' + title + '" or [' + select[titleIndices[1]] + '] contains "' + title + '")';
+              q += op + '([' + select[titleIndices[0]] + '] contains "' + title + '" or ' +
+                         '[' + select[titleIndices[1]] + '] contains "' + title + '")';
               if (!op) {op = titleOperator;}
             }
             q += ')';
           }
           if (authors[0]) {
-            if (concat) {q += interItemOperator;}
+            if (concat) {q += ' and ';}
             concat = true;
             let op = '';
             q += '(';
             for (let author of authors) {
-              q += op + '([' + select[authorIndices[0]] + '] contains "' + author + '" or [' + select[authorIndices[1]] + '] contains "' + author.replace(/[ぁ-ゖ]/g, (s) => {return String.fromCharCode(s.charCodeAt(0) + 0x60);}) + '")';
+              q += op + '([' + select[authorIndices[0]] + '] contains "' + author + '" or ' +
+                         '[' + select[authorIndices[1]] + '] contains "' + author.replace(/[ぁ-ゖ]/g, (s) => {return String.fromCharCode(s.charCodeAt(0) + 0x60);}) + '")';
               if (!op) {op = authorOperator;}
             }
             q += ')';
           }
           if (publishers[0]) {
-            if (concat) {q += interItemOperator;}
+            if (concat) {q += ' and ';}
             concat = true;
             let op = '';
             q += '(';
@@ -173,7 +173,7 @@
             q += ')';
           }
           if (publishyears[0] || publishyears[1]) {
-            if (concat) {q += interItemOperator;}
+            if (concat) {q += ' and ';}
             concat = true;
             q += '([' + select[publishyearIndex] + '] is not null and ';
             if (publishyears[0]) {
@@ -187,6 +187,7 @@
             }
             q += ')';
           }
+
           // rewrite due to a bug of Google Visualization API
           for (let r of select) {
             q = q.replace(new RegExp('\\[' + r + '\\]', "g"), selectA1[r]);
