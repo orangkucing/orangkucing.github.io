@@ -3,16 +3,19 @@
   <head>
     <base target="_top">
     <style>
+      html {
+        font-family: 'Hiragino Sans', 'Meiryo', sans-serif;
+      }
       .longbox {
-        width: 10rem;
+        width: 14rem;
       }
       .shortbox {
         width: 4rem;
       }
-      .remark {
+      table caption, .remark {
         font-size: 66%;
       }
-      td span {
+      td .switch {
         vertical-align: middle;
       }
       iframe {
@@ -73,8 +76,9 @@
     <h3>中野バプテスト教会　蔵書検索サービス</h3>
     <form>
       <table>
-        <tr><td></td><td style="text-align: right;">項目間</td><td><label class="switch"><input type="checkbox" name="interItemOr"><span class="slider"></span></label>OR</td></tr>
-        <tr><td>タイトル</td><td><input class="longbox" type="search" name="keyword"></td><td><label class="switch"><input type="checkbox" name="keywordOr"><span class="slider"></span></label>OR</td></tr>
+      <caption>キーワードはスペースで区切ってください。</caption>
+        <tr><td></td><td><input class="longbox" type="search" name="all" placeholder="キーワード"></td><td><label class="switch"><input type="checkbox" name="allOr" checked><span class="slider"></span></label>OR</td></tr>
+        <tr><td>タイトル</td><td><input class="longbox" type="search" name="title"></td><td><label class="switch"><input type="checkbox" name="titleOr"><span class="slider"></span></label>OR</td></tr>
         <tr><td>著者・編者</td><td><input class="longbox" type="search" name="author"></td><td><label class="switch"><input type="checkbox" name="authorOr"><span class="slider"></span></label>OR</td></tr>
         <tr><td>出版者</td><td><input class="longbox" type="search" name="publisher" placeholder="出版社名など"></td><td><label class="switch"><input type="checkbox" name="publisherOr"><span class="slider"></span></label>OR</td></tr>
         <tr><td>出版年</td><td><input class="shortbox" type="search" name="yearfrom" placeholder="西暦">-<input class="shortbox" type="search" name="yearuntil" placeholder="西暦"></td><td></td></tr>
@@ -88,22 +92,24 @@
         const selectA1 = {'著者・編者':'B', '読み':'C', 'シリーズ名':'D', '巻号':'E', 'タイトル':'F', '出版者':'G', '出版年':'H', '分類記号':'I', '配架場所':'L'};
         const yomiIndex = 1;
         const authorIndices = [0, yomiIndex];
-        const keywordIndices = [2, 4];
+        const titleIndices = [2, 4];
         const publisherIndex = 5;
         const publishyearIndex = 6;
         const sheetname = 'Sheet1';
         //
         const regex = /["'=\[\]・　＝]/g;
         var select = Object.keys(selectA1);
-        var interItemOperator = document.querySelector('input[name="interItemOr"]').checked ? ' or ' : ' and ';
-        var keywords = document.querySelector('input[name="keyword"]').value.replace(regex, ' ').split(' ');
-        var keywordOperator = document.querySelector('input[name="keywordOr"]').checked ? ' or ' : ' and ';
+        const interItemOperator = ' and ';
+        var all = document.querySelector('input[name="all"]').value.replace(regex, ' ').split(' ');
+        var allOperator = document.querySelector('input[name="allOr"]').checked ? ' or ' : ' and ';
+        var titles = document.querySelector('input[name="title"]').value.replace(regex, ' ').split(' ');
+        var titleOperator = document.querySelector('input[name="titleOr"]').checked ? ' or ' : ' and ';
         var authors = document.querySelector('input[name="author"]').value.replace(regex, ' ').split(' ');
         var authorOperator = document.querySelector('input[name="authorOr"]').checked ? ' or ' : ' and ';
         var publishers = document.querySelector('input[name="publisher"]').value.replace(regex, ' ').split(' ');
         var publisherOperator = document.querySelector('input[name="publisherOr"]').checked ? ' or ' : ' and ';
         var publishyears = [document.querySelector('input[name="yearfrom"]').value, document.querySelector('input[name="yearuntil"]').value];
-        if (authors[0] || publishers[0] || keywords[0] || publishyears[0] || publishyears[1]) {
+        if (all[0] || authors[0] || publishers[0] || titles[0] || publishyears[0] || publishyears[1]) {
           let q = 'select ';
           let concat = false;
           {
@@ -118,7 +124,34 @@
             }
           }
           q += ' where ';
+          if (all[0]) {
+            if (concat) {q += interItemOperator;}
+            concat = true;
+            let op = '';
+            q += '(';
+            for (let a of all) {
+              q += op + '([' + select[titleIndices[0]] + '] contains "' + a + '" or ' +
+                         '[' + select[titleIndices[1]] + '] contains "' + a + '" or ' +
+                         '[' + select[authorIndices[0]] + '] contains "' + a + '" or ' + 
+                         '[' + select[authorIndices[1]] + '] contains "' + a.replace(/[ぁ-ゖ]/g, (s) => {return String.fromCharCode(s.charCodeAt(0) + 0x60);}) + '" or ' +
+                         '[' + select[publisherIndex] + '] contains "' + a + '")';
+              if (!op) {op = allOperator;}
+            }
+            q += ')';
+          }
+          if (titles[0]) {
+            if (concat) {q += interItemOperator;}
+            concat = true;
+            let op = '';
+            q += '(';
+            for (let title of titles) {
+              q += op + '([' + select[titleIndices[0]] + '] contains "' + title + '" or [' + select[titleIndices[1]] + '] contains "' + title + '")';
+              if (!op) {op = titleOperator;}
+            }
+            q += ')';
+          }
           if (authors[0]) {
+            if (concat) {q += interItemOperator;}
             concat = true;
             let op = '';
             q += '(';
@@ -136,17 +169,6 @@
             for (let publisher of publishers) {
               q += op + '[' + select[publisherIndex] + '] contains "' + publisher + '"';
               if (!op) {op = publisherOperator;}
-            }
-            q += ')';
-          }
-          if (keywords[0]) {
-            if (concat) {q += interItemOperator;}
-            concat = true;
-            let op = '';
-            q += '(';
-            for (let keyword of keywords) {
-              q += op + '([' + select[keywordIndices[0]] + '] contains "' + keyword + '" or [' + select[keywordIndices[1]] + '] contains "' + keyword + '")';
-              if (!op) {op = keywordOperator;}
             }
             q += ')';
           }
