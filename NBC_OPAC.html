@@ -41,19 +41,27 @@
         float: left;
         background-color: #2196f3;
         border: none;
-        border-radius: 8px;
+        border-radius: 10px;
         color: white;
         margin: 10px auto 0;
-        /* padding: 0.2rem 1rem; */
-        padding: 10px;
+        padding: 5px 10px; */
         text-align: center;
         text-decoration: none;
         display: inline-block;
         cursor: pointer;
+        -webkit-transition: .4s;
+        transition: .4s;
+      }
+
+      button:before {
+        -webkit-transition: .4s;
+        transition: .4s;
       }
 
       button:active {
-        transform: translateY(2px);
+        -webkit-transform: translateY(4px);
+        -ms-transform: translateY(4px);
+        transform: translateY(4px);
       }
 
       iframe {
