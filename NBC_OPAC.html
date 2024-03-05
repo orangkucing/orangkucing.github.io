@@ -8,7 +8,7 @@
       }
 
       .longbox {
-        width: 18rem;
+        width: 14rem;
       }
 
       .shortbox {
@@ -106,7 +106,7 @@
         var select = Object.keys(selectA1);
         var obj = {};
         for (let s of ['keyword', 'title', 'author', 'publisher']) {
-          obj[s + 's'] = document.querySelector('input[name="' + s +'"]').value.replace(/["'=\[\]・　＝]/g, ' ').split(' ');
+          obj[s + 's'] = document.querySelector('input[name="' + s +'"]').value.replace(/[,\."'`=\[\]/／・　＝、。，]/g, ' ').split(' ');
           obj[s + 'Operator'] = document.querySelector('input[name="' + s + 'Or"]').checked ? 'or' : 'and';
         }
         var publishyears = {};
@@ -224,7 +224,7 @@
         </tr>
         <tr>
           <td>著者・編者</td>
-          <td><input class="longbox" type="search" name="author"></td>
+          <td><input class="longbox" type="search" name="author" placeholder="読みでも検索できます"></td>
           <td><label class="switch"><input type="checkbox" name="authorOr"><span class="slider"></span></label>OR</td>
         </tr>
         <tr>
