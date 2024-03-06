@@ -2,28 +2,39 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <base target="_self">
     <style>
       html {
         font-family: 'Hiragino Sans', 'Meiryo', sans-serif;
+        font-size: 16px;
+        margin: 0;
+      }
+
+      body {
+        margin: 0;
+      }
+
+      h4, form {
+        margin: 0 auto;
+      }
+
+      table, tr, td {
+        border-spacing: 0;
+        padding: 0;
       }
 
       .longbox {
-        width: 14rem;
+        width: 10rem;
       }
 
       .shortbox {
-        width: 6rem;
-      }
-
-      td {
-        padding-right: 4px;
-        padding-left: 4px;
+        width: 4rem;
       }
 
       .remark {
-        font-size: 70%;
+        height: 50%;
+        font-size: 50%;
       }
 
       .google-wrapper {
@@ -31,11 +42,11 @@
       }
 
       .google-wrapper .google {
-        font-size: 70%;
+        font-size: 50%;
         display: block;
         position: absolute;
         bottom: 0;
-        right: 1rem;
+        right: 0.5rem;
       } 
 
       button {
@@ -44,8 +55,8 @@
         border: none;
         border-radius: 10px;
         color: white;
-        margin: 3px auto 0;
-        padding: 5px 10px;
+        margin: 1px;
+        padding: 1px 10px;
         text-align: center;
         text-decoration: none;
         display: inline-block;
@@ -63,13 +74,14 @@
         background-color: #ccc;
       }
 
-      .iframe-wrapper {
+      #iframe-wrapper {
         width: 100%;
       }
 
-      iframe {
+      #results {
         width: 100%;
-        border: none;
+        height: 100%
+        border: 0 none;
         overflow: hidden;
       }
 
@@ -167,7 +179,7 @@
         var select = Object.keys(selectA1);
         var obj = {};
         for (let s of ['keyword', 'title', 'author', 'publisher']) {
-          obj[s + 's'] = document.querySelector('input[name="' + s +'"]').value.replace(/[,\."'`=\[\]/／・　＝、。，]/g, ' ').split(' ');
+          obj[s + 's'] = document.querySelector('input[name="' + s +'"]').value.replace(/[,\."'`=\[\]/∙∙／・　＝、。，]/g, ' ').split(' ');
           obj[s + 'Operator'] = document.querySelector('input[name="' + s + 'Or"]').checked ? 'or' : 'and';
         }
         var publishyears = {};
@@ -259,8 +271,10 @@
             q = q.replace(new RegExp('\\[' + r + '\\]', "g"), selectA1[r]);
           }
 
+          let iframeWrapper = document.getElementById('iframe-wrapper');
           let iframe = document.getElementById('results');
-          iframe.height = document.documentElement.clientHeight - iframe.getBoundingClientRect().x * 2  - iframe.getBoundingClientRect().y;
+          let h = (document.documentElement.clientHeight - iframeWrapper.getBoundingClientRect().y) + "px";
+          iframeWrapper.style.height = iframe.style.height = h;
           iframe.src = 'https://docs.google.com/spreadsheets/d/1-XgySBso-vJoqMhmYgUZMtjcCY0qnjm-vIr3c6J7_M8/gviz/tq' +
                        '?sheet=%22' + sheetname + '%22&tqx=out:html&tq=' + encodeURIComponent(q);
         } else {
@@ -271,17 +285,17 @@
     </script>
   </head>
   <body>
-    <h3>中野バプテスト教会　蔵書検索サービス</h3>
-    <form action="." method="">
+    <form action="#" method>
+      <h4>中野バプテスト教会　蔵書検索サービス</h3>
       <table>
         <tr>
           <td>簡易検索</td>
           <td><input class="longbox" type="search" name="keyword" placeholder="キーワード" autofocus></td>
           <td><label class="switch"><input type="checkbox" name="keywordOr" checked><span class="slider"></span></label>OR</td>
         </tr>
-        <tr>
+        <tr class="remark">
           <td></td>
-          <td><span class="remark">キーワードはスペースで区切ってください。</span></td>
+          <td>キーワードはスペースで区切ってください。</td>
           <td></td>
         </tr>
         <tr>
@@ -290,7 +304,7 @@
           <td><label class="switch"><input type="checkbox" name="titleOr"><span class="slider"></span></label>OR</td>
         </tr>
         <tr>
-          <td>著者・編者</td>
+          <td>著者∙編者</td>
           <td><input class="longbox" type="search" name="author" placeholder="読みでも検索できます"></td>
           <td><label class="switch"><input type="checkbox" name="authorOr"><span class="slider"></span></label>OR</td>
         </tr>
@@ -310,6 +324,6 @@
         </tr>
       </table>
     </form>
-    <div class="iframe-wrapper"><iframe id='results'></iframe></div>
+    <div id="iframe-wrapper"><iframe id='results' frameborder="0"></iframe></div>
   </body>
 </html>
