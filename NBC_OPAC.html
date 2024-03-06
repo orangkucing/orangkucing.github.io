@@ -10,14 +10,16 @@
         font-size: 16px;
         margin: 0;
         overflow: hidden;
+        overscroll-behaviour: none; /* disable pull to refresh */
       }
 
       body {
-        height: 100vh;
-        height: 100dvh;
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
         margin: 0;
+      }
+
+      #iframe-wrapper {
+        overflow-x: hidden;
+        overflow-y: auto;
       }
 
       @media screen and (max-width: 652px) {
@@ -28,8 +30,6 @@
         #iframe-wrapper {
           float: left;
           width: 100%;
-          overflow-x: hidden;
-          overflow-y: auto;
         }
       }
 
@@ -44,8 +44,6 @@
         #iframe-wrapper {
           float: right;
           width: calc(100% - 280px);
-          overflow-x: hidden;
-          overflow-y: auto;
         }
       }
 
