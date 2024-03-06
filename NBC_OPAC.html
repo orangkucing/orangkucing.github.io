@@ -208,11 +208,9 @@
       /* end: clear button */
     </style>
     <script>
-      window.onload = () => {
+      window.onload = (() => {
         window.addEventListener('resize', setIframeSize, false);
-        // click outside the inputs losing focus (iPhone)
-        document.body.firstElementChild.tabIndex = 1;
-      };
+      });
 
       function setIframeSize() {
         var iframeWrapper = document.getElementById('iframe-wrapper');
@@ -350,7 +348,7 @@
     </script>
   </head>
   <body>
-    <div id="menubox">
+    <div id="menubox" onclick="">
     <h4>中野バプテスト教会 蔵書検索サービス</h3>
     <form action="#" method="">
       <table>
@@ -390,6 +388,6 @@
       </table>
     </form>
     </div>
-    <div id="iframe-wrapper"><iframe id='results' frameborder="0"></iframe></div>
+    <div id="iframe-wrapper" onclick=""><iframe id='results' frameborder="0"></iframe></div>
   </body>
 </html>
