@@ -9,9 +9,14 @@
         font-family: 'Hiragino Sans', 'Meiryo', sans-serif;
         font-size: 16px;
         margin: 0;
+        overflow: hidden;
       }
 
       body {
+        height: 100vh;
+        height: 100dvh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
         margin: 0;
       }
 
@@ -345,7 +350,7 @@
       <table>
         <tr>
           <td>簡易検索</td>
-          <td><input class="longbox" type="search" name="keyword" placeholder="キーワード" autofocus></td>
+          <td><input class="longbox" type="search" name="keyword" placeholder="キーワード"></td>
           <td><label class="switch"><input type="checkbox" name="keywordOr" checked><span class="slider"></span></label><span class="or">OR</span></td>
         </tr>
         <tr class="remark">
