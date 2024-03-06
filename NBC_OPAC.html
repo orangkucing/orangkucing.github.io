@@ -15,8 +15,47 @@
         margin: 0;
       }
 
-      h4, form {
-        margin: 0 auto;
+      @media screen and (max-width: 652px) {
+        div#menubox {
+          width: 100%;
+        }
+
+        #iframe-wrapper {
+          float: left;
+          width: 100%;
+          overflow-x: hidden;
+          overflow-y: auto;
+        }
+      }
+
+      @media screen and (min-width: 653px) {
+        div#menubox {
+          position: absolute;
+          top: 0px;
+          left: 0px;
+          width: 280px;
+        }
+
+        #iframe-wrapper {
+          float: right;
+          width: calc(100% - 280px);
+          overflow-x: hidden;
+          overflow-y: auto;
+        }
+      }
+
+      h4 {
+        margin-block-end: 0;
+        margin-block-start: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
 
       table, tr, td {
@@ -30,6 +69,10 @@
 
       .shortbox {
         width: 4rem;
+      }
+
+      .or {
+        font-size: 50%;
       }
 
       .remark {
@@ -72,10 +115,6 @@
 
       button:active {
         background-color: #ccc;
-      }
-
-      #iframe-wrapper {
-        width: 100%;
       }
 
       #results {
@@ -162,6 +201,22 @@
       /* end: clear button */
     </style>
     <script>
+      window.addEventListener('resize', setIframeSize, false);
+
+      function setIframeSize() {
+        var iframeWrapper = document.getElementById('iframe-wrapper');
+        var rect = iframeWrapper.getBoundingClientRect();
+        var iframe = document.getElementById('results');
+        if (rect.left == 0) { /* portlait */
+          iframe.style.height = (document.documentElement.clientHeight - rect.top) + "px";
+          iframe.style.width = document.documentElement.clientWidth + "px";
+        } else { /* landscape */
+          iframe.style.height = document.documentElement.clientHeight + "px";
+          iframe.style.width = (document.documentElement.clientWidth - 280) + "px";
+        }
+        return iframe;
+      }
+
       function toKatakana(s) {
         return s.replace(/[ぁ-ゖ]/g, (s) => {return String.fromCharCode(s.charCodeAt(0) + 0x60);});
       }
@@ -271,12 +326,8 @@
             q = q.replace(new RegExp('\\[' + r + '\\]', "g"), selectA1[r]);
           }
 
-          let iframeWrapper = document.getElementById('iframe-wrapper');
-          let iframe = document.getElementById('results');
-          let h = (document.documentElement.clientHeight - iframeWrapper.getBoundingClientRect().y) + "px";
-          iframeWrapper.style.height = iframe.style.height = h;
-          iframe.src = 'https://docs.google.com/spreadsheets/d/1-XgySBso-vJoqMhmYgUZMtjcCY0qnjm-vIr3c6J7_M8/gviz/tq' +
-                       '?sheet=%22' + sheetname + '%22&tqx=out:html&tq=' + encodeURIComponent(q);
+          var iframe = setIframeSize();
+          iframe.src = 'https://docs.google.com/spreadsheets/d/1-XgySBso-vJoqMhmYgUZMtjcCY0qnjm-vIr3c6J7_M8/gviz/tq?sheet=%22' + sheetname + '%22&tqx=out:html&tq=' + encodeURIComponent(q);
         } else {
           document.getElementById('results').src = 'about:blank';
         }
@@ -285,13 +336,14 @@
     </script>
   </head>
   <body>
-    <form action="#" method>
-      <h4>中野バプテスト教会　蔵書検索サービス</h3>
+    <div id="menubox">
+    <h4>中野バプテスト教会 蔵書検索サービス</h3>
+    <form action="#" method="">
       <table>
         <tr>
           <td>簡易検索</td>
           <td><input class="longbox" type="search" name="keyword" placeholder="キーワード" autofocus></td>
-          <td><label class="switch"><input type="checkbox" name="keywordOr" checked><span class="slider"></span></label>OR</td>
+          <td><label class="switch"><input type="checkbox" name="keywordOr" checked><span class="slider"></span></label><span class="or">OR</span></td>
         </tr>
         <tr class="remark">
           <td></td>
@@ -301,17 +353,17 @@
         <tr>
           <td>タイトル</td>
           <td><input class="longbox" type="search" name="title" placeholder="タイトルやシリーズ名"></td>
-          <td><label class="switch"><input type="checkbox" name="titleOr"><span class="slider"></span></label>OR</td>
+          <td><label class="switch"><input type="checkbox" name="titleOr"><span class="slider"></span></label><span class="or">OR</span></td>
         </tr>
         <tr>
           <td>著者∙編者</td>
           <td><input class="longbox" type="search" name="author" placeholder="読みでも検索できます"></td>
-          <td><label class="switch"><input type="checkbox" name="authorOr"><span class="slider"></span></label>OR</td>
+          <td><label class="switch"><input type="checkbox" name="authorOr"><span class="slider"></span></label><span class="or">OR</span></td>
         </tr>
         <tr>
           <td>出版者</td>
           <td><input class="longbox" type="search" name="publisher" placeholder="出版社名など"></td>
-          <td><label class="switch"><input type="checkbox" name="publisherOr"><span class="slider"></span></label>OR</td>
+          <td><label class="switch"><input type="checkbox" name="publisherOr"><span class="slider"></span></label><span class="or">OR</span></td>
         </tr>
         <tr>
           <td>出版年</td>
@@ -324,6 +376,7 @@
         </tr>
       </table>
     </form>
+    </div>
     <div id="iframe-wrapper"><iframe id='results' frameborder="0"></iframe></div>
   </body>
 </html>
