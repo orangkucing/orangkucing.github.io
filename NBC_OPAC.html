@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <base target="_self">
     <style>
       html {
@@ -64,17 +64,12 @@
 
       .iframe-wrapper {
         width: 100%;
-        height: 100vh;
-        height: 100dvh;
-        overflow: auto;
-        -webkit-overflow-scrolling: touch;
       }
 
       iframe {
         width: 100%;
-        height: 100%;
         border: none;
-        display: block;
+        overflow: hidden;
       }
 
       /* begin: slide switch */
@@ -263,8 +258,10 @@
             q = q.replace(new RegExp('\\[' + r + '\\]', "g"), selectA1[r]);
           }
 
-          document.getElementById('results').src = 'https://docs.google.com/spreadsheets/d/1-XgySBso-vJoqMhmYgUZMtjcCY0qnjm-vIr3c6J7_M8/gviz/tq' +
-                                                   '?sheet=%22' + sheetname + '%22&tqx=out:html&tq=' + encodeURIComponent(q);
+          let iframe = document.getElementById('results');
+          iframe.height = document.documentElement.clientHeight - iframe.getBoundingClientRect().x * 2  - iframe.getBoundingClientRect().y;
+          iframe.src = 'https://docs.google.com/spreadsheets/d/1-XgySBso-vJoqMhmYgUZMtjcCY0qnjm-vIr3c6J7_M8/gviz/tq' +
+                       '?sheet=%22' + sheetname + '%22&tqx=out:html&tq=' + encodeURIComponent(q);
         } else {
           document.getElementById('results').src = 'about:blank';
         }
