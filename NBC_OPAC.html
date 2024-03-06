@@ -208,7 +208,11 @@
       /* end: clear button */
     </style>
     <script>
-      window.addEventListener('resize', setIframeSize, false);
+      window.onload = () => {
+        window.addEventListener('resize', setIframeSize, false);
+        // click outside the inputs losing focus (iPhone)
+        document.body.firstElementChild.tabIndex = 1;
+      };
 
       function setIframeSize() {
         var iframeWrapper = document.getElementById('iframe-wrapper');
@@ -333,6 +337,9 @@
             q = q.replace(new RegExp('\\[' + r + '\\]', "g"), selectA1[r]);
           }
 
+          // remove keyboard (iPhone)
+          document.activeElement.blur();
+          //
           var iframe = setIframeSize();
           iframe.src = 'https://docs.google.com/spreadsheets/d/1-XgySBso-vJoqMhmYgUZMtjcCY0qnjm-vIr3c6J7_M8/gviz/tq?sheet=%22' + sheetname + '%22&tqx=out:html&tq=' + encodeURIComponent(q);
         } else {
@@ -343,9 +350,6 @@
     </script>
   </head>
   <body>
-    <!--- dummy div for focus blur --->
-    <div onclick=""></div>
-    <!--- end dummy div --->
     <div id="menubox">
     <h4>中野バプテスト教会 蔵書検索サービス</h3>
     <form action="#" method="">
