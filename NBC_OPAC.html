@@ -12,10 +12,6 @@
         overscroll-behaviour: none; /* disable pull to refresh */
       }
 
-      body {
-        /* iOS cannot set margin:0; so we do so in div#absolute */
-      }
-
       div#absolute {
         position: absolute;
         top: 0px;
@@ -223,6 +219,9 @@
 
       function setIframeSize() {
         var rectangleWithOutMargin = document.getElementById('absolute');
+        // iPhone bug workaround
+        rectangleWithOutMargin.top = "0px";
+        //
         var iframeWrapper = document.getElementById('iframe-wrapper');
         var rect = iframeWrapper.getBoundingClientRect();
         var iframe = document.getElementById('results');
