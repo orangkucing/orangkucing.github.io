@@ -66,16 +66,22 @@
         padding: 0;
       }
 
-      .longbox {
+      input {
+        font-size: 1rem !important;
+        padding-block: 0;
+        padding-inline: 0;
+      }
+
+      input.longbox {
         width: 10rem;
       }
 
-      .shortbox {
-        width: 5.2rem;
+      input.shortbox {
+        width: 4.5rem;
       }
 
       .or {
-        font-size: 50%;
+        font-size: 60%;
       }
 
       .remark {
@@ -97,11 +103,12 @@
 
       button {
         float: left;
+        font-size: 1rem !important;
         background-color: #2196f3;
         border: none;
         border-radius: 10px;
         color: white;
-        margin: 1px;
+        margin: 2px 0 0;
         padding: 1px 10px;
         text-align: center;
         text-decoration: none;
@@ -194,6 +201,7 @@
         background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232196F3'><path d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'/></svg>");
         background-size: contain;
         display: none;
+        cursor: pointer;
         pointer-events: none;
       }
 
@@ -360,12 +368,12 @@
         </tr>
         <tr>
           <td>タイトル</td>
-          <td><input class="longbox" type="search" name="title" placeholder="タイトルやシリーズ名"></td>
+	<td><input class="longbox" type="search" name="title" placeholder="書名など"></td>
           <td><label class="switch"><input type="checkbox" name="titleOr"><span class="slider"></span></label><span class="or">OR</span></td>
         </tr>
         <tr>
-          <td>著者∙編者</td>
-          <td><input class="longbox" type="search" name="author" placeholder="読みでも検索できます"></td>
+          <td>著者/編者</td>
+          <td><input class="longbox" type="search" name="author" placeholder="読みも検索します"></td>
           <td><label class="switch"><input type="checkbox" name="authorOr"><span class="slider"></span></label><span class="or">OR</span></td>
         </tr>
         <tr>
