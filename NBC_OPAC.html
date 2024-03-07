@@ -8,13 +8,26 @@
       html {
         font-family: 'Hiragino Sans', 'Meiryo', sans-serif;
         font-size: 16px;
-        margin: 0;
         overflow: hidden;
         overscroll-behaviour: none; /* disable pull to refresh */
       }
 
       body {
+        /* iOS cannot set margin:0; so we do so in div#absolute */
+      }
+
+      div#absolute {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 100vw;
+        width: 100dvw;
+        height: 100vh;
+        height: 100dvh;
         margin: 0;
+        padding: 0;
+        border-width: 0;
+        box-sizing: border-box;
       }
 
       #iframe-wrapper {
@@ -209,17 +222,17 @@
       });
 
       function setIframeSize() {
+        var rectangleWithOutMargin = document.getElementById('absolute');
         var iframeWrapper = document.getElementById('iframe-wrapper');
         var rect = iframeWrapper.getBoundingClientRect();
         var iframe = document.getElementById('results');
         if (rect.left == 0) { /* portlait */
-          iframe.style.height = (document.documentElement.clientHeight - rect.top) + "px";
-          iframe.style.width = document.documentElement.clientWidth + "px";
+          iframe.style.height = (rectangleWithOutMargin.getBoundingClientRect().height - rect.top) + "px";
+          iframe.style.width = rectangleWithOutMargin.getBoundingClientRect().width + "px";
         } else { /* landscape */
-          iframe.style.height = document.documentElement.clientHeight + "px";
-          iframe.style.width = (document.documentElement.clientWidth - 280) + "px";
+          iframe.style.height = rectangleWithOutMargin.getBoundingClientRect().height + "px";
+          iframe.style.width = (rectangleWithOutMargin.getBoundingClientRect().width - 280) + "px";
         }
-        return iframe;
       }
 
       function toKatakana(s) {
@@ -334,8 +347,8 @@
           // remove keyboard (iPhone)
           document.activeElement.blur();
           //
-          var iframe = setIframeSize();
-          iframe.src = 'https://docs.google.com/spreadsheets/d/1-XgySBso-vJoqMhmYgUZMtjcCY0qnjm-vIr3c6J7_M8/gviz/tq?sheet=%22' + sheetname + '%22&tqx=out:html&tq=' + encodeURIComponent(q);
+          setIframeSize();
+          document.getElementById('results').src = 'https://docs.google.com/spreadsheets/d/1-XgySBso-vJoqMhmYgUZMtjcCY0qnjm-vIr3c6J7_M8/gviz/tq?sheet=%22' + sheetname + '%22&tqx=out:html&tq=' + encodeURIComponent(q);
         } else {
           document.getElementById('results').src = 'about:blank';
         }
@@ -343,7 +356,7 @@
       }
     </script>
   </head>
-  <body>
+  <body><div id="absolute">
     <div id="menubox" onclick="">
     <form action="#" method="">
       <table>
@@ -385,5 +398,5 @@
     </form>
     </div>
     <div id="iframe-wrapper" onclick=""><iframe id='results' frameborder="0"></iframe></div>
-  </body>
+  </div></body>
 </html>
