@@ -1,400 +1,54 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <base target="_self">
-    <style>
-      html {
-        font-family: 'Hiragino Sans', 'Meiryo', sans-serif;
-        font-size: 16px;
-        overflow: hidden;
-        overscroll-behaviour: none; /* disable pull to refresh */
-      }
-
-      div#absolute {
-        position: fixed;
-        top: 0px;
-        left: 0px;
-        width: 100%;
-        width: 100vw;
-        width: 100dvw;
-        height: 100%;
-        height: 100vh;
-        height: 100dvh;
-        margin: 0;
-        padding: 0;
-        border-width: 0;
-        box-sizing: border-box;
-      }
-
-      #iframe-wrapper {
-        overflow-x: hidden;
-        overflow-y: auto;
-      }
-
-      @media screen and (max-width: 652px) {
-        div#menubox {
-          width: 100%;
-        }
-
-        #iframe-wrapper {
-          float: left;
-          width: 100%;
-        }
-      }
-
-      @media screen and (min-width: 653px) {
-        div#menubox {
-          position: absolute;
-          top: 0px;
-          left: 0px;
-          width: 280px;
-        }
-
-        #iframe-wrapper {
-          float: right;
-          width: calc(100% - 280px);
-        }
-      }
-
-      form {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-
-      table, tr, td {
-        border-spacing: 0;
-        padding: 0;
-      }
-
-      input {
-        font-size: 1rem !important;
-        padding-block: 0;
-        padding-inline: 0;
-      }
-
-      input.longbox {
-        width: 10rem;
-      }
-
-      input.shortbox {
-        width: 4.5rem;
-      }
-
-      .or {
-        font-size: 60%;
-      }
-
-      .remark {
-        height: 50%;
-        font-size: 50%;
-      }
-
-      .google-wrapper {
-        position: relative;
-      }
-
-      .google-wrapper .google {
-        font-size: 50%;
-        display: block;
-        position: absolute;
-        bottom: 0;
-        right: 0.5rem;
-      } 
-
-      button {
-        float: left;
-        font-size: 1rem !important;
-        background-color: #2196f3;
-        border: none;
-        border-radius: 10px;
-        color: white;
-        margin: 2px 0 0;
-        padding: 1px 10px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        cursor: pointer;
-        -webkit-transition: .4s;
-        transition: .4s;
-      }
-
-      button:before {
-        -webkit-transition: .4s;
-        transition: .4s;
-      }
-
-      button:active {
-        background-color: #ccc;
-      }
-
-      #results {
-        width: 100%;
-        height: 100%
-        border: 0 none;
-        overflow: hidden;
-      }
-
-      /* begin: slide switch */
-      td .switch {
-        vertical-align: middle;
-      }
-
-      .switch {
-        position: relative;
-        display: inline-block;
-        width: 28px;
-        height: 16px;
-      }
-
-      .switch input { 
-        opacity: 0;
-        width: 0;
-        height: 0;
-      }
-
-      .slider {
-        position: absolute;
-        cursor: pointer;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: #ccc;
-        -webkit-transition: .4s;
-        transition: .4s;
-        border-radius: 16px;
-      }
-
-      .slider:before {
-        position: absolute;
-        content: "";
-        height: 12px;
-        width: 12px;
-        left: 2px;
-        bottom: 2px;
-        background-color: white;
-        -webkit-transition: .4s;
-        transition: .4s;
-        border-radius: 50%;
-      }
-
-      input:checked + .slider {
-        background-color: #2196F3;
-      }
-
-      input:focus + .slider {
-        box-shadow: 0 0 1px #2196F3;
-      }
-
-      input:checked + .slider:before {
-        -webkit-transform: translateX(12px);
-        -ms-transform: translateX(12px);
-        transform: translateX(12px);
-      }
-      /* end: slide switch */
-
-      /* begin: clear button */
-      input[type="search"]::-webkit-search-cancel-button {
-        -webkit-appearance: none;
-        height: 1rem;
-        width: 1rem;
-        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232196F3'><path d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'/></svg>");
-        background-size: contain;
-        display: none;
-        cursor: pointer;
-        pointer-events: none;
-      }
-
-      input[type="search"]:focus::-webkit-search-cancel-button {
-        display: block;
-        pointer-events: all;
-      }
-      /* end: clear button */
-    </style>
-    <script>
-      window.onload = (() => {
-        window.addEventListener('resize', setIframeSize, false);
-      });
-
-      function setIframeSize() {
-        var rectangleWithOutMargin = document.getElementById('absolute');
-        var iframeWrapper = document.getElementById('iframe-wrapper');
-        var rect = iframeWrapper.getBoundingClientRect();
-        var iframe = document.getElementById('results');
-        if (rect.left == 0) { /* portlait */
-          iframe.style.height = (rectangleWithOutMargin.getBoundingClientRect().height - rect.top) + "px";
-          iframe.style.width = rectangleWithOutMargin.getBoundingClientRect().width + "px";
-        } else { /* landscape */
-          iframe.style.height = rectangleWithOutMargin.getBoundingClientRect().height + "px";
-          iframe.style.width = (rectangleWithOutMargin.getBoundingClientRect().width - 280) + "px";
-        }
-      }
-
-      function toKatakana(s) {
-        return s.replace(/[ぁ-ゖ]/g, (s) => {return String.fromCharCode(s.charCodeAt(0) + 0x60);});
-      }
-
-      function sendQuery(event) {
-        // change here! if column or sheet names are modified in the sheet
-        const selectA1 = {'著者・編者':'B', '読み':'C', 'シリーズ名':'D', '巻号':'E', 'タイトル':'F', '出版者':'G', '出版年':'H', '分類記号':'I', '配架場所':'L'};
-        const yomiIndex = 1;
-        const authorIndices = [0, yomiIndex];
-        const titleIndices = [2, 4];
-        const publisherIndex = 5;
-        const publishyearIndex = 6;
-        const sheetname = 'Sheet1';
-        //
-        var select = Object.keys(selectA1);
-        var obj = {};
-        for (let s of ['keyword', 'title', 'author', 'publisher']) {
-          obj[s + 's'] = document.querySelector('input[name="' + s +'"]').value.replace(/[,\."'`=\[\]/∙∙／・　＝、。，]/g, ' ').split(' ');
-          obj[s + 'Operator'] = document.querySelector('input[name="' + s + 'Or"]').checked ? 'or' : 'and';
-        }
-        var publishyears = {};
-        for (let s of ['from', 'until']) {
-          let sel = document.querySelector('input[name="year' + s + '"]');
-          let i = parseInt(sel.value, 10);
-          publishyears[s] = isNaN(i) ? (sel.value = '') : i;
-        }
-        if (obj['keywords'][0] || obj['authors'][0] || obj['publishers'][0] || obj['titles'][0] || publishyears['from'] || publishyears['until']) {
-          let q = 'select ';
-          let concat = false;
-          {
-            let op = '';
-            for (let i = 0; i < select.length; i++) {
-              if (i != yomiIndex) {
-                q += op + '[' + select[i] + ']';
-                if (!op) {op = ',';}
-              }
-            }
-          }
-          q += ' where';
-          if (obj['keywords'][0]) {
-            if (concat) {q += 'and';}
-            concat = true;
-            let op = '';
-            q += '(';
-            for (let keyword of obj['keywords']) {
-              q += op + '([' + select[titleIndices[0]] + '] contains"' + keyword + '"or ' +
-                         '[' + select[titleIndices[1]] + '] contains"' + keyword + '"or ' +
-                         '[' + select[authorIndices[0]] + '] contains"' + keyword + '"or ' + 
-                         '[' + select[authorIndices[1]] + '] contains"' + toKatakana(keyword) + '"or ' +
-                         '[' + select[publisherIndex] + '] contains"' + keyword + '")';
-              if (!op) {op = obj['keywordOperator'];}
-            }
-            q += ')';
-          }
-          if (obj['titles'][0]) {
-            if (concat) {q += 'and';}
-            concat = true;
-            let op = '';
-            q += '(';
-            for (let title of obj['titles']) {
-              q += op + '([' + select[titleIndices[0]] + '] contains"' + title + '"or ' +
-                         '[' + select[titleIndices[1]] + '] contains"' + title + '")';
-              if (!op) {op = obj['titleOperator'];}
-            }
-            q += ')';
-          }
-          if (obj['authors'][0]) {
-            if (concat) {q += 'and';}
-            concat = true;
-            let op = '';
-            q += '(';
-            for (let author of obj['authors']) {
-              q += op + '([' + select[authorIndices[0]] + '] contains"' + author + '"or ' +
-                         '[' + select[authorIndices[1]] + '] contains"' + toKatakana(author) + '")';
-              if (!op) {op = obj['authorOperator'];}
-            }
-            q += ')';
-          }
-          if (obj['publishers'][0]) {
-            if (concat) {q += 'and';}
-            concat = true;
-            let op = '';
-            q += '(';
-            for (let publisher of publishers) {
-              q += op + '[' + select[publisherIndex] + '] contains"' + publisher + '"';
-              if (!op) {op = obj['publisherOperator'];}
-            }
-            q += ')';
-          }
-          if (publishyears['from'] || publishyears['until']) {
-            if (concat) {q += 'and';}
-            concat = true;
-            q += '([' + select[publishyearIndex] + '] is not null and ';
-            if (publishyears['from']) {
-              q += '[' + select[publishyearIndex] + ']>=' + publishyears['from'];
-              if (publishyears['until']) {
-                q += ' and ';
-              }
-            }
-            if (publishyears['until']) {
-              q += '[' + select[publishyearIndex] + ']<=' + publishyears['until']; }
-            q += ')';
-          }
-
-          // rewrite due to a bug of Google Visualization API
-          for (let r of select) {
-            q = q.replace(new RegExp('\\[' + r + '\\]', "g"), selectA1[r]);
-          }
-
-          // remove keyboard (iPhone)
-          document.activeElement.blur();
-          //
-          setIframeSize();
-          document.getElementById('results').src = 'https://docs.google.com/spreadsheets/d/1-XgySBso-vJoqMhmYgUZMtjcCY0qnjm-vIr3c6J7_M8/gviz/tq?sheet=%22' + sheetname + '%22&tqx=out:html&tq=' + encodeURIComponent(q);
-        } else {
-          document.getElementById('results').src = 'about:blank';
-        }
-        event.preventDefault();
-      }
-    </script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="NBC_OPAC.css" rel="stylesheet" />
+    <script src="NBC_OPAC.js" async></script>
   </head>
-  <body><div id="absolute">
-    <div id="menubox" onclick="">
-    <form action="#" method="">
-      <table>
-        <caption>中野バプテスト教会 蔵書検索</caption>
-        <tr>
-          <td>簡易検索</td>
-          <td><input class="longbox" type="search" name="keyword" placeholder="キーワード"></td>
-          <td><label class="switch"><input type="checkbox" name="keywordOr" checked><span class="slider"></span></label><span class="or">OR</span></td>
-        </tr>
-        <tr class="remark">
-          <td></td>
-          <td>キーワードはスペースで区切ってください。</td>
-          <td></td>
-        </tr>
-        <tr>
-          <td>タイトル</td>
-	<td><input class="longbox" type="search" name="title" placeholder="書名など"></td>
-          <td><label class="switch"><input type="checkbox" name="titleOr"><span class="slider"></span></label><span class="or">OR</span></td>
-        </tr>
-        <tr>
-          <td>著者/編者</td>
-          <td><input class="longbox" type="search" name="author" placeholder="読みも検索します"></td>
-          <td><label class="switch"><input type="checkbox" name="authorOr"><span class="slider"></span></label><span class="or">OR</span></td>
-        </tr>
-        <tr>
-          <td>出版者</td>
-          <td><input class="longbox" type="search" name="publisher" placeholder="出版社名など"></td>
-          <td><label class="switch"><input type="checkbox" name="publisherOr"><span class="slider"></span></label><span class="or">OR</span></td>
-        </tr>
-        <tr>
-          <td>出版年</td>
-          <td colspan="2"><input class="shortbox" type="search" name="yearfrom" placeholder="西暦">～<input class="shortbox" type="search" name="yearuntil" placeholder="西暦"></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td colspan="2" class="google-wrapper"><button onclick="sendQuery(event)">検索</button><span class="google">Powered by <a href="https://docs.google.com/spreadsheets/d/1-XgySBso-vJoqMhmYgUZMtjcCY0qnjm-vIr3c6J7_M8/edit?usp=sharing">Google Sheets</a></span></td>
-        </tr>
-      </table>
-    </form>
+  <body>
+    <div id="absolute" onclick="">
+      <div id="menubox">
+      <form action="#" method="">
+        <table>
+          <caption>中野バプテスト教会 蔵書検索</caption>
+          <tr>
+            <td>簡易検索</td>
+            <td><input class="longbox" type="search" name="keyword" placeholder="キーワード"></td>
+            <td><label class="switch"><input type="checkbox" name="keywordOr" checked><span class="slider"></span></label><span class="or">OR</span></td>
+          </tr>
+          <tr class="remark">
+            <td></td>
+            <td>キーワードはスペースで区切ってください。</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>タイトル</td>
+  	    <td><input class="longbox" type="search" name="title" placeholder="書名など"></td>
+            <td><label class="switch"><input type="checkbox" name="titleOr"><span class="slider"></span></label><span class="or">OR</span></td>
+          </tr>
+          <tr>
+            <td>著者/編者</td>
+            <td><input class="longbox" type="search" name="author" placeholder="読みも検索します"></td>
+            <td><label class="switch"><input type="checkbox" name="authorOr"><span class="slider"></span></label><span class="or">OR</span></td>
+          </tr>
+          <tr>
+            <td>出版者</td>
+            <td><input class="longbox" type="search" name="publisher" placeholder="出版社名など"></td>
+            <td><label class="switch"><input type="checkbox" name="publisherOr"><span class="slider"></span></label><span class="or">OR</span></td>
+          </tr>
+          <tr>
+            <td>出版年</td>
+            <td colspan="2"><input class="shortbox" type="search" name="yearfrom" placeholder="西暦">～<input class="shortbox" type="search" name="yearuntil" placeholder="西暦"></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td colspan="2" class="google-wrapper"><button onclick="sendQuery(event)">検索</button><span class="google">Powered by <a href="https://docs.google.com/spreadsheets/d/1-XgySBso-vJoqMhmYgUZMtjcCY0qnjm-vIr3c6J7_M8/edit?usp=sharing">Google Sheets</a></span></td>
+          </tr>
+        </table>
+      </form>
+      </div>
+      <div id="iframe-wrapper"><iframe id='results' frameborder="0"></iframe></div>
     </div>
-    <div id="iframe-wrapper" onclick=""><iframe id='results' frameborder="0"></iframe></div>
-  </div></body>
+  </body>
 </html>
