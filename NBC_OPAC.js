@@ -2,7 +2,7 @@ const ro = new ResizeObserver((entries) => {
   setIframeSize();
 });
 
-ro.observe(document.getElementById('iframe-wrapper'));
+ro.observe(document.getElementById('absolute'));
 
 function setIframeSize() {
   var rectangleWithOutMargin = document.getElementById('absolute');
