@@ -131,7 +131,7 @@ function sendQuery(event) {
     document.activeElement.blur();
     //
     setIframeSize();
-    document.getElementById('results').src = 'https://docs.google.com/spreadsheets/d/1-XgySBso-vJoqMhmYgUZMtjcCY0qnjm-vIr3c6J7_M8/gviz/tq?sheet=%22' + sheetname + '%22&tqx=out:html&tq=' + encodeURIComponent(q);
+    document.getElementById('results').src = 'https://docs.google.com/spreadsheets/d/1-XgySBso-vJoqMhmYgUZMtjcCY0qnjm-vIr3c6J7_M8/gviz/tq?headers=1&sheet=%22' + sheetname + '%22&tqx=out:html&tq=' + encodeURIComponent(q);
   } else {
     document.getElementById('results').src = 'about:blank';
   }
