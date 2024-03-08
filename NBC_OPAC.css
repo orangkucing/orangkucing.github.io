@@ -23,8 +23,7 @@ caption {
 }
 
 #iframe-wrapper {
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: visible;
 }
 
 @media screen and (max-width: 652px) {

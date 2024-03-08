@@ -1,4 +1,8 @@
-window.addEventListener('orientationchange', sendQuery, false);
+const ro = new ResizeObserver((entries) => {
+  setIframeSize();
+});
+
+ro.observe(document.getElementById('iframe-wrapper'));
 
 function setIframeSize() {
   var rectangleWithOutMargin = document.getElementById('absolute');
