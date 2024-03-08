@@ -1,14 +1,7 @@
 html {
   font-family: 'Hiragino Sans', 'Meiryo', sans-serif;
   font-size: 16px;
-  margin: 0;
-  padding: 0;
   overscroll-behaviour: none; /* disable pull to refresh */
-}
-
-body {
-  margin: 0;
-  padding: 0;
 }
 
 div#absolute {
