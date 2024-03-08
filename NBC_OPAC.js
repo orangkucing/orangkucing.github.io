@@ -1,6 +1,4 @@
-window.onload = (() => {
-  window.addEventListener('resize', setIframeSize, false);
-});
+window.addEventListener('orientationchange resize', setIframeSize, false);
 
 function setIframeSize() {
   var rectangleWithOutMargin = document.getElementById('absolute');
