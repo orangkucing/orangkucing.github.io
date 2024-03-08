@@ -1,4 +1,4 @@
-window.addEventListener('orientationchange resize', setIframeSize, false);
+window.addEventListener('orientationchange', sendQuery, false);
 
 function setIframeSize() {
   var rectangleWithOutMargin = document.getElementById('absolute');
