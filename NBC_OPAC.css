@@ -4,7 +4,7 @@ html {
   overscroll-behaviour: none; /* disable pull to refresh */
 }
 
-div#absolute {
+#wrapper {
   position: fixed;
   top: 0px;
   left: 0px;

@@ -1,11 +1,18 @@
 const ro = new ResizeObserver((entries) => {
   setIframeSize();
 });
-
-ro.observe(document.getElementById('absolute'));
+new Promise((resolve) => {
+    setTimeout(() => {
+      let target;
+      do {
+        target = document.getElementById('wrapper');
+      } while (!target);
+      ro.observe(target);
+    }, 20000);
+});
 
 function setIframeSize() {
-  var rectangleWithOutMargin = document.getElementById('absolute');
+  var rectangleWithOutMargin = document.getElementById('wrapper');
   var iframeWrapper = document.getElementById('iframe-wrapper');
   var rect = iframeWrapper.getBoundingClientRect();
   var iframe = document.getElementById('results');
