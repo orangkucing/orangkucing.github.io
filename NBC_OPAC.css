@@ -4,7 +4,7 @@ html {
 }
 
 body {
-  overscroll-behaviour: none; /* disable pull to refresh */
+  overflow: hidden; /* stop overscrolling behaviour */
 }
 
 #wrapper {
@@ -19,7 +19,6 @@ body {
   padding: 0;
   border-width: 0;
   box-sizing: border-box;
-  overscroll-behaviour: none; /* disable pull to refresh */
 }
 
 caption {
