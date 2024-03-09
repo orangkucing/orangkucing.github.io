@@ -2,13 +2,13 @@ const ro = new ResizeObserver((entries) => {
   setIframeSize();
 });
 new Promise((resolve) => {
-    setTimeout(() => {
-      let target;
-      do {
-        target = document.getElementById('wrapper');
-      } while (!target);
-      ro.observe(target);
-    }, 20000);
+  setTimeout(() => {
+    let target;
+    do {
+      target = document.getElementById('wrapper');
+    } while (!target);
+    ro.observe(target);
+  }, 1000); 
 });
 
 function setIframeSize() {
