@@ -3,6 +3,10 @@ html {
   font-size: 16px;
 }
 
+body {
+  overscroll-behaviour: none; /* disable pull to refresh */
+}
+
 #wrapper {
   position: fixed;
   top: 0px;
