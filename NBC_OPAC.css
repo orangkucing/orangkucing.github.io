@@ -1,7 +1,6 @@
 html {
   font-family: 'Hiragino Sans', 'Meiryo', sans-serif;
   font-size: 16px;
-  overscroll-behaviour: none; /* disable pull to refresh */
 }
 
 #wrapper {
@@ -16,6 +15,7 @@ html {
   padding: 0;
   border-width: 0;
   box-sizing: border-box;
+  overscroll-behaviour: none; /* disable pull to refresh */
 }
 
 caption {
