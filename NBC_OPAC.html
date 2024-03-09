@@ -16,7 +16,7 @@
           <caption>中野バプテスト教会 蔵書検索</caption>
           <tr>
             <td>簡易検索</td>
-            <td><input class="longbox" type="search" name="keyword" placeholder="キーワード"></td>
+            <td><input class="longbox" type="search" results="0" name="keyword" placeholder="キーワード"></td>
             <td><label class="switch"><input type="checkbox" name="keywordOr" checked><span class="slider"></span></label><span class="or">OR</span></td>
           </tr>
           <tr class="remark">
@@ -26,22 +26,22 @@
           </tr>
           <tr>
             <td>タイトル</td>
-  	    <td><input class="longbox" type="search" name="title" placeholder="書名など"></td>
+  	    <td><input class="longbox" type="search" results="0" name="title" placeholder="書名など"></td>
             <td><label class="switch"><input type="checkbox" name="titleOr"><span class="slider"></span></label><span class="or">OR</span></td>
           </tr>
           <tr>
             <td>著者/編者</td>
-            <td><input class="longbox" type="search" name="author" placeholder="読みも検索します"></td>
+            <td><input class="longbox" type="search" results="0" name="author" placeholder="読みも検索します"></td>
             <td><label class="switch"><input type="checkbox" name="authorOr"><span class="slider"></span></label><span class="or">OR</span></td>
           </tr>
           <tr>
             <td>出版者</td>
-            <td><input class="longbox" type="search" name="publisher" placeholder="出版社名など"></td>
+            <td><input class="longbox" type="search" results="0" name="publisher" placeholder="出版社名など"></td>
             <td><label class="switch"><input type="checkbox" name="publisherOr"><span class="slider"></span></label><span class="or">OR</span></td>
           </tr>
           <tr>
             <td>出版年</td>
-            <td colspan="2"><input class="shortbox" type="search" name="yearfrom" placeholder="西暦">～<input class="shortbox" type="search" name="yearuntil" placeholder="西暦"></td>
+            <td colspan="2"><input class="shortbox" type="search" results="0" name="yearfrom" placeholder="西暦">～<input class="shortbox" type="search" results="0" name="yearuntil" placeholder="西暦"></td>
           </tr>
           <tr>
             <td></td>
@@ -50,7 +50,8 @@
         </table>
       </form>
       </div>
-      <div id="iframe-wrapper"><iframe id='results' frameborder="0"></iframe></div>
+      <div id="result-wrapper"><div id='results'></div></div>
     </div>
+    <script></script>
   </body>
 </html>

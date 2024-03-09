@@ -1,5 +1,5 @@
 const ro = new ResizeObserver((entries) => {
-  setIframeSize();
+  setResultsSize();
 });
 new Promise((resolve) => {
   setTimeout(() => {
@@ -11,17 +11,17 @@ new Promise((resolve) => {
   }, 1000); 
 });
 
-function setIframeSize() {
+function setResultsSize() {
   var rectangleWithOutMargin = document.getElementById('wrapper');
-  var iframeWrapper = document.getElementById('iframe-wrapper');
-  var rect = iframeWrapper.getBoundingClientRect();
-  var iframe = document.getElementById('results');
+  var resultWrapper = document.getElementById('result-wrapper');
+  var rect = resultWrapper.getBoundingClientRect();
+  var results = document.getElementById('results');
   if (rect.left == 0) { /* portlait */
-    iframe.style.height = (rectangleWithOutMargin.getBoundingClientRect().height - rect.top) + "px";
-    iframe.style.width = rectangleWithOutMargin.getBoundingClientRect().width + "px";
+    results.style.height = (rectangleWithOutMargin.getBoundingClientRect().height - rect.top) + "px";
+    results.style.width = rectangleWithOutMargin.getBoundingClientRect().width + "px";
   } else { /* landscape */
-    iframe.style.height = rectangleWithOutMargin.getBoundingClientRect().height + "px";
-    iframe.style.width = (rectangleWithOutMargin.getBoundingClientRect().width - 280) + "px";
+    results.style.height = rectangleWithOutMargin.getBoundingClientRect().height + "px";
+    results.style.width = (rectangleWithOutMargin.getBoundingClientRect().width - 280) + "px";
   }
 }
 
@@ -29,7 +29,7 @@ function toKatakana(s) {
   return s.replace(/[ぁ-ゖ]/g, (s) => {return String.fromCharCode(s.charCodeAt(0) + 0x60);});
 }
 
-function sendQuery(event) {
+async function sendQuery(event) {
   // change here! if column or sheet names are modified in the sheet
   const selectA1 = {'著者・編者':'B', '読み':'C', 'シリーズ名':'D', '巻号':'E', 'タイトル':'F', '出版者':'G', '出版年':'H', '分類記号':'I', '配架場所':'L'};
   const yomiIndex = 1;
@@ -137,10 +137,20 @@ function sendQuery(event) {
     // remove keyboard (iPhone)
     document.activeElement.blur();
     //
-    setIframeSize();
-    document.getElementById('results').src = 'https://docs.google.com/spreadsheets/d/1-XgySBso-vJoqMhmYgUZMtjcCY0qnjm-vIr3c6J7_M8/gviz/tq?headers=1&sheet=%22' + sheetname + '%22&tqx=out:html&tq=' + encodeURIComponent(q);
+    setResultsSize();
+
+    const script = document.createElement('script');
+    script.src = 'https://docs.google.com/spreadsheets/d/1-XgySBso-vJoqMhmYgUZMtjcCY0qnjm-vIr3c6J7_M8/gviz/tq?tqx=out:json;responseHandler:callback&headers=1&sheet=%22' + sheetname + '%22&tq=' + encodeURIComponent(q);
+    document.body.lastElementChild.replaceWith(script);
+    // callback function dataHandler() is called.
   } else {
-    document.getElementById('results').src = 'about:blank';
+    document.getElementById('results').innerHTML = '';
   }
   event.preventDefault();
+}
+
+var callback = (json) => {
+  var data = new google.visualization.DataTable(json['table']);
+  var table = new google.visualization.Table(document.getElementById('results'));
+  table.draw(data, {width: '100%'});
 }

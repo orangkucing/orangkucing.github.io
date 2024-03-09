@@ -22,30 +22,30 @@ caption {
   font-weight: bold;
 }
 
-#iframe-wrapper {
+#result-wrapper {
   overflow: visible;
 }
 
 @media screen and (max-width: 652px) {
-  div#menubox {
+  #menubox {
     width: 100%;
   }
 
-  #iframe-wrapper {
+  #result-wrapper {
     float: left;
     width: 100%;
   }
 }
 
 @media screen and (min-width: 653px) {
-  div#menubox {
+  #menubox {
     position: absolute;
     top: 0px;
     left: 0px;
     width: 280px;
   }
 
-  #iframe-wrapper {
+  #result-wrapper {
     float: right;
     width: calc(100% - 280px);
   }
