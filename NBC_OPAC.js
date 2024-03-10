@@ -1,3 +1,14 @@
+// change here! if column or sheet names are modified in the sheet
+const selectA1 = {'著者・編者':'B', '読み':'C', 'シリーズ名':'D', '巻号':'E', 'タイトル':'F', '出版者':'G', '出版年':'H', '分類記号':'I', '配架場所':'L', 'NDL書誌ID':'J'};
+const yomiIndex = 1;
+const authorIndices = [0, yomiIndex];
+const titleIndices = [2, 4];
+const publisherIndex = 5;
+const publishyearIndex = 6;
+const NDLBibIDIndex = 9;
+const sheetname = 'Sheet1';
+//
+
 const ro = new ResizeObserver((entries) => {
   setResultsSize();
 });
@@ -30,15 +41,6 @@ function toKatakana(s) {
 }
 
 async function sendQuery(event) {
-  // change here! if column or sheet names are modified in the sheet
-  const selectA1 = {'著者・編者':'B', '読み':'C', 'シリーズ名':'D', '巻号':'E', 'タイトル':'F', '出版者':'G', '出版年':'H', '分類記号':'I', '配架場所':'L'};
-  const yomiIndex = 1;
-  const authorIndices = [0, yomiIndex];
-  const titleIndices = [2, 4];
-  const publisherIndex = 5;
-  const publishyearIndex = 6;
-  const sheetname = 'Sheet1';
-  //
   var select = Object.keys(selectA1);
   var obj = {};
   for (let s of ['keyword', 'title', 'author', 'publisher']) {
@@ -57,10 +59,8 @@ async function sendQuery(event) {
     {
       let op = '';
       for (let i = 0; i < select.length; i++) {
-        if (i != yomiIndex) {
-          q += op + '[' + select[i] + ']';
-          if (!op) {op = ',';}
-        }
+        q += op + '[' + select[i] + ']';
+        if (!op) {op = ',';}
       }
     }
     q += ' where';
@@ -151,6 +151,15 @@ async function sendQuery(event) {
 
 var callback = (json) => {
   var data = new google.visualization.DataTable(json['table']);
+  var view = new google.visualization.DataView(data);
+  view.hideColumns([yomiIndex, NDLBibIDIndex]);
   var table = new google.visualization.Table(document.getElementById('results'));
-  table.draw(data, {width: '100%'});
+  table.draw(view, {width: '100%'});
+  google.visualization.events.addListener(table, 'select', () => {
+    var row = table.getSelection()[0].row;
+    var id = data.getValue(row, NDLBibIDIndex);
+    if (id && id !== 'N/A') {
+      window.open('https://id.ndl.go.jp/bib/' + id);
+    }
+  });
 }
