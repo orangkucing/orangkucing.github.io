@@ -1,5 +1,5 @@
 // change here! if column or sheet names are modified in the sheet
-const selectA1 = {'著者・編者':'B', '読み':'C', 'シリーズ名':'D', '巻号':'E', 'タイトル':'F', '出版者':'G', '出版年':'H', '分類記号':'I', '配架場所':'L', 'NDL書誌ID':'J'};
+const selectA1 = {'著者・編者':'B', '読み':'C', 'シリーズ名':'D', '巻号':'E', 'タイトル':'F', '出版者':'G', '出版年':'H', '分類記号':'I', '配架場所':'K', 'NDL書誌ID':'J'};
 const yomiIndex = 1;
 const authorIndices = [0, yomiIndex];
 const titleIndices = [2, 4];
