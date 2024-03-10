@@ -44,7 +44,7 @@ async function sendQuery(event) {
   var select = Object.keys(selectA1);
   var obj = {};
   for (let s of ['keyword', 'title', 'author', 'publisher']) {
-    obj[s + 's'] = document.querySelector('input[name="' + s +'"]').value.replace(/[,\."'`=\[\]/∙∙／・　＝、。，]/g, ' ').split(' ');
+    obj[s + 's'] = document.querySelector('input[name="' + s +'"]').value.replace(new RegExp('[,\."\'`=\[\]/∙∙／・　＝、。，]', "g"), ' ').split(' ');
     obj[s + 'Operator'] = document.querySelector('input[name="' + s + 'Or"]').checked ? 'or' : 'and';
   }
   var publishyears = {};
@@ -53,7 +53,7 @@ async function sendQuery(event) {
     let i = parseInt(sel.value, 10);
     publishyears[s] = isNaN(i) ? (sel.value = '') : i;
   }
-  if (obj['keywords'][0] || obj['authors'][0] || obj['publishers'][0] || obj['titles'][0] || publishyears['from'] || publishyears['until']) {
+  if (obj['keywords'][0] || obj['titles'][0] || obj['authors'][0] || obj['publishers'][0] || publishyears['from'] || publishyears['until']) {
     let q = 'select ';
     let concat = false;
     {
@@ -108,7 +108,7 @@ async function sendQuery(event) {
       concat = true;
       let op = '';
       q += '(';
-      for (let publisher of publishers) {
+      for (let publisher of obj['publishers']) {
         q += op + '[' + select[publisherIndex] + '] contains"' + publisher + '"';
         if (!op) {op = obj['publisherOperator'];}
       }
@@ -117,7 +117,7 @@ async function sendQuery(event) {
     if (publishyears['from'] || publishyears['until']) {
       if (concat) {q += 'and';}
       concat = true;
-      q += '([' + select[publishyearIndex] + '] is not null and ';
+      q += '(';
       if (publishyears['from']) {
         q += '[' + select[publishyearIndex] + ']>=' + publishyears['from'];
         if (publishyears['until']) {
