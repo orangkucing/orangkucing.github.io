@@ -141,7 +141,7 @@ async function sendQuery(event) {
 
     const script = document.createElement('script');
     script.src = 'https://docs.google.com/spreadsheets/d/1-XgySBso-vJoqMhmYgUZMtjcCY0qnjm-vIr3c6J7_M8/gviz/tq?tqx=out:json;responseHandler:callback&headers=1&sheet=%22' + sheetname + '%22&tq=' + encodeURIComponent(q);
-    document.body.lastElementChild.replaceWith(script);
+    document.head.appendChild(script);
     // callback function dataHandler() is called.
   } else {
     document.getElementById('results').innerHTML = '';
