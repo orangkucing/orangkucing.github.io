@@ -44,7 +44,7 @@ async function sendQuery(event) {
   var select = Object.keys(selectA1);
   var obj = {};
   for (let s of ['keyword', 'title', 'author', 'publisher']) {
-    obj[s + 's'] = document.querySelector('input[name="' + s +'"]').value.replace(new RegExp('[\x20\u3000"]', 'g'), ' ').split(' ');
+    obj[s + 's'] = document.querySelector('input[name="' + s +'"]').value.replace(new RegExp('[\x20\u3000"\\]', 'g'), ' ').split(' ');
     obj[s + 'Operator'] = document.querySelector('input[name="' + s + 'Or"]').checked ? 'or' : 'and';
   }
   var publishyears = {};
@@ -160,7 +160,7 @@ var callback = (json) => {
     if (selection.length > 0) {
       var row = table.getSelection()[0].row;
       var id = data.getValue(row, NDLBibIDIndex);
-      if (String(id).test(/^[0-9]+$/) {
+      if (String(id).test(/^[0-9]+$/)) {
         var win = window.open('https://id.ndl.go.jp/bib/' + id);
         // take care of iPhone's spinning indicator
         var timer = setInterval(() => {
