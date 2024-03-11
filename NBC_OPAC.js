@@ -160,7 +160,7 @@ var callback = (json) => {
     if (selection.length > 0) {
       var row = table.getSelection()[0].row;
       var id = data.getValue(row, NDLBibIDIndex);
-      if (id && id !== 'N/A') {
+      if (String(id).test(/^[0-9]+$/) {
         var win = window.open('https://id.ndl.go.jp/bib/' + id);
         // take care of iPhone's spinning indicator
         var timer = setInterval(() => {
