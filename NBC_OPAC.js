@@ -163,7 +163,7 @@ var callback = (json) => {
       if (id && id !== 'N/A') {
         var win = window.open('https://id.ndl.go.jp/bib/' + id);
         // take care of iPhone's spinning indicator
-        var timer setInterval(() => {
+        var timer = setInterval(() => {
           if (win.closed) {
             clearInterval(timer);
           }
