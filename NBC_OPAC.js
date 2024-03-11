@@ -164,10 +164,10 @@ var callback = (json) => {
         var win = window.open('https://id.ndl.go.jp/bib/' + id);
         // take care of iPhone's spinning indicator
         var timer = setInterval(() => {
-          if (win.closed) {
+          if (!win || win.closed) {
             clearInterval(timer);
           }
-        }, 5000);
+        }, 1000);
       }
     }
     table.setSelection([]);
