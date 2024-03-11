@@ -161,7 +161,13 @@ var callback = (json) => {
       var row = table.getSelection()[0].row;
       var id = data.getValue(row, NDLBibIDIndex);
       if (id && id !== 'N/A') {
-        var w = window.open('https://id.ndl.go.jp/bib/' + id);
+        var win = window.open('https://id.ndl.go.jp/bib/' + id);
+        // take care of iPhone's spinning indicator
+        var timer setInterval(() => {
+          if (win.closed) {
+            clearInterval(timer);
+          }
+        }, 1000);
       }
     }
     table.setSelection([]);
