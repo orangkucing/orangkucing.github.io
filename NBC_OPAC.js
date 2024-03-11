@@ -167,7 +167,7 @@ var callback = (json) => {
           if (win.closed) {
             clearInterval(timer);
           }
-        }, 1000);
+        }, 5000);
       }
     }
     table.setSelection([]);
