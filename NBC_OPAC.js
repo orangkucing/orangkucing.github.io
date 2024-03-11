@@ -156,10 +156,14 @@ var callback = (json) => {
   var table = new google.visualization.Table(document.getElementById('results'));
   table.draw(view, {width: '100%'});
   google.visualization.events.addListener(table, 'select', () => {
-    var row = table.getSelection()[0].row;
-    var id = data.getValue(row, NDLBibIDIndex);
-    if (id && id !== 'N/A') {
-      window.open('https://id.ndl.go.jp/bib/' + id);
+    var selection = table.getSelection();
+    if (selection.length > 0) {
+      var row = table.getSelection()[0].row;
+      var id = data.getValue(row, NDLBibIDIndex);
+      if (id && id !== 'N/A') {
+        var w = window.open('https://id.ndl.go.jp/bib/' + id);
+      }
     }
+    table.setSelection([]);
   });
 }
