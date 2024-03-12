@@ -161,7 +161,7 @@ var callback = (json) => {
       var row = table.getSelection()[0].row;
       var id = data.getValue(row, NDLBibIDIndex);
       if (id.match(/^[0-9]+$/)) {
-        var win = window.open('https://id.ndl.go.jp/bib/' + id, '', 'noreferrer=true');
+        var win = window.open('https://id.ndl.go.jp/bib/' + id, '_blank', 'noreferrer=true');
       }
     }
     table.setSelection([]);
