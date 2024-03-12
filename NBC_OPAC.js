@@ -159,17 +159,17 @@ var callback = (json) => {
     var selection = table.getSelection();
     if (selection.length > 0) {
       var row = table.getSelection()[0].row;
+      table.setSelection([]);
       var id = data.getValue(row, NDLBibIDIndex);
       if (id.match(/^[0-9]+$/)) {
         var a = document.createElement('a');
         a.href = 'https://id.ndl.go.jp/bib/' + id;
         a.target = '_blank';
-        a.rel = 'ext';
+        // a.rel = 'ext';
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
       }
-      table.setSelection([]);
     }
   });
 }
