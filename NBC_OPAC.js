@@ -44,7 +44,7 @@ async function sendQuery(event) {
   var select = Object.keys(selectA1);
   var obj = {};
   for (let s of ['keyword', 'title', 'author', 'publisher']) {
-    obj[s + 's'] = document.querySelector('input[name="' + s +'"]').value.replace(new RegExp('[\x20\u3000"]+', 'g'), ' ').replace(/^\x20|\x20$/, '').split(' ');
+    obj[s + 's'] = document.querySelector('input[name="' + s +'"]').value.replace(new RegExp('[\s\u3000"]+', 'g'), ' ').replace(/^ *| *$/, '').split(' ');
     obj[s + 'Operator'] = document.querySelector('input[name="' + s + 'Or"]').checked ? 'or' : 'and';
   }
   var publishyears = {};
