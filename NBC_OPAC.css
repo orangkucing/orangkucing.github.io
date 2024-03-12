@@ -211,8 +211,8 @@ input[type="search"]:focus::-webkit-search-cancel-button {
 }
 /* end: clear button */
 
-.gradient-style {
-  color: #fff;
-  background-color: #000 !important;
+div.google-visualization-table table.google-visualization-table-table thead tr.google-visualization-table-tr-head th.google-visualization-table-th.gradient.unsorted {
+  color: #000 !important;
+  background-color: #ccc !important;
   background-image: none !important;
 }
