@@ -161,14 +161,7 @@ var callback = (json) => {
       var row = table.getSelection()[0].row;
       var id = data.getValue(row, NDLBibIDIndex);
       if (id.match(/^[0-9]+$/)) {
-        var win = window.open('https://id.ndl.go.jp/bib/' + id);
-        // take care of iPhone's spinning indicator
-        var timer = setInterval(() => {
-          if (win.closed) {
-            clearInterval(timer);
-alert('hehehe');
-          }
-        }, 1000);
+        var win = window.open('https://id.ndl.go.jp/bib/' + id, '', 'noreferrer=true');
       }
     }
     table.setSelection([]);
