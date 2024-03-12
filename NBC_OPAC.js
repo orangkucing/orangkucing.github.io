@@ -164,7 +164,8 @@ var callback = (json) => {
         var win = window.open('https://id.ndl.go.jp/bib/' + id);
         // take care of iPhone's spinning indicator
         var timer = setInterval(() => {
-          if (!win || win.closed) {
+          if (win.closed) {
+            win.close();
             clearInterval(timer);
           }
         }, 1000);
