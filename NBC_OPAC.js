@@ -149,21 +149,22 @@ async function sendQuery(event) {
   event.preventDefault();
 }
 
+const options = {width: '100%', 'allowHtml': true, 'cssClassNames': {
+  'headerRow': 'gradient-style',
+  'tableRow': '',
+  'oddTableRow': '',
+  'selectedTableRow': '',
+  'hoverTableRow': '',
+  'headerCell': '',
+  'tableCell': '',
+  'rowNumberCell': ''}
+};
+
 var callback = (json) => {
   var data = new google.visualization.DataTable(json['table']);
   var view = new google.visualization.DataView(data);
   view.hideColumns([yomiIndex, NDLBibIDIndex]);
   var table = new google.visualization.Table(document.getElementById('results'));
-  const options = {'width': '100%', 'allowHtml': true, 'cssClassNames' : cssClassNames};
-  const cssClassNames = {
-    'headerRow': 'gradient-style',
-    'tableRow': '',
-    'oddTableRow': '',
-    'selectedTableRow': '',
-    'hoverTableRow': '',
-    'headerCell': '',
-    'tableCell': '',
-    'rowNumberCell': ''};
   table.draw(view, options);
   google.visualization.events.addListener(table, 'select', () => {
     var selection = table.getSelection();
