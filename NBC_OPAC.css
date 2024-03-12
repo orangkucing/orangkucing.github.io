@@ -212,7 +212,7 @@ input[type="search"]:focus::-webkit-search-cancel-button {
 /* end: clear button */
 
 /* workaround Android's chrome bug */
-th.google-visualization-table.gradient.unsorted {
+th.google-visualization-table-th.gradient.unsorted {
   background-image: linear-gradient(to bottom,rgba(255,255,255,0.8)  0%,rgba(255,255,255,0.7)  30%,rgba(255,255,255,0.5)  60%,rgba(255,255,255,0)  100%) !important;
   background-image: -moz-linear-gradient(top,rgba(255,255,255,0.8)  0%,rgba(255,255,255,0.7)  30%,rgba(255,255,255,0.5)  60%,rgba(255,255,255,0)  100%) !important;
   background-image: -webkit-linear-gradient(top,rgba(255,255,255,0.8)  0%,rgba(255,255,255,0.7)  30%,rgba(255,255,255,0.5)  60%,rgba(255,255,255,0)  100%) !important;
