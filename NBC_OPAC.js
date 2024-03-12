@@ -165,10 +165,9 @@ var callback = (json) => {
         var a = document.createElement('a');
         a.href = 'https://id.ndl.go.jp/bib/' + id;
         a.target = '_blank';
-        a.rel = 'opener external help';
+        a.rel = 'noreferer external';
         document.body.appendChild(a);
         a.click();
-        document.body.removeChild(a);
       }
     }
   });
