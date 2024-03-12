@@ -149,15 +149,12 @@ async function sendQuery(event) {
   event.preventDefault();
 }
 
-const options = {width: '100%', 'allowHtml': true, 'cssClassNames': {
-  'headerRow': 'gradient-style',
-  'tableRow': '',
-  'oddTableRow': '',
-  'selectedTableRow': '',
-  'hoverTableRow': '',
-  'headerCell': '',
-  'tableCell': '',
-  'rowNumberCell': ''}
+const options = {
+  width: '100%',
+  'allowHtml': true,
+  'cssClassNames': {
+    'headerRow': 'gradient-style',
+  }
 };
 
 var callback = (json) => {
