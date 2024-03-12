@@ -165,7 +165,6 @@ var callback = (json) => {
         // take care of iPhone's spinning indicator
         var timer = setInterval(() => {
           if (win.closed) {
-            win.stop();
             clearInterval(timer);
           }
         }, 1000);
