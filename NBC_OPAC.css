@@ -213,6 +213,6 @@ input[type="search"]:focus::-webkit-search-cancel-button {
 
 .gradient-style {
   color: #fff;
-  background-color: #000;
-  background-image: url(//ssl.gstatic.com/charts/static/table-title-bg.gif) repeat-x left bottom;
+  background-color: #000 !important;
+  background-image: none !important;
 }
