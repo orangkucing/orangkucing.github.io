@@ -7,14 +7,6 @@ body {
   overflow: hidden; /* stop overscrolling behaviour */
 }
 
-.panel-arrowcontent {
-  box-shadow: none !important;
-}
-
-.panel-arrowbox {
-  display: none !important;
-}
-
 #wrapper {
   position: fixed;
   top: 0px;
