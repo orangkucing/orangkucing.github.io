@@ -161,7 +161,12 @@ var callback = (json) => {
       var row = table.getSelection()[0].row;
       var id = data.getValue(row, NDLBibIDIndex);
       if (id.match(/^[0-9]+$/)) {
-        window.open('https://id.ndl.go.jp/bib/' + id, '_blank', 'noreferrer');
+        var a = document.createElement('a');
+        a.href = 'https://id.ndl.go.jp/bib/' + id;
+        a.rel = 'ext';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
       }
     }
   });
