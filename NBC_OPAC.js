@@ -166,6 +166,7 @@ var callback = (json) => {
         var timer = setInterval(() => {
           if (win.closed) {
             clearInterval(timer);
+alert('hehehe');
           }
         }, 1000);
       }
