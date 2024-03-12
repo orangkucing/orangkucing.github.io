@@ -173,9 +173,3 @@ var callback = (json) => {
     table.setSelection([]);
   });
 }
-
-window.addEventListener('message', (e) => {
-  if (e.origin = 'https://id.ndl.go.jp') {
-    alert('message come');
-  }
-}, false);
