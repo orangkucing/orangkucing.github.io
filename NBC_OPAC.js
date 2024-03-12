@@ -154,7 +154,17 @@ var callback = (json) => {
   var view = new google.visualization.DataView(data);
   view.hideColumns([yomiIndex, NDLBibIDIndex]);
   var table = new google.visualization.Table(document.getElementById('results'));
-  table.draw(view, {width: '100%'});
+  const options = {'width': '100%', 'allowHtml': true, 'cssClassNames' : cssClassNames};
+  const cssClassNames = {
+    'headerRow': 'gradient-style',
+    'tableRow': '',
+    'oddTableRow': '',
+    'selectedTableRow': '',
+    'hoverTableRow': '',
+    'headerCell': '',
+    'tableCell': '',
+    'rowNumberCell': ''};
+  table.draw(view, options);
   google.visualization.events.addListener(table, 'select', () => {
     var selection = table.getSelection();
     if (selection.length > 0) {
