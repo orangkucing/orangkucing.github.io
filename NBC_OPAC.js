@@ -168,6 +168,10 @@ var callback = (json) => {
         a.rel = 'noreferer external';
         document.body.appendChild(a);
         a.click();
+        /* stop spinning circle near Wi-Fi icon in iPhone */
+        var iframe = document.createElement('iframe');
+        iframe.src = 'about:blank';
+        document.body.appendChild(iframe);
       }
     }
   });
