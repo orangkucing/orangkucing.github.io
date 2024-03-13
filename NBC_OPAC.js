@@ -168,15 +168,6 @@ var callback = (json) => {
         a.rel = 'noreferer external';
         document.body.appendChild(a);
         a.click();
-        // for iPhone Safari
-        window.addEventListener("pageshow", (e) => {
-          var entries = performance.getEntriesByType("navigation");
-          entries.forEach((entry) => {
-            if (entry.type == "back_forward") {
-              e.preventDefault(); // not to fire spinning wheel
-            }
-          });
-        });
       }
     }
   });
