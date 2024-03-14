@@ -110,7 +110,7 @@ async function sendQuery(event) {
       q += '(';
       for (let publisher of obj['publishers']) {
         q += op + '[' + select[publisherIndex] + '] contains"' + publisher + '"';
-        if (!op) {op = obj['publisherOperator'];}
+        if (!op) {op = obj['publisherOperator'] + ' ';}
       }
       q += ')';
     }
@@ -166,7 +166,8 @@ var callback = (json) => {
         a.href = 'https://id.ndl.go.jp/bib/' + id;
         a.target = '_blank';
         a.rel = 'noreferer external';
-        document.body.appendChild(a);
+        a.style = 'display: none;';
+        document.getElementById('wrapper').appendChild(a);
         a.click();
       }
     }
