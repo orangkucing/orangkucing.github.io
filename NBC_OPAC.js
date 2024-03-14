@@ -167,7 +167,7 @@ var callback = (json) => {
         a.target = '_blank';
         a.rel = 'noreferer external';
         a.style = 'display: none;';
-        document.getElementById('wrapper').appendChild(a);
+        document.querySelector('form').appendChild(a);
         a.click();
       }
     }
