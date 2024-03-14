@@ -164,7 +164,7 @@ var callback = (json) => {
       if (id.match(/^[0-9]+$/)) {
         var a = document.createElement('a');
         a.href = 'https://id.ndl.go.jp/bib/' + id;
-        //a.target = '_blank';
+        a.target = '_blank';
         a.click();
         a.remove();
       }
