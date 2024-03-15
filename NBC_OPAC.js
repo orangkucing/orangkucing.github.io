@@ -166,11 +166,7 @@ var callback = (json) => {
         a.href = 'https://id.ndl.go.jp/bib/' + id;
         a.target = '_blank';
         a.rel = 'noreferrer';
-        a.dispatchEvent(new MouseEvent('click', {
-          'view': window,
-          'bubbles': false,
-        }));
-        //a.click();
+        a.click();
         a.remove();
       }
     }
