@@ -164,9 +164,13 @@ var callback = (json) => {
       if (id.match(/^[0-9]+$/)) {
         var a = document.createElement('a');
         a.href = 'https://id.ndl.go.jp/bib/' + id;
-        a.target = '_NDL';
+        a.target = '_blank';
         a.rel = 'noreferrer';
-        a.click();
+        a.dispatchEvent(new MouseEvent('click', {
+          'view': window,
+          'bubbles': false,
+        }));
+        //a.click();
         a.remove();
       }
     }
