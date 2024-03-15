@@ -165,6 +165,7 @@ var callback = (json) => {
         var a = document.createElement('a');
         a.href = 'https://id.ndl.go.jp/bib/' + id;
         a.target = '_blank';
+        a.rel = 'noopener';
         a.click();
         a.remove();
       }
