@@ -1,9 +1,10 @@
 // change here! if column or sheet names are modified in the sheet
-const selectA1 = {'著者・編者':'B', '読み':'C', 'シリーズ名':'D', '巻号':'E', 'タイトル':'F', '出版者':'G', '出版年':'H', '分類記号':'I', '配架場所':'K', 'NDL書誌ID':'J'};
+const selectA1 = {'著者・編者':'B', '読み':'C', 'シリーズ名':'D', '巻号':'E', 'タイトル':'F', '出版者':'G', '出版年':'H', '分類記号':'I', '配架場所':'K', 'NDL書誌ID':'J', '出版者備考':'N'};
 const yomiIndex = 1;
 const authorIndices = [0, yomiIndex];
 const titleIndices = [2, 4];
-const publisherIndex = 5;
+const publisher2Index = 10;
+const publisherIndices = [5, publisher2Index];
 const publishyearIndex = 6;
 const NDLBibIDIndex = 9;
 const sheetname = 'Sheet1';
@@ -74,7 +75,8 @@ async function sendQuery(event) {
                    '[' + select[titleIndices[1]] + '] contains"' + keyword + '"or ' +
                    '[' + select[authorIndices[0]] + '] contains"' + keyword + '"or ' + 
                    '[' + select[authorIndices[1]] + '] contains"' + toKatakana(keyword) + '"or ' +
-                   '[' + select[publisherIndex] + '] contains"' + keyword + '")';
+                   '[' + select[publisherIndices[0]] + '] contains"' + keyword + '"or ' +
+                   '[' + select[publisherIndices[1]] + '] contains"' + keyword + '")';
         if (!op) {op = obj['keywordOperator'];}
       }
       q += ')';
@@ -109,8 +111,9 @@ async function sendQuery(event) {
       let op = '';
       q += '(';
       for (let publisher of obj['publishers']) {
-        q += op + '[' + select[publisherIndex] + '] contains"' + publisher + '"';
-        if (!op) {op = obj['publisherOperator'] + ' ';}
+        q += op + '([' + select[publisherIndices[0]] + '] contains"' + publisher + '"or ' +
+                   '[' + select[publisherIndices[1]] + '] contains"' + publisher + '")';
+        if (!op) {op = obj['publisherOperator'];}
       }
       q += ')';
     }
@@ -152,7 +155,7 @@ async function sendQuery(event) {
 var callback = (json) => {
   var data = new google.visualization.DataTable(json['table']);
   var view = new google.visualization.DataView(data);
-  view.hideColumns([yomiIndex, NDLBibIDIndex]);
+  view.hideColumns([yomiIndex, NDLBibIDIndex, publisher2Index]);
   var table = new google.visualization.Table(document.getElementById('results'));
   table.draw(view, { width: '100%' });
   google.visualization.events.addListener(table, 'select', () => {
