@@ -252,16 +252,12 @@ function callback(json) {
         if (selection.length > 0) {
             row = table.getSelection()[0].row;
             id = data.getValue(row, hiddenIndex);
-            table.setSelection([]);
             if (id.match(/^[0-9]+$/)) {
-                a = document.createElement("a");
+                a = document.getElementById("dummy");
                 a.href = "https://id.ndl.go.jp/bib/" + id;
-                a.target = "_blank";
-                a.rel = "noreferrer";
                 a.click();
-                a.href = "";
-                a.remove();
             }
+            table.setSelection([]);
         }
     });
 }
