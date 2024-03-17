@@ -1,8 +1,9 @@
 // change here! if column or sheet names are modified in the sheet
-const selectA1 = {'著者・編者':'B', '読み':'C', 'シリーズ名':'D', '巻号':'E', 'タイトル':'F', '出版者':'H', '出版年':'J', '分類記号':'K', '配架場所':'M', 'NDL書誌ID':'L', '出版者備考':'I'};
+const selectA1 = {'著者・編者':'B', '読み':'C', 'シリーズ名':'D', '巻号':'E', 'タイトル':'F', '出版者':'H', '出版年':'J', '分類記号':'K', '配架場所':'M', 'NDL書誌ID':'L', '出版者備考':'I', 'タイトル備考':'G'};
 const yomiIndex = 1;
 const authorIndices = [0, yomiIndex];
-const titleIndices = [2, 4];
+const title2Index = 11;
+const titleIndices = [2, 4, title2Index];
 const publisher2Index = 10;
 const publisherIndices = [5, publisher2Index];
 const publishyearIndex = 6;
@@ -71,12 +72,21 @@ async function sendQuery(event) {
       let op = '';
       q += '(';
       for (let keyword of obj['keywords']) {
-        q += op + '([' + select[titleIndices[0]] + '] contains"' + keyword + '"or ' +
-                   '[' + select[titleIndices[1]] + '] contains"' + keyword + '"or ' +
-                   '[' + select[authorIndices[0]] + '] contains"' + keyword + '"or ' + 
-                   '[' + select[authorIndices[1]] + '] contains"' + toKatakana(keyword) + '"or ' +
-                   '[' + select[publisherIndices[0]] + '] contains"' + keyword + '"or ' +
-                   '[' + select[publisherIndices[1]] + '] contains"' + keyword + '")';
+        q += op + '(';
+        {
+          let op = '';
+          for (let titleIndex of titleIndices) {
+            q += op + '[' + select[titleIndex] + '] contains"' + keyword + '"';
+            if (!op) {op = 'or ';}
+          }
+          for (let authorIndex of authorIndices) {
+            q += op + '[' + select[authorIndex] + '] contains"' + keyword + '"'; 
+          }
+          for (let publisherIndex of publisherIndices) {
+            q += op + '[' + select[publisherIndex] + '] contains"' + keyword + '"';
+          }
+        }
+        q += ')';
         if (!op) {op = obj['keywordOperator'];}
       }
       q += ')';
@@ -87,8 +97,15 @@ async function sendQuery(event) {
       let op = '';
       q += '(';
       for (let title of obj['titles']) {
-        q += op + '([' + select[titleIndices[0]] + '] contains"' + title + '"or ' +
-                   '[' + select[titleIndices[1]] + '] contains"' + title + '")';
+        q += op + '(';
+        {
+          let op = '';
+          for (let titleIndex of titleIndices) {
+            q += op + '[' + select[titleIndex] + '] contains"' + title + '"';
+            if (!op) {op = 'or ';}
+          }
+        }
+        q += ')';
         if (!op) {op = obj['titleOperator'];}
       }
       q += ')';
@@ -99,8 +116,18 @@ async function sendQuery(event) {
       let op = '';
       q += '(';
       for (let author of obj['authors']) {
-        q += op + '([' + select[authorIndices[0]] + '] contains"' + author + '"or ' +
-                   '[' + select[authorIndices[1]] + '] contains"' + toKatakana(author) + '")';
+        q += op + '(';
+        {
+          let op = '';
+          for (let authorIndex of authorIndices) {
+            if (authorIndex === yomiIndex) {
+              author = toKatakana(author);
+            }
+            q += op + '[' + select[authorIndex] + '] contains"' + author + '"';
+            if (!op) {op = 'or ';}
+          }
+        }
+        q += ')';
         if (!op) {op = obj['authorOperator'];}
       }
       q += ')';
@@ -111,8 +138,15 @@ async function sendQuery(event) {
       let op = '';
       q += '(';
       for (let publisher of obj['publishers']) {
-        q += op + '([' + select[publisherIndices[0]] + '] contains"' + publisher + '"or ' +
-                   '[' + select[publisherIndices[1]] + '] contains"' + publisher + '")';
+        q += op + '(';
+        {
+          let op = '';
+          for (let publisherIndex of publisherIndices) {
+            q += op + '[' + select[publisherIndex] + '] contains"' + publisher + '"';
+            if (!op) {op = 'or ';}
+          }
+        }
+        q += ')';
         if (!op) {op = obj['publisherOperator'];}
       }
       q += ')';
@@ -155,7 +189,7 @@ async function sendQuery(event) {
 var callback = (json) => {
   var data = new google.visualization.DataTable(json['table']);
   var view = new google.visualization.DataView(data);
-  view.hideColumns([yomiIndex, NDLBibIDIndex, publisher2Index]);
+  view.hideColumns([yomiIndex, NDLBibIDIndex, publisher2Index, title2Index]);
   var table = new google.visualization.Table(document.getElementById('results'));
   table.draw(view, { width: '100%' });
   google.visualization.events.addListener(table, 'select', () => {
