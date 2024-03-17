@@ -26,7 +26,7 @@ caption {
 }
 
 #result-wrapper {
-  overflow: auto;
+  overflow: visible;
 }
 
 @media screen and (max-width: 652px) {
@@ -56,6 +56,7 @@ caption {
 
 #results {
   width: 100%;
+  height: 100%;
   overflow-x: hidden;
   overflow-y: auto;
 }
