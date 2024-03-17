@@ -49,11 +49,11 @@ new Promise(function () {
 
 function setResultsSize() {
     "use strict";
-    var rectangleWithOutMargin = document.getElementById('wrapper');
-    var resultWrapper = document.getElementById('result-wrapper');
+    var rectangleWithOutMargin = document.getElementById("wrapper");
+    var resultWrapper = document.getElementById("result-wrapper");
     var rect = resultWrapper.getBoundingClientRect();
-    var results = document.getElementById('results');
-    if (rect.left == 0) { // portrait
+    var results = document.getElementById("results");
+    if (rect.left === 0) { // portrait
         results.style.height = (rectangleWithOutMargin.getBoundingClientRect().height - rect.top) + "px";
         results.style.width = rectangleWithOutMargin.getBoundingClientRect().width + "px";
     } else { // landscape
