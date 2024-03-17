@@ -259,6 +259,7 @@ function callback(json) {
                 a.target = "_blank";
                 a.rel = "noreferrer";
                 a.click();
+                a.href = "";
                 a.remove();
             }
         }
