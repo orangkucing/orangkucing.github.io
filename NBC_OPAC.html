@@ -1,77 +1,77 @@
 <!DOCTYPE html>
 <html lang="ja" prefix="og: http://ogp.me/ns#">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=0">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=0">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=0">
-    <link rel="manifest" href="/site.webmanifest?v=0">
-    <link rel="mask-icon" href="/safari-pinned-tab.svg?v=0" color="#5bbad5">
-    <link rel="shortcut icon" href="/favicon.ico?v=0">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="theme-color" content="#ffffff">
-    <link href="NBC_OPAC.min.css" rel="stylesheet" />
-    <script src="https://www.gstatic.com/charts/loader.js"></script>
-    <script>google.charts.load('current', {'packages': ['table']});</script>
-    <script async src="NBC_OPAC.min.js"></script>
-    <meta property="og:type" content="article" />
-    <meta property="og:article:published_time" content="2024-03-17" />
-    <meta property="og:article:author" content="黒絵魚" />
-    <meta property="og:article:tag" content="教会図書" />
-    <meta property="og:article:tag" content="検索システム" />
-    <meta property="og:url" content="https://orangkucing.github.io/NBC_OPAC.html" />
-    <meta property="og:title" content="中野バプテスト教会 蔵書検索システム" />
-    <meta property="og:description" content="当教会が保有している書籍等の検索ができます" />
-    <meta property="og:image" content="https://orangkucing.github.io/IMG20230702999_11.JPG" />
-    <meta property="og:image:type" content="image/jpg" />
-    <meta property="og:image:alt" content="中野バプテスト教会礼拝堂の十字架" />
-    <meta property="og:image:width" content="3272" />
-    <meta property="og:image:height" content="4908" />
-  </head>
-  <body>
-    <div id="wrapper" onclick="">
-      <div id="menubox">
-      <form action="#" method="">
-        <table>
-          <caption>中野バプテスト教会&nbsp;蔵書検索</caption>
-          <tr>
-            <td>簡易検索</td>
-            <td><input class="longbox" type="search" results="0" name="keyword" placeholder="キーワード"></td>
-            <td><label class="switch"><input type="checkbox" name="keywordOr" checked><span class="slider"></span></label><span class="or" lang="en">OR</span></td>
-          </tr>
-          <tr class="remark">
-            <td></td>
-            <td>キーワードはスペースで区切ってください。</td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>タイトル</td>
-  	    <td><input class="longbox" type="search" results="0" name="title" placeholder="書名など"></td>
-            <td><label class="switch"><input type="checkbox" name="titleOr"><span class="slider"></span></label><span class="or" lang="en">OR</span></td>
-          </tr>
-          <tr>
-            <td>著者/編者</td>
-            <td><input class="longbox" type="search" results="0" name="author" placeholder="読みも検索します"></td>
-            <td><label class="switch"><input type="checkbox" name="authorOr"><span class="slider"></span></label><span class="or" lang="en">OR</span></td>
-          </tr>
-          <tr>
-            <td>出版者</td>
-            <td><input class="longbox" type="search" results="0" name="publisher" placeholder="出版社名など"></td>
-            <td><label class="switch"><input type="checkbox" name="publisherOr"><span class="slider"></span></label><span class="or" lang="en">OR</span></td>
-          </tr>
-          <tr>
-            <td>出版年</td>
-            <td colspan="2"><input class="shortbox" type="search" results="0" name="yearfrom" placeholder="西暦">～<input class="shortbox" type="search" results="0" name="yearuntil" placeholder="西暦"></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td colspan="2" class="google-wrapper"><button onclick="sendQuery(event)">検索</button><span class="google" lang="en">Powered by <a href="https://docs.google.com/spreadsheets/d/1-XgySBso-vJoqMhmYgUZMtjcCY0qnjm-vIr3c6J7_M8/edit?usp=sharing">Google Sheets</a></span></td>
-          </tr>
-        </table>
-      </form>
-      </div>
-      <div id="result-wrapper"><div id='results'></div></div>
-    </div>
-  </body>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=0">
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=0">
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=0">
+		<link rel="manifest" href="/site.webmanifest?v=0">
+		<link rel="mask-icon" href="/safari-pinned-tab.svg?v=0" color="#5bbad5">
+		<link rel="shortcut icon" href="/favicon.ico?v=0">
+		<meta name="msapplication-TileColor" content="#da532c">
+		<meta name="theme-color" content="#ffffff">
+		<link href="NBC_OPAC.min.css" rel="stylesheet" />
+		<script src="https://www.gstatic.com/charts/loader.js"></script>
+		<script>google.charts.load('current', {'packages': ['table']});</script>
+		<script async src="NBC_OPAC.min.js"></script>
+		<meta property="og:type" content="article" />
+		<meta property="og:article:published_time" content="2024-03-17" />
+		<meta property="og:article:author" content="黒絵魚" />
+		<meta property="og:article:tag" content="教会図書" />
+		<meta property="og:article:tag" content="検索システム" />
+		<meta property="og:url" content="https://orangkucing.github.io/NBC_OPAC.html" />
+		<meta property="og:title" content="中野バプテスト教会 蔵書検索システム" />
+		<meta property="og:description" content="当教会が保有している書籍等の検索ができます" />
+		<meta property="og:image" content="https://orangkucing.github.io/IMG20230702999_11.JPG" />
+		<meta property="og:image:type" content="image/jpg" />
+		<meta property="og:image:alt" content="中野バプテスト教会礼拝堂の十字架" />
+		<meta property="og:image:width" content="3272" />
+		<meta property="og:image:height" content="4908" />
+	</head>
+	<body>
+		<div id="wrapper" onclick="">
+			<div id="menubox">
+			<form action="#" method="">
+				<table>
+					<caption>中野バプテスト教会&nbsp;蔵書検索</caption>
+					<tr>
+						<td>簡易検索</td>
+						<td><input class="longbox" type="search" results="0" name="keyword" placeholder="キーワード"></td>
+						<td><label class="switch"><input type="checkbox" name="keywordOr" checked><span class="slider"></span></label><span class="or" lang="en">OR</span></td>
+					</tr>
+					<tr class="remark">
+						<td></td>
+						<td>キーワードはスペースで区切ってください。</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>タイトル</td>
+				<td><input class="longbox" type="search" results="0" name="title" placeholder="書名など"></td>
+						<td><label class="switch"><input type="checkbox" name="titleOr"><span class="slider"></span></label><span class="or" lang="en">OR</span></td>
+					</tr>
+					<tr>
+						<td>著者/編者</td>
+						<td><input class="longbox" type="search" results="0" name="author" placeholder="読みも検索します"></td>
+						<td><label class="switch"><input type="checkbox" name="authorOr"><span class="slider"></span></label><span class="or" lang="en">OR</span></td>
+					</tr>
+					<tr>
+						<td>出版者</td>
+						<td><input class="longbox" type="search" results="0" name="publisher" placeholder="出版社名など"></td>
+						<td><label class="switch"><input type="checkbox" name="publisherOr"><span class="slider"></span></label><span class="or" lang="en">OR</span></td>
+					</tr>
+					<tr>
+						<td>出版年</td>
+						<td colspan="2"><input class="shortbox" type="search" results="0" name="yearfrom" placeholder="西暦">～<input class="shortbox" type="search" results="0" name="yearuntil" placeholder="西暦"></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td colspan="2" class="google-wrapper"><button onclick="sendQuery(event)">検索</button><span class="google" lang="en">Powered by <a href="https://docs.google.com/spreadsheets/d/1-XgySBso-vJoqMhmYgUZMtjcCY0qnjm-vIr3c6J7_M8/edit?usp=sharing">Google Sheets</a></span></td>
+					</tr>
+				</table>
+			</form>
+			</div>
+			<div id="result-wrapper"><div id='results'></div></div>
+		</div>
+	</body>
 </html>
