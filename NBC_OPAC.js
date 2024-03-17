@@ -10,31 +10,15 @@ const publishyearIndex = 6;
 const NDLBibIDIndex = 9;
 const sheetname = 'Sheet1';
 //
-
-const ro = new ResizeObserver((entries) => {
-  setResultsSize();
-});
-new Promise((resolve) => {
-  setTimeout(() => {
-    let target;
-    do {
-      target = document.getElementById('wrapper');
-    } while (!target);
-    ro.observe(target);
-  }, 1000); 
-});
-
-function setResultsSize() {
-  var rectangleWithOutMargin = document.getElementById('wrapper');
-  var resultWrapper = document.getElementById('result-wrapper');
-  var rect = resultWrapper.getBoundingClientRect();
-  var results = document.getElementById('results');
-  if (rect.left == 0) { /* portlait */
-    results.style.height = (rectangleWithOutMargin.getBoundingClientRect().height - rect.top) + "px";
-    results.style.width = rectangleWithOutMargin.getBoundingClientRect().width + "px";
-  } else { /* landscape */
-    results.style.height = rectangleWithOutMargin.getBoundingClientRect().height + "px";
-    results.style.width = (rectangleWithOutMargin.getBoundingClientRect().width - 280) + "px";
+var select = Object.keys(selectA1);
+var querySelect = [];
+var hiddenIndex = -1;
+for (let i = 0; i < select.length; i++) {
+  if (i === NDLBibIDIndex) {
+    hiddenIndex = querySelect.length;
+  }
+  if (i !== yomiIndex && i !== title2Index && i !== publisher2Index) {
+    querySelect.push(select[i]);
   }
 }
 
@@ -43,7 +27,6 @@ function toKatakana(s) {
 }
 
 async function sendQuery(event) {
-  var select = Object.keys(selectA1);
   var obj = {};
   for (let s of ['keyword', 'title', 'author', 'publisher']) {
     obj[s + 's'] = document.querySelector('input[name="' + s +'"]').value.replace(/[\s\u3000"]+/g, ' ').replace(/^\s*|\s*$/g, '').split(' ');
@@ -60,8 +43,8 @@ async function sendQuery(event) {
     let concat = false;
     {
       let op = '';
-      for (let i = 0; i < select.length; i++) {
-        q += op + '[' + select[i] + ']';
+      for (let s of querySelect) {
+        q += op + '[' + s + ']';
         if (!op) {op = ',';}
       }
     }
@@ -174,7 +157,6 @@ async function sendQuery(event) {
     // remove keyboard (iPhone)
     document.activeElement.blur();
     //
-    setResultsSize();
 
     const script = document.createElement('script');
     script.src = 'https://docs.google.com/spreadsheets/d/1-XgySBso-vJoqMhmYgUZMtjcCY0qnjm-vIr3c6J7_M8/gviz/tq?tqx=out:json;responseHandler:callback&headers=1&sheet=%22' + sheetname + '%22&tq=' + encodeURIComponent(q);
@@ -189,7 +171,7 @@ async function sendQuery(event) {
 var callback = (json) => {
   var data = new google.visualization.DataTable(json['table']);
   var view = new google.visualization.DataView(data);
-  view.hideColumns([yomiIndex, NDLBibIDIndex, publisher2Index, title2Index]);
+  view.hideColumns([hiddenIndex]);
   var table = new google.visualization.Table(document.getElementById('results'));
   table.draw(view, { width: '100%' });
   google.visualization.events.addListener(table, 'select', () => {
@@ -197,7 +179,7 @@ var callback = (json) => {
     if (selection.length > 0) {
       var row = table.getSelection()[0].row;
       table.setSelection([]);
-      var id = data.getValue(row, NDLBibIDIndex);
+      var id = data.getValue(row, hiddenIndex);
       if (id.match(/^[0-9]+$/)) {
         var a = document.createElement('a');
         a.href = 'https://id.ndl.go.jp/bib/' + id;
