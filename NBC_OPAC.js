@@ -256,6 +256,7 @@ function callback(json) {
                 a = document.getElementById("dummy");
                 a.href = "https://id.ndl.go.jp/bib/" + id;
                 a.click();
+                a.href = "about:blank";
             }
             table.setSelection([]);
         }
