@@ -34,6 +34,29 @@ select.forEach(function (e, i) {
     }
 });
 
+const ro = new ResizeObserver(function () {
+    setResultsSize();
+});
+new Promise(function () {
+    setTimeout(function () {
+        var target;
+        do {
+            target = document.getElementById("wrapper");
+        } while (!target);
+        ro.observe(target);
+    }, 1000);
+});
+
+function setResultsSize() {
+    "use strict";
+    var rect = document.getElementById("result-wrapper").getBoundingClientRect();
+    if (rect.left === 0) { // portrait
+        document.getElementById("results").style.height = (document.getElementById("wrapper").getBoundingClientRect().height - rect.top) + "px";
+    } else { // landscape
+        document.getElementById("results").style.height = document.getElementById("wrapper").getBoundingClientRect().height + "px";
+    }
+}
+
 function toKatakana(s) {
     "use strict";
     return s.replace(/[ぁ-ゖ]/g, function (c) {
@@ -197,6 +220,7 @@ function sendQuery(event) {
         // remove keyboard (iPhone)
         document.activeElement.blur();
         //
+        setResultsSize();
 
         const script = document.createElement("script");
         script.src = "https://docs.google.com/spreadsheets/d/1-XgySBso-vJoqMhmYgUZMtjcCY0qnjm-vIr3c6J7_M8/gviz/tq?tqx=out:json;responseHandler:callback&headers=1&sheet=%22" + sheetname + "%22&tq=" + encodeURIComponent(q);
