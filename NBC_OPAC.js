@@ -49,11 +49,16 @@ new Promise(function () {
 
 function setResultsSize() {
     "use strict";
-    var rect = document.getElementById("result-wrapper").getBoundingClientRect();
-    if (rect.left === 0) { // portrait
-        document.getElementById("results").style.height = (document.getElementById("wrapper").getBoundingClientRect().height - rect.top) + "px";
+    var rectangleWithOutMargin = document.getElementById('wrapper');
+    var resultWrapper = document.getElementById('result-wrapper');
+    var rect = resultWrapper.getBoundingClientRect();
+    var results = document.getElementById('results');
+    if (rect.left == 0) { // portrait
+        results.style.height = (rectangleWithOutMargin.getBoundingClientRect().height - rect.top) + "px";
+        results.style.width = rectangleWithOutMargin.getBoundingClientRect().width + "px";
     } else { // landscape
-        document.getElementById("results").style.height = document.getElementById("wrapper").getBoundingClientRect().height + "px";
+        results.style.height = rectangleWithOutMargin.getBoundingClientRect().height + "px";
+        results.style.width = (rectangleWithOutMargin.getBoundingClientRect().width - 280) + "px";
     }
 }
 
