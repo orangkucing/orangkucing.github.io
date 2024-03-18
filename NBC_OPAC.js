@@ -14,12 +14,9 @@ const select = [
     "I", // 10 出版者備考
     "G" // 11 タイトル備考
 ];
-const yomiIndex = 1;
-const authorIndices = [0, yomiIndex];
-const title2Index = 11;
-const titleIndices = [2, 4, title2Index];
-const publisher2Index = 10;
-const publisherIndices = [5, publisher2Index];
+const authorIndices = [1, 0]; // authorIndices[0] = yomiIndex
+const titleIndices = [11, 2, 4]; // titleIndices[0] = title2Index
+const publisherIndices = [10, 5]; // publisherIndices[0] = publisher2Index
 const publishyearIndex = 6;
 const NDLBibIDIndex = 9;
 //
@@ -29,7 +26,7 @@ select.forEach(function (e, i) {
     if (i === NDLBibIDIndex) {
         hiddenIndex = querySelect.length;
     }
-    if (i !== yomiIndex && i !== title2Index && i !== publisher2Index) {
+    if (i !== authorIndices[0] && i !== titleIndices[0] && i !== publisherIndices[0]) {
         querySelect.push(e);
     }
 });
@@ -74,7 +71,7 @@ function sendQuery(event) {
     var obj = {};
     var publishyears = {};
     var q = "select ";
-    var concat = false;
+    var concat;
     var op;
     var op2;
     ["keyword", "title", "author", "publisher"].forEach(function (s) {
@@ -98,16 +95,13 @@ function sendQuery(event) {
         op = "";
         querySelect.forEach(function (s) {
             q += op + s;
-            if (!op) {
-                op = ",";
-            }
+            op = ",";
         });
         q += " where";
+        concat = "";
         if (obj.keywords[0]) {
-            if (concat) {
-                q += "and";
-            }
-            concat = true;
+            q += concat;
+            concat = "and";
             op = "";
             q += "(";
             obj.keywords.forEach(function (keyword) {
@@ -115,9 +109,7 @@ function sendQuery(event) {
                 op2 = "";
                 titleIndices.forEach(function (titleIndex) {
                     q += op2 + select[titleIndex] + " contains\"" + keyword + "\"";
-                    if (!op2) {
-                        op2 = "or ";
-                    }
+                    op2 = "or ";
                 });
                 authorIndices.forEach(function (authorIndex) {
                     q += op2 + select[authorIndex] + " contains\"" + keyword + "\"";
@@ -126,17 +118,13 @@ function sendQuery(event) {
                     q += op2 + select[publisherIndex] + " contains\"" + keyword + "\"";
                 });
                 q += ")";
-                if (!op) {
-                    op = obj.keywordOperator;
-                }
+                op = obj.keywordOperator;
             });
             q += ")";
         }
         if (obj.titles[0]) {
-            if (concat) {
-                q += "and";
-            }
-            concat = true;
+            q += concat;
+            concat = "and";
             op = "";
             q += "(";
             obj.titles.forEach(function (title) {
@@ -144,48 +132,36 @@ function sendQuery(event) {
                 op2 = "";
                 titleIndices.forEach(function (titleIndex) {
                     q += op2 + select[titleIndex] + " contains\"" + title + "\"";
-                    if (!op2) {
-                        op2 = "or ";
-                    }
+                    op2 = "or ";
                 });
                 q += ")";
-                if (!op) {
-                    op = obj.titleOperator;
-                }
+                op = obj.titleOperator;
             });
             q += ")";
         }
         if (obj.authors[0]) {
-            if (concat) {
-                q += "and";
-            }
-            concat = true;
+            q += concat;
+            concat = "and";
             op = "";
             q += "(";
             obj.authors.forEach(function (author) {
                 q += op + "(";
                 op2 = "";
                 authorIndices.forEach(function (authorIndex) {
-                    if (authorIndex === yomiIndex) {
+                    if (authorIndex === authorIndices[0]) {
                         author = toKatakana(author);
                     }
                     q += op2 + select[authorIndex] + " contains\"" + author + "\"";
-                    if (!op2) {
-                        op2 = "or ";
-                    }
+                    op2 = "or ";
                 });
                 q += ")";
-                if (!op) {
-                    op = obj.authorOperator;
-                }
+                op = obj.authorOperator;
             });
             q += ")";
         }
         if (obj.publishers[0]) {
-            if (concat) {
-                q += "and";
-            }
-            concat = true;
+            q += concat;
+            concat = "and";
             op = "";
             q += "(";
             obj.publishers.forEach(function (publisher) {
@@ -193,22 +169,16 @@ function sendQuery(event) {
                 op2 = "";
                 publisherIndices.forEach(function (publisherIndex) {
                     q += op2 + select[publisherIndex] + " contains\"" + publisher + "\"";
-                    if (!op2) {
-                        op2 = "or ";
-                    }
+                    op2 = "or ";
                 });
                 q += ")";
-                if (!op) {
-                    op = obj.publisherOperator;
-                }
+                op = obj.publisherOperator;
             });
             q += ")";
         }
         if (publishyears.from || publishyears.until) {
-            if (concat) {
-                q += "and";
-            }
-            concat = true;
+            q += concat;
+            concat = "and";
             q += "(";
             if (publishyears.from) {
                 q += select[publishyearIndex] + ">=" + publishyears.from;
