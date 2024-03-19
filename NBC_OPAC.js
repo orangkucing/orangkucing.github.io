@@ -32,7 +32,7 @@ var hiddenIndex;
             // no display
             hiddenIndex = j;
         }
-        if (Object.keys(indices).map(function (k) {return indices[k][0];}).includes(i)) {
+        if (Object.values(indices).map(function (k) {return k[0];}).includes(i)) {
             return;
         }
         querySelect += op + e;
