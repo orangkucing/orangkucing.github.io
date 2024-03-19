@@ -12,12 +12,12 @@ const select = [
     "M", // 8 配架場所
     "L", // 9 NDL書誌ID (no display)
     "I", // 10 出版者備考 (no select)
-    "G" // 11 タイトル備考 (no select)
+    "G"  // 11 タイトル備考 (no select)
 ];
 const indices = {
-    "author": [1, 0], // indices.author[0] = no select
-    "title": [11, 2, 4], // indices.title[0] = no select
-    "publisher": [10, 5] // indices.publisher[0] = no select
+    "author": [1, 0],     // indices.author[0] = no select
+    "publisher": [10, 5], // indices.publisher[0] = no select
+    "title": [11, 2, 4]   // indices.title[0] = no select
 };
 const publishyearIndex = 6; // number
 const NDLBibIDIndex = 9; // no display
