@@ -1,6 +1,7 @@
-// change here! if column order or sheet name are modified in the sheet
+// change here! if column char or sheet name are modified in the sheet
 const sheetname = "Sheet1";
 const select = [
+    // don't reindex. modify column char only
     "B", // 0 著者・編者
     "C", // 1 読み (no select)
     "D", // 2 シリーズ名
@@ -14,6 +15,7 @@ const select = [
     "I", // 10 出版者備考 (no select)
     "G"  // 11 タイトル備考 (no select)
 ];
+// begin: number in following lines denote index above
 const indices = {
     // data type: text
     // element 0 of each array is for searching hint thus no select
@@ -23,22 +25,24 @@ const indices = {
 };
 const publishyearIndex = 6; // data type: number
 const NDLBibIDIndex = 9; // select but no display
-//
+// end
+
 var querySelect = "select ";
-var hiddenIndex;
+var hiddenColumnInSelect;
 (function () {
     var op = "";
     var j = 0;
     var tmp = Object.values(indices).map(function (k) {return k[0];});
-    select.forEach(function (e, i) {
+    select.forEach(function (c, i) {
         if (tmp.includes(i)) {
+            // no select
             return;
         }
         if (i === NDLBibIDIndex) {
             // no display
-            hiddenIndex = j;
+            hiddenColumnInSelect = j;
         }
-        querySelect += op + e;
+        querySelect += op + c;
         op = ",";
         j += 1;
     });
@@ -84,11 +88,11 @@ function makeQueryString(ss, w) {
     var q = "(";
     var op = "";
     ss.forEach(function (s) {
-        indices[s].forEach(function (i) {
-            if (i === indices.author[0]) { // yomi in Katakana
-                q += op + select[i] + " contains\"" + toKatakana(w) + "\"";
+        indices[s].forEach(function (e) {
+            if (e === indices.author[0]) { // yomi in Katakana
+                q += op + select[e] + " contains\"" + toKatakana(w) + "\"";
             } else {
-                q += op + select[i] + " contains\"" + w + "\"";
+                q += op + select[e] + " contains\"" + w + "\"";
             }
             op = "or ";
         });
@@ -180,7 +184,7 @@ function callback(json) {
     var data = new google.visualization.DataTable(json.table);
     var view = new google.visualization.DataView(data);
     var table = new google.visualization.Table(document.getElementById("results"));
-    view.hideColumns([hiddenIndex]);
+    view.hideColumns([hiddenColumnInSelect]);
     table.draw(view, {width: "100%"});
     google.visualization.events.addListener(table, "select", function () {
         var selection = table.getSelection();
