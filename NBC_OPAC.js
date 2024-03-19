@@ -193,7 +193,7 @@ function callback(json) {
         var a;
         if (selection.length > 0) {
             row = table.getSelection()[0].row;
-            id = data.getValue(row, hiddenIndex);
+            id = data.getValue(row, hiddenColumnInSelect);
             if (id.match(/^[0-9]+$/)) {
                 a = document.getElementById("dummy");
                 a.href = "https://id.ndl.go.jp/bib/" + id;
