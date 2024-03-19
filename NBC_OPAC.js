@@ -10,30 +10,33 @@ const select = [
     "J", // 6 出版年 (number)
     "K", // 7 分類記号
     "M", // 8 配架場所
-    "L", // 9 NDL書誌ID (no display)
+    "L", // 9 NDL書誌ID (select but no display)
     "I", // 10 出版者備考 (no select)
     "G"  // 11 タイトル備考 (no select)
 ];
 const indices = {
-    "author": [1, 0],     // indices.author[0] = no select
-    "publisher": [10, 5], // indices.publisher[0] = no select
-    "title": [11, 2, 4]   // indices.title[0] = no select
+    // data type: text
+    // element 0 of each array is for searching hint thus no select
+    "author": [1, 0],
+    "publisher": [10, 5],
+    "title": [11, 2, 4]
 };
-const publishyearIndex = 6; // number
-const NDLBibIDIndex = 9; // no display
+const publishyearIndex = 6; // data type: number
+const NDLBibIDIndex = 9; // select but no display
 //
 var querySelect = "select ";
 var hiddenIndex;
 (function () {
     var op = "";
     var j = 0;
+    var tmp = Object.values(indices).map(function (k) {return k[0];});
     select.forEach(function (e, i) {
+        if (tmp.includes(i)) {
+            return;
+        }
         if (i === NDLBibIDIndex) {
             // no display
             hiddenIndex = j;
-        }
-        if (Object.values(indices).map(function (k) {return k[0];}).includes(i)) {
-            return;
         }
         querySelect += op + e;
         op = ",";
@@ -57,16 +60,15 @@ new Promise(function () {
 
 function setResultsSize() {
     "use strict";
-    var rectangleWithOutMargin = document.getElementById("wrapper");
-    var resultWrapper = document.getElementById("result-wrapper");
-    var rect = resultWrapper.getBoundingClientRect();
-    var results = document.getElementById("results");
+    var results = document.getElementById("results").style;
+    var wrapper = document.getElementById("wrapper").getBoundingClientRect();
+    var rect = document.getElementById("result-wrapper").getBoundingClientRect();
     if (rect.left === 0) { // portrait
-        results.style.height = (rectangleWithOutMargin.getBoundingClientRect().height - rect.top) + "px";
-        results.style.width = rectangleWithOutMargin.getBoundingClientRect().width + "px";
+        results.height = (wrapper.height - rect.top) + "px";
+        results.width = wrapper.width + "px";
     } else { // landscape
-        results.style.height = rectangleWithOutMargin.getBoundingClientRect().height + "px";
-        results.style.width = (rectangleWithOutMargin.getBoundingClientRect().width - 280) + "px";
+        results.height = wrapper.height + "px";
+        results.width = (wrapper.width - 280) + "px";
     }
 }
 
@@ -110,23 +112,13 @@ function sendQuery(event) {
             : "and"
         );
     });
-    ["from", "until"].forEach(function (s) {
-        var sel = document.querySelector("input[name=\"year" + s + "\"]");
-        var year = parseInt(sel.value, 10);
-        if (Number.isNaN(year)) {
-            sel.value = "";
-        } else {
-            publishyears[s] = year;
-        }
-    });
     if (obj.keyword[0]) {
         q += concat;
         concat = "and";
         op = "";
         q += "(";
         obj.keyword.forEach(function (w) {
-            q += op;
-            q += makeQueryString(Object.keys(indices), w);
+            q += op + makeQueryString(Object.keys(indices), w);
             op = obj.keywordOperator;
         });
         q += ")";
@@ -138,25 +130,31 @@ function sendQuery(event) {
             op = "";
             q += "(";
             obj[s].forEach(function (w) {
-                q += op;
-                q += makeQueryString([s], w);
+                q += op + makeQueryString([s], w);
                 op = obj[s + "Operator"];
             });
             q += ")";
         }
     });
+    ["from", "until"].forEach(function (s) {
+        var sel = document.querySelector("input[name=\"year" + s + "\"]");
+        var year = parseInt(sel.value, 10);
+        if (Number.isNaN(year)) {
+            sel.value = "";
+        } else {
+            publishyears[s] = year;
+        }
+    });
     if (publishyears.from || publishyears.until) {
         q += concat;
-        concat = "and";
+        op = "";
         q += "(";
         if (publishyears.from) {
-            q += select[publishyearIndex] + ">=" + publishyears.from;
-            if (publishyears.until) {
-                q += " and ";
-            }
+            q += op + select[publishyearIndex] + ">=" + publishyears.from;
+            op = " and ";
         }
         if (publishyears.until) {
-            q += select[publishyearIndex] + "<=" + publishyears.until;
+            q += op + select[publishyearIndex] + "<=" + publishyears.until;
         }
         q += ")";
     }
