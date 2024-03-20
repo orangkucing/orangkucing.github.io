@@ -67,12 +67,12 @@ function setResultsSize() {
     var results = document.getElementById("results").style;
     var wrapper = document.getElementById("wrapper").getBoundingClientRect();
     var rect = document.getElementById("result-wrapper").getBoundingClientRect();
-    if (rect.left === 0) { // portrait
+    if (rect.left === 0) {
+        // portrait
         results.height = (wrapper.height - rect.top) + "px";
-        results.width = wrapper.width + "px";
-    } else { // landscape
+    } else {
+        // landscape
         results.height = wrapper.height + "px";
-        results.width = (wrapper.width - 280) + "px";
     }
 }
 
