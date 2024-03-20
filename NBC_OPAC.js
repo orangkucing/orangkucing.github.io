@@ -52,15 +52,17 @@ var hiddenColumnInSelect;
 const ro = new ResizeObserver(function () {
     setResultsSize();
 });
-new Promise(function () {
-    setTimeout(function () {
-        var target;
-        do {
-            target = document.getElementById("wrapper");
-        } while (!target);
-        ro.observe(target);
-    }, 1000);
-});
+(function () {
+    return new Promise(function () {
+        setTimeout(function () {
+            var target;
+            do {
+                target = document.getElementById("wrapper");
+            } while (!target);
+            ro.observe(target);
+        }, 10000);
+    });
+}());
 
 function setResultsSize() {
     "use strict";
@@ -111,9 +113,9 @@ function sendQuery(event) {
     ["keyword"].concat(Object.keys(indices)).forEach(function (s) {
         obj[s] = document.querySelector("input[name=\"" + s + "\"]").value.replace(/[\s\u3000"]+/g, " ").replace(/^\s*|\s*$/g, "").split(" ");
         obj[s + "Operator"] = (
-            document.querySelector("input[name=\"" + s + "Or\"]").checked
-            ? "or"
-            : "and"
+            document.querySelector("input[name=\"" + s + "Or\"]").checked ?
+            "or" :
+            "and"
         );
     });
     if (obj.keyword[0]) {
