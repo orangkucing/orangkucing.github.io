@@ -209,15 +209,14 @@ input[type="search"]:focus::-webkit-search-cancel-button {
 }
 /* end: clear button */
 
-/* Android 7 */
-/*
+/* begin: workaround for google visualization api bug */
 div.google-visualization-table table.google-visualization-table-table thead tr.google-visualization-table-tr-head th.google-visualization-table-th.gradient {
   color: #000 !important;
-  background-color: #ccc !important;
+  background-color: #ddd !important;
   background-image: none !important;
 }
 
 div.google-visualization-table table.google-visualization-table-table thead tr.google-visualization-table-tr-head th.google-visualization-table-th.gradient span.google-visualization-table-sortind {
   color: #777 !important;
-} */
-/* end: Android 7 */
+}
+/* end: workaround */
