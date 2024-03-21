@@ -210,6 +210,7 @@ input[type="search"]:focus::-webkit-search-cancel-button {
 /* end: clear button */
 
 /* Android 7 */
+/*
 div.google-visualization-table table.google-visualization-table-table thead tr.google-visualization-table-tr-head th.google-visualization-table-th.gradient {
   color: #000 !important;
   background-color: #ccc !important;
@@ -218,5 +219,5 @@ div.google-visualization-table table.google-visualization-table-table thead tr.g
 
 div.google-visualization-table table.google-visualization-table-table thead tr.google-visualization-table-tr-head th.google-visualization-table-th.gradient span.google-visualization-table-sortind {
   color: #777 !important;
-}
+} */
 /* end: Android 7 */
