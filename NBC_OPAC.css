@@ -214,11 +214,9 @@ div.google-visualization-table table.google-visualization-table-table thead tr.g
   color: #000 !important;
   background-color: #ddd !important;
   background-image: none !important;
-  word-break: break-all !important;
 }
 
 div.google-visualization-table table.google-visualization-table-table thead tr.google-visualization-table-tr-head th.google-visualization-table-th.gradient span.google-visualization-table-sortind {
   color: #777 !important;
-  word-break: break-all !important;
 }
 /* end: workaround */
