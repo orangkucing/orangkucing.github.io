@@ -1,3 +1,0 @@
-webrick:
-  headers:
-    Cache-Control: "max-age=0"
